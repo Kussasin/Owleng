@@ -73,5 +73,5 @@ ____
 - [Советы по стилю кода](https://learn.javascript.ru/coding-style)
 - [Деструктуризация](https://learn.javascript.ru/destructuring)
 - [Руководство по стилю написания кода React](https://webformyself.com/rukovodstvo-po-stilyu-napisaniya-koda-react/)
-- [Правила оформления кода на React](hhttps://netology-university.bitbucket.io/codestyle/react/)
+- [Правила оформления кода на React](https://netology-university.bitbucket.io/codestyle/react/)
 
