@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styles from './loginStyle.module.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import styles from "./loginStyle.module.css";
 
 function Login() {
   return (
@@ -23,10 +23,7 @@ function Login() {
               required
               className={styles.input}
             />
-            <button
-              type="submit"
-              className={styles.green_btn}
-            >
+            <button type="submit" className={styles.green_btn}>
               Sing In
             </button>
           </form>
@@ -34,10 +31,7 @@ function Login() {
         <div className={styles.right}>
           <h1>New Here ?</h1>
           <Link to="/signup">
-            <button
-              type="button"
-              className={styles.white_btn}
-            >
+            <button type="button" className={styles.white_btn}>
               Sing Up
             </button>
           </Link>

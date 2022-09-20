@@ -1,0 +1,27 @@
+.level_check_container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #e9e9e9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form_container {
+  width: "80%";
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.button_style {
+  width: 478px;
+}
+
+.title {
+  font-weight: 700;
+  color: black;
+  font-size: 32px;
+  line-height: 35px;
+  margin-bottom: 70px;
+}

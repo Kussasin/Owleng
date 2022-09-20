@@ -4,6 +4,8 @@ import React, { Component } from 'react';
 
 import Login from './Components/Login/Login';
 import SignUp from './Components/SignUp/SignUp';
+import LevelCheck from './Components/LevelCheck/LevelCheck';
+import LevelTest from './Components/LevelTest/LevelTest';
 
 class App extends Component {
   render() {
@@ -13,6 +15,8 @@ class App extends Component {
           <Routes>
             <Route path="/login" exact element={<Login />} />
             <Route path="/signup" exact element={<SignUp />} />
+            <Route path="/levelCheck" exact element={<LevelCheck />} />
+            <Route path="/levelTest" exact element={<LevelTest />} />
           </Routes>
         </BrowserRouter>
       </div>
