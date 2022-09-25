@@ -8,7 +8,7 @@
 }
 
 .form_container {
-  width: "80%";
+  width: 80%;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -17,7 +17,7 @@
 .title {
   font-weight: 700;
   color: black;
-  font-size: 32px;
+  font-size: 260%;
   line-height: 35px;
   margin-bottom: 70px;
 }
@@ -45,10 +45,15 @@
 .grid_container {
   display: grid;
   grid-template-columns: auto auto;
-  padding: 0px 150px 0px 150px;
+  padding-left: 10%;
+  padding-right: 10%;
   align-items: center;
 }
 
 .card {
   padding: 73px 196px 73px 196px;
+}
+
+a {
+  text-decoration: none;
 }
