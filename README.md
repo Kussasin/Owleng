@@ -40,6 +40,13 @@ ____
 - Would you like to install them now? выбираем Yes
 - Which package manager do you want to use? выбираем npm
 ```
+- установите зависимости Sass:
+`npm install sass-loader sass webpack --save-dev`
+и
+`npm install node-sass`
+
+- Установите ``` Live Sass Compiler ``` в VSCode для работы с scss/saas прочитайте как он работает
+
 ____
 # Как делать pull и push проекта
 [:arrow_up:Оглавление](#Оглавление)
@@ -65,6 +72,7 @@ ____
 
 - `npm i node-modules`
 - `npm i react-router-dom`
+- `npm i -S prop-types`
 ____
 # Полезные ссылки:
 [:arrow_up:Оглавление](#Оглавление)
@@ -74,4 +82,5 @@ ____
 - [Деструктуризация](https://learn.javascript.ru/destructuring)
 - [Руководство по стилю написания кода React](https://webformyself.com/rukovodstvo-po-stilyu-napisaniya-koda-react/)
 - [Правила оформления кода на React](https://netology-university.bitbucket.io/codestyle/react/)
+- [Основы Sass](https://sass-scss.ru/guide/)
 

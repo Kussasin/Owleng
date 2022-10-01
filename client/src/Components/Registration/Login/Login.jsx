@@ -1,19 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './loginStyle.module.scss';
-import welcomeImg from '../../img/authentication-illustration.svg';
+import welcomeImg from '../../../img/LogRegImg/authentication-illustration.svg';
+import Header from '../RegHeader/RegHeader';
 
 function Login() {
   return (
     <div className={styles.login_page}>
       <div className={styles.login_page_container}>
-        <div className={styles.logo_navbar}>
-          <h1>Owleng</h1>
-        </div>
+        <Header />
         <div className={styles.login_container}>
           <div className={styles.login_container_left}>
             <div className={styles.login_forms_container}>
-              <div className={styles.container_content}>
+              <div className={styles.forms_container_content}>
                 <form className={styles.form_container}>
                   <h1>Zaloguj się na swoje konto</h1>
                   <input
@@ -61,7 +60,6 @@ function Login() {
           </div>
         </div>
       </div>
-
     </div>
   );
 }

@@ -1,19 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './signUp.module.scss';
-import regestrationImg from '../../img/registration-illustration.svg';
+import regestrationImg from '../../../img/LogRegImg/registration-illustration.svg';
+import Header from '../RegHeader/RegHeader';
 
 function Signup() {
   return (
     <div className={styles.registration_page}>
       <div className={styles.registration_page_container}>
-        <div className={styles.logo_navbar}>
-          <h1>Owleng</h1>
-        </div>
+        <Header />
         <div className={styles.registration_container}>
           <div className={styles.registration_container_left}>
             <div className={styles.registration_forms_container}>
-              <div className={styles.container_content}>
+              <div className={styles.forms_container_content}>
                 <form className={styles.form_container}>
                   <h1>Założ nowe konto w Owleng</h1>
                   <input
@@ -79,7 +78,6 @@ function Signup() {
           </div>
         </div>
       </div>
-
     </div>
   );
 }
