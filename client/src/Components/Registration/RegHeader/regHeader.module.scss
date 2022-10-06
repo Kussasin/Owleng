@@ -1,0 +1,15 @@
+@import '../../../lightmode_colors.module';
+
+.logo_navbar {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+
+    h1 {
+        font-style: normal;
+        font-weight: 700;
+        font-size: 35px;
+        text-transform: uppercase;
+        color: $main_color;
+    }
+}
