@@ -10,7 +10,7 @@ function Card(props) {
   );
 }
 Card.propTypes = {
-  additionalStyles: PropTypes.object,
+  additionalStyles: PropTypes.string,
   children: PropTypes.element,
 };
 export default Card;

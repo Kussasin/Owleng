@@ -17,7 +17,7 @@ const CustomButton = (props) => {
 CustomButton.propTypes = {
   title: PropTypes.string,
   type: PropTypes.string,
-  additionalStyles: PropTypes.object,
+  additionalStyles: PropTypes.string,
   onPress: PropTypes.func,
 };
 

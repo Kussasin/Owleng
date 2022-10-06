@@ -3,11 +3,11 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import React, { Component } from "react";
 
 import LevelCheck from "./Components/LevelCheck/LevelCheck";
-import LevelTest from "./Components/LevelTest/LevelTest";
+import Test from "./Components/LevelTest/LevelTest";
 import ChoiceLevel from "./Components/ChoiceLevel/ChoiceLevel";
-import MainPage from './Components/Main/MainPage/MainPage';
-import Login from './Components/Registration/Login/Login';
-import SignUp from './Components/Registration/SignUp/SignUp';
+import MainPage from "./Components/Main/MainPage/MainPage";
+import Login from "./Components/Registration/Login/Login";
+import SignUp from "./Components/Registration/SignUp/SignUp";
 
 class App extends Component {
   render() {
@@ -19,7 +19,7 @@ class App extends Component {
             <Route path="/login" exact element={<Login />} />
             <Route path="/signup" exact element={<SignUp />} />
             <Route path="/levelCheck" exact element={<LevelCheck />} />
-            <Route path="/levelTest" exact element={<LevelTest />} />
+            <Route path="/levelTest" exact element={<Test />} />
             <Route path="/choiceLevel" exact element={<ChoiceLevel />} />
           </Routes>
         </BrowserRouter>
