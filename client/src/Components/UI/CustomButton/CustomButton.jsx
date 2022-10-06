@@ -9,7 +9,7 @@ const CustomButton = (props) => {
       className={`${styles.custom_button} ${props.additionalStyles}`}
       onClick={props.onPress}
     >
-      {props.title}
+      <span>{props.title}</span>
     </button>
   );
 };

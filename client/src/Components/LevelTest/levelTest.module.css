@@ -17,7 +17,7 @@
 .title {
   font-weight: 700;
   color: black;
-  font-size: 260%;
+  font-size: 3em;
   line-height: 35px;
   margin-bottom: 70px;
 }
@@ -33,6 +33,10 @@
   color: #000000;
 }
 
+.answer_button {
+  width: 40%;
+}
+
 .result_button {
   width: 100%;
   padding-top: 20px;
@@ -43,11 +47,11 @@
 }
 
 .grid_container {
-  display: grid;
-  grid-template-columns: auto auto;
-  padding-left: 10%;
-  padding-right: 10%;
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
+  gap: 12px;
 }
 
 .card {

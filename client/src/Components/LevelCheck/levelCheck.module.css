@@ -8,14 +8,29 @@
 }
 
 .form_container {
-  width: "80%";
+  width: 80%;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
 }
 
+.check_level {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .button_style {
-  width: 478px;
+  display: block;
+  width: 100%;
+}
+
+.link_container {
+  width: 60%;
 }
 
 .title {

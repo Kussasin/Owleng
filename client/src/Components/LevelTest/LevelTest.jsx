@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-//import { Link } from "react-router-dom";
 import styles from "./levelTest.module.css";
 import CustomButton from "../UI/CustomButton/CustomButton";
 import Card from "../Card/Card";
@@ -33,6 +32,7 @@ function Test() {
                 key={answer}
                 title={answer}
                 onPress={() => setIsTestFinished(true)}
+                additionalStyles={styles.answer_button}
               />
             ))}
           </div>
