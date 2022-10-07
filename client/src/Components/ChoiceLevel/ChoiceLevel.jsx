@@ -1,13 +1,12 @@
 import React from "react";
-import styles from "./choiceLevel.module.css";
-//import { Link } from "react-router-dom";
+import styles from "./choiceLevel.module.scss";
 import CustomButton from "../UI/CustomButton/CustomButton";
 
 function ChoiceLevel() {
   return (
-    <div className={styles.coice_level_container}>
+    <div className={styles.choice_level_container}>
       <div className={styles.form_container}>
-        <p className={styles.title}>Wybierz swój poziom</p>
+        <p>Wybierz swój poziom</p>
         <div className={styles.grid_container}>
           <CustomButton
             title="A1"

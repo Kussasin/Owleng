@@ -1,14 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import styles from "./levelCheck.module.css";
+import styles from "./levelCheck.module.scss";
 import CustomButton from "../UI/CustomButton/CustomButton";
-//import ChoiceLevel from "../ChoiceLevel/ChoiceLevel";
 
 function LevelCheck() {
   return (
     <div className={styles.level_check_container}>
       <div className={styles.form_container}>
-        <p className={styles.title}>Czy wiesz swój poziom języka?</p>
+        <p>Czy wiesz swój poziom języka?</p>
         <div className={styles.check_level}>
           <NavLink to="/ChoiceLevel" className={styles.link_container}>
             <CustomButton

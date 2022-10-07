@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styles from "./customButton.module.css";
+import styles from "./customButton.module.scss";
 
 const CustomButton = (props) => {
   return (

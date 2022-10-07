@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./levelTest.module.css";
+import styles from "./levelTest.module.scss";
 import CustomButton from "../UI/CustomButton/CustomButton";
 import Card from "../Card/Card";
 import { NavLink } from "react-router-dom";
@@ -105,7 +105,7 @@ const Test = () => {
       {isTestFinished ? (
         <Card additionalStyles={styles.card}>
           <>
-            <p className={styles.result_title}>Jesteś na poziomie A2!</p>
+            <p className={styles.card_title}>Jesteś na poziomie A2!</p>
             <div>
               <p>Twój wynik: {userScore}</p>
             </div>
@@ -113,14 +113,14 @@ const Test = () => {
               <CustomButton
                 title={"Zacznij naukę ->"}
                 onPress={() => {}}
-                additionalStyles={styles.result_button}
+                additionalStyles={styles.card_result_button}
               />
             </NavLink>
           </>
         </Card>
       ) : (
         <div className={styles.form_container}>
-          <p className={styles.title}>{TEST[currentQuestionIndex].question}</p>
+          <p>{TEST[currentQuestionIndex].question}</p>
           <div className={styles.grid_container}>
             {TEST[currentQuestionIndex].answers.map((answer) => (
               <CustomButton
