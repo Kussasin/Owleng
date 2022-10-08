@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styles from './loginStyle.module.scss';
-import welcomeImg from '../../../img/LogRegImg/authentication-illustration.svg';
-import Header from '../RegHeader/RegHeader';
+import React from "react";
+import { Link } from "react-router-dom";
+import styles from "./loginStyle.module.scss";
+import welcomeImg from "../../../img/LogRegImg/authentication-illustration.svg";
+import Header from "../RegHeader/RegHeader";
 
 function Login() {
   return (
@@ -29,10 +29,7 @@ function Login() {
                     required
                     className={styles.input}
                   />
-                  <button
-                    type="submit"
-                    className={styles.submit_button}
-                  >
+                  <button type="submit" className={styles.submit_button}>
                     Zaloguj się
                   </button>
                 </form>
@@ -40,9 +37,7 @@ function Login() {
                   <p>
                     <span>Nie masz jeszcze profilu? </span>
                     <Link to="/signup">
-                      <span>
-                        Zarejestruj się
-                      </span>
+                      <span>Zarejestruj się</span>
                     </Link>
                   </p>
                 </div>
@@ -52,10 +47,18 @@ function Login() {
           <div className={styles.login_container_right}>
             <div className={styles.login_content}>
               <div className={styles.content_container}>
-                <h1 className={styles.content_container_title}>Ucz się razem z Owleng</h1>
-                <p className={styles.content_container_subtitle}>Zaloguj się, aby rozpocząć.</p>
+                <h1 className={styles.content_container_title}>
+                  Ucz się razem z Owleng
+                </h1>
+                <p className={styles.content_container_subtitle}>
+                  Zaloguj się, aby rozpocząć.
+                </p>
               </div>
-              <img className={styles.content_container_picture} src={welcomeImg} alt="welcome_picture" />
+              <img
+                className={styles.content_container_picture}
+                src={welcomeImg}
+                alt="welcome_picture"
+              />
             </div>
           </div>
         </div>

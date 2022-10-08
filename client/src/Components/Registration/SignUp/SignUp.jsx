@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styles from './signUp.module.scss';
-import regestrationImg from '../../../img/LogRegImg/registration-illustration.svg';
-import Header from '../RegHeader/RegHeader';
+import React from "react";
+import { Link } from "react-router-dom";
+import styles from "./signUp.module.scss";
+import regestrationImg from "../../../img/LogRegImg/registration-illustration.svg";
+import Header from "../RegHeader/RegHeader";
 
 function Signup() {
   return (
@@ -43,10 +43,7 @@ function Signup() {
                     required
                     className={styles.input}
                   />
-                  <button
-                    type="submit"
-                    className={styles.submit_button}
-                  >
+                  <button type="submit" className={styles.submit_button}>
                     Zarejestruj się
                   </button>
                 </form>
@@ -54,9 +51,7 @@ function Signup() {
                   <p>
                     <span>Masz już profil? </span>
                     <Link to="/login">
-                      <span>
-                        Zaloguj sie
-                      </span>
+                      <span>Zaloguj sie</span>
                     </Link>
                   </p>
                 </div>
@@ -66,14 +61,20 @@ function Signup() {
           <div className={styles.registration_container_right}>
             <div className={styles.registration_content}>
               <div className={styles.content_container}>
-                <h1 className={styles.content_container_title}>Witamy w Owleng!</h1>
+                <h1 className={styles.content_container_title}>
+                  Witamy w Owleng!
+                </h1>
                 <p className={styles.content_container_subtitle}>
-                  Ucz się języka angielskiego przy
-                  użyciu materiał&oacute;w w&nbsp;100%
-                  w&nbsp;języku angielskim&nbsp;&mdash; w&nbsp;dowolnym miejscu i&nbsp;czasie.
+                  Ucz się języka angielskiego przy użyciu materiał&oacute;w
+                  w&nbsp;100% w&nbsp;języku angielskim&nbsp;&mdash;
+                  w&nbsp;dowolnym miejscu i&nbsp;czasie.
                 </p>
               </div>
-              <img className={styles.content_container_picture} src={regestrationImg} alt="welcome_picture" />
+              <img
+                className={styles.content_container_picture}
+                src={regestrationImg}
+                alt="welcome_picture"
+              />
             </div>
           </div>
         </div>

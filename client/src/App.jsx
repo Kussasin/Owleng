@@ -1,10 +1,10 @@
 /* eslint-disable react/prefer-stateless-function */
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import React, { Component } from 'react';
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import React, { Component } from "react";
 
-import Login from './Components/Registration/Login/Login';
-import SignUp from './Components/Registration/SignUp/SignUp';
-import MainPage from './Components/Main/MainPage/MainPage';
+import Login from "./Components/Registration/Login/Login";
+import SignUp from "./Components/Registration/SignUp/SignUp";
+import MainPage from "./Components/Main/MainPage/MainPage";
 
 class App extends Component {
   render() {

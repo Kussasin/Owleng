@@ -61,7 +61,6 @@ function Header() {
               <a className={styles.container_item} href="#about">Pomoc</a>
               <a className={styles.container_item} href="#contact">O nas</a>
               <a className={styles.container_item} href="#contact">Wyloguj się</a>
-
             </div>
           </div>
         </div>
