@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./choiceLevel.module.scss";
-import CustomButton from "../UI/CustomButton/CustomButton";
+import CustomButton from "../../UI/CustomButton/CustomButton";
 
 function ChoiceLevel() {
   return (

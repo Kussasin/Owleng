@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./levelCheck.module.scss";
-import CustomButton from "../UI/CustomButton/CustomButton";
+import CustomButton from "../../UI/CustomButton/CustomButton";
 
 function LevelCheck() {
   return (
