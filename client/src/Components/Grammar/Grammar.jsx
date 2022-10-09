@@ -1,8 +1,9 @@
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import styles from "./grammar.module.scss";
-import Header from "../Header/Header";
-import Dropdown from "../../../img/HeaderImg/Dropdown_arrow.png";
+import Header from "../Main/Header/Header";
+import MobileHeader from "../Main/MobileHeader/MobileHeader";
+import Dropdown from "../../img/HeaderImg/Dropdown_arrow.png";
 
 function MainPage() {
   const linkTo = "#";
@@ -16,6 +17,7 @@ function MainPage() {
   return (
     <div className={styles.container}>
       <div className={styles.container_header}>
+        <MobileHeader/>
         <Header />
       </div>
       <div className={styles.container_content}>
