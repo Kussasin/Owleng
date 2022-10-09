@@ -4,8 +4,8 @@
         "es2021": true
     },
     "extends": [
-        "plugin:react/recommended",
-        "eslint:recommended"
+        "eslint:recommended",
+        "plugin:react/recommended"
     ],
     "overrides": [
     ],
@@ -17,6 +17,5 @@
         "react"
     ],
     "rules": {
-        "linebreak-style": 0
     }
 }

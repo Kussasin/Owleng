@@ -1,0 +1,67 @@
+@import "../../lightmode_colors.module.scss";
+
+@mixin center {
+  align-items: center;
+  justify-content: center;
+}
+
+.level_test_container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: $background;
+  display: flex;
+  @include center();
+}
+
+.form_container {
+  width: 80%;
+  text-align: center;
+  @include center();
+
+  p {
+    font-weight: 700;
+    color: $black;
+    font-size: 3em;
+    line-height: 35px;
+    margin-bottom: 70px;
+    line-height: 1em;
+  }
+}
+
+.answer_button {
+  width: 40%;
+}
+
+.grid_container {
+  display: flex;
+  flex-wrap: wrap;
+  @include center();
+  gap: 12px;
+}
+
+.card {
+  padding: 73px 196px 73px 196px;
+
+  a {
+    text-decoration: none;
+  }
+
+  &_title {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+    color: $black;
+  }
+
+  &_result_button {
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 14px;
+    line-height: 15px;
+    margin: 0px 0px 0px 0px;
+  }
+}

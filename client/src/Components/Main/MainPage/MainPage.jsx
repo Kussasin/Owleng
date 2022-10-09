@@ -12,9 +12,10 @@ import Mówienie from "../../../img/MainImg/Mówienie.png"
 import Arrow from "../../../img/MainImg/arrow.png"
 import ActiveArrow from "../../../img/MainImg/arrowactive.png"
 
-function SquareButton(name, url, linkTo) {
+function SquareButton(key, name, url, linkTo) {
   return (
     <Link className={styles.link_button} to={linkTo} key={name}>
+
       <div className={styles.button_container}>
         <h3 className={styles.button_container_title}>{name}</h3>
         <img className={styles.button_container_image} src={url} alt={name} />
@@ -37,15 +38,15 @@ function MainPage() {
     { url: Mówienie, title: "Mówienie", link: "/" },
   ];
   
+
   return (
     <div className={styles.container}>
       <div className={styles.container_header}>
         <Header />
-        <MobileHeader />
       </div>
       <div className={styles.container_content}>
         {buttonData.map((item) =>
-          SquareButton(item.title, item.url, item.link, item.arrow)
+          SquareButton(item.title, item.title, item.url, item.link)
         )}
       </div>
     </div>

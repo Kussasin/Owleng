@@ -1,0 +1,53 @@
+@import "../../lightmode_colors.module.scss";
+
+@mixin flexible() {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flexColumn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.level_check_container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: $background;
+  @include flexible();
+}
+
+.form_container {
+  width: 80%;
+  text-align: center;
+  @include flexColumn();
+
+  p {
+    font-weight: 700;
+    color: $black;
+    font-size: 32px;
+    line-height: 35px;
+    margin-bottom: 70px;
+  }
+}
+
+.check_level {
+  width: 80%;
+  @include flexColumn();
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.button_style {
+  display: block;
+  width: 100%;
+}
+
+.link_container {
+  width: 60%;
+}
