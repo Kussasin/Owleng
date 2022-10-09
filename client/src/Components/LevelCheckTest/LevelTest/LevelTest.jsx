@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./levelTest.module.scss";
-import CustomButton from "../UI/CustomButton/CustomButton";
-import Card from "../Card/Card";
+import CustomButton from "../../UI/CustomButton/CustomButton";
+import Card from "../../Card/Card";
 import { NavLink } from "react-router-dom";
 
 const TEST = [
