@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./mainPage.module.scss";
 import Header from "../Header/Header";
+import MobileHeader from "../Header/MobileHeader/MobileHeader";
 import Gramatyka from "../../../img/MainImg/Gramatyka.png"
 import Czytanie from "../../../img/MainImg/Czytanie.png"
 import Testy from "../../../img/MainImg/Testy.png"
@@ -35,10 +36,12 @@ function MainPage() {
     { url: Wideo_materiały, title: "Wideo Materiały", link: "/" },
     { url: Mówienie, title: "Mówienie", link: "/" },
   ];
+  
   return (
     <div className={styles.container}>
       <div className={styles.container_header}>
         <Header />
+        <MobileHeader />
       </div>
       <div className={styles.container_content}>
         {buttonData.map((item) =>

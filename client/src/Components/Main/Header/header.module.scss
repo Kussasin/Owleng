@@ -13,6 +13,7 @@ $font_size: 20px;
   width: 100%;
   max-height: 96px;
   box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.04);
+  display: block;
 }
 
 .header_container {
@@ -109,7 +110,7 @@ $font_size: 20px;
 .header_right {
   @include flexible();
   justify-content: space-between;
-  gap: 20px;
+  gap: 30px;
 
   .notification,
   .favorite,
@@ -137,7 +138,7 @@ $font_size: 20px;
   position: absolute;
   right: 0;
   background-color: $white;
-  min-width: 160px;
+  min-width: 186px;
   overflow: auto;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
@@ -150,6 +151,10 @@ $font_size: 20px;
     display: block;
     font-weight: 700;
     text-align: center;
+
+    p {
+      margin: 0;
+    }
 
     &:hover {
       background-color: $main_color;
@@ -167,5 +172,23 @@ $font_size: 20px;
 }
 
 @media (max-width: 769px) {
+  .header {
+    display: none;
+  }
 
+  .toggle_container {
+    width: 52px;
+    height: 20px;
+
+    .dialog_button {
+      width: 21px;
+      height: 21px;
+    }
+
+    .disabled {
+      background-color: $black;
+      color: $white;
+      left: 2px;
+    }
+  }
 }

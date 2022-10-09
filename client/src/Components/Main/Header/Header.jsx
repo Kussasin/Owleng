@@ -8,6 +8,14 @@ import Bell from '../../../img/HeaderImg/Bell.png';
 import Star from '../../../img/HeaderImg/Star.png';
 import ToggleButton from './ToggleButton/ToggleButton';
 
+function DropdownItem(title, link) {
+  return (
+    <Link className={styles.container_item} to={link} key={title}>
+      <p>{title}</p>
+    </Link>
+  );
+}
+
 function Header() {
   const poziom = 'B1';
   const [isActive, setIsActive] = useState(false);
@@ -28,6 +36,12 @@ function Header() {
       document.removeEventListener('mousedown', checkIfClickedOutside);
     };
   }, [isActive]);
+  const DropdownItems = [
+    { title: "Ustawenia", link: "/" },
+    { title: "Pomoc", link: "/" },
+    { title: "O nas", link: "/" },
+    { title: "Wyloguj się", link: "/login" },
+  ];
 
   return (
     <nav className={styles.header}>
@@ -57,10 +71,9 @@ function Header() {
             <img className={styles.dropdown_icon} src={People} alt="man icon" />
             <img className={`${styles.dropdown_arrow} ${isActive ? styles.rotate_arrow_180 : ''}`} src={Dropdown} alt="dropdown arrow" />
             <div className={`${styles.dropdown_container} ${isActive ? styles.show : styles.hide}`}>
-              <a className={styles.container_item} href="#home">Ustawenia</a>
-              <a className={styles.container_item} href="#about">Pomoc</a>
-              <a className={styles.container_item} href="#contact">O nas</a>
-              <a className={styles.container_item} href="#contact">Wyloguj się</a>
+              {DropdownItems.map((item) =>
+                DropdownItem(item.title, item.link)
+              )}
             </div>
           </div>
         </div>
