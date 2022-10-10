@@ -16,7 +16,6 @@ import ActiveArrow from "../../../img/MainImg/arrowactive.png"
 function SquareButton(name, url, linkTo) {
   return (
     <Link className={styles.link_button} to={linkTo} key={name}>
-
       <div className={styles.button_container}>
         <h3 className={styles.button_container_title}>{name}</h3>
         <img className={styles.button_container_image} src={url} alt={name} />
@@ -35,7 +34,7 @@ function MainPage() {
     { url: Czytanie, title: "Czytanie", link: "/" },
     { url: Testy, title: "Testy", link: "/" },
     { url: Słuchanie, title: "Słuchanie", link: "/" },
-    { url: Wideo_materiały, title: "Wideo Materiały", link: "/" },
+    { url: Wideo_materiały, title: "Wideo Materiały", link: "/video" },
     { url: Mówienie, title: "Mówienie", link: "/" },
   ];
 
