@@ -4,6 +4,7 @@ import styles from "./grammar.module.scss";
 import Header from "../Main/Header/Header";
 import MobileHeader from "../Main/MobileHeader/MobileHeader";
 import Dropdown from "../../img/HeaderImg/Dropdown_arrow.png";
+import CustomButton from "../UI/CustomButton/CustomButton";
 
 function MainPage() {
   const linkTo = "#";
@@ -52,14 +53,17 @@ function MainPage() {
           </div>
         </div>
         <div className={styles.container_content_right}>
+          <div className={styles.container_content_right_dk}>
           <div className={styles.content}>
             <p>a</p>
           </div>
+          </div>
           <div className={styles.content_button}>
             <Link to={linkTo}>
-              <button type="submit" className={styles.button}>
-                Przejdź do testu
-              </button>
+            <CustomButton
+              title="Przejdź do testu"
+              additionalStyles={styles.button_style}
+            />
             </Link>
           </div>
         </div>
