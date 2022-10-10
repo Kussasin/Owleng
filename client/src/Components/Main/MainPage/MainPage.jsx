@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./mainPage.module.scss";
 import Header from "../Header/Header";
-import MobileHeader from "../Header/MobileHeader/MobileHeader";
+import MobileHeader from "../MobileHeader/MobileHeader";
 import Gramatyka from "../../../img/MainImg/Gramatyka.png"
 import Czytanie from "../../../img/MainImg/Czytanie.png"
 import Testy from "../../../img/MainImg/Testy.png"
@@ -30,7 +30,7 @@ function SquareButton(name, url, linkTo) {
 
 function MainPage() {
   const buttonData = [
-    { url: Gramatyka, title: "Gramatyka", link: "/" },
+    { url: Gramatyka, title: "Gramatyka", link: "/grammar" },
     { url: Czytanie, title: "Czytanie", link: "/" },
     { url: Testy, title: "Testy", link: "/" },
     { url: Słuchanie, title: "Słuchanie", link: "/" },

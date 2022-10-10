@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-import Burger from "../../../../img/HeaderImg/Burger.png"
-import Cross from "../../../../img/HeaderImg/Cross.png"
+import Burger from "../../../img/HeaderImg/Burger.png"
+import Cross from "../../../img/HeaderImg/Cross.png"
 import styles from "./mobileheader.module.scss";
-import ToggleButton from '../ToggleButton/ToggleButton';
+import ToggleButton from '../Header/ToggleButton/ToggleButton';
 
 function NavItem(name, link) {
   return (
