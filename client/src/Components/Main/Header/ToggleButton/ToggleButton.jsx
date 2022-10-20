@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import styles from '../header.module.scss';
+import styles from './toggleButton.module.scss';
+import Moon from '../../../../img//HeaderImg/moon.png';
+import Sun from '../../../../img//HeaderImg/sun.png';
 
 class ToggleButton extends Component {
   constructor(props) {
@@ -12,10 +14,14 @@ class ToggleButton extends Component {
   render() {
     const { selected, toggleSelected } = this.props;
     return (
-      <div className={`${styles.toggle_container} ${selected ? `${styles.container_disable}` : ''}`} 
-      onClick={toggleSelected} aria-hidden="true">
+      <div className={`${styles.theme_control_container} ${selected ? `${styles.container_disable}` : ''}`}
+        onClick={toggleSelected} aria-hidden="true">
+        {selected ?
+          <img className={ `${styles.theme_control_icon} ${styles.moon}`} src={Moon} alt="theme_icon_moon" />
+          :
+          <img className={`${styles.theme_control_icon} ${styles.sun}`} src={Sun} alt="theme_icon_sun" />
+        }
         <div className={`${styles.dialog_button} ${selected ? '' : `${styles.disabled}`}`}>
-          {selected ? 'Y' : 'N'}
         </div>
       </div>
     );

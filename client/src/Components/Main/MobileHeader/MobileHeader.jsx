@@ -19,7 +19,6 @@ function MobileHeader() {
   const [selected, setSelected] = useState(false);
   const NavItemsOver = [
     { title: "Mój profil", link: "/" },
-    { title: "Powiadomienia", link: "/" },
     { title: "Ulubione", link: "/" },
   ];
   const NavItemsUnder = [
