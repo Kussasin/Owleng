@@ -1,5 +1,5 @@
 @import '../../../lightmode_colors.module.scss';
-
+$left_img_weight: 18px;
 @mixin flexible() {
 	display: flex;
 	align-items: center;
@@ -125,8 +125,20 @@
 		margin: 0;
 		color: $black;
 	}
-}
 
+}
+.theme_control_icon {
+	width: $left_img_weight;
+	position: absolute;
+}
+.sun{
+	right: 6px;
+	bottom: 5px;
+}
+.moon{
+	left: 6px;
+	bottom: 5px;
+}
 .menu_disable {
 	display: none;
 }

@@ -12,7 +12,6 @@ import Mówienie from "../../../img/MainImg/Mówienie.png"
 import Arrow from "../../../img/MainImg/arrow.png"
 import ActiveArrow from "../../../img/MainImg/arrowactive.png"
 
-
 function SquareButton(name, url, linkTo) {
   return (
     <Link className={styles.link_button} to={linkTo} key={name}>
