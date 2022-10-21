@@ -1,168 +1,135 @@
 @import '../../../lightmode_colors.module.scss';
 
-$left_img_weight: 18px;
 $right_img_weight: 25px;
 $font_size: 20px;
 
 @mixin flexible() {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .header {
-    width: 100%;
-    max-height: 96px;
-    box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.04);
+  width: 100%;
+  max-height: 96px;
+  box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.04);
+  display: block;
 }
 
 .header_container {
-    @include flexible();
-    justify-content: space-between;
-    padding: 12px 32px;
+  @include flexible();
+  justify-content: space-between;
+  padding: 12px 32px;
 }
 
 .header_left {
-    @include flexible();
-    justify-content: space-between;
-    gap: 20px;
+  @include flexible();
+  justify-content: space-between;
+  gap: 20px;
 
-    h1 {
-        font-style: normal;
-        font-weight: 700;
-        font-size: 35px;
-        text-transform: uppercase;
-        margin: 0;
-    }
+  h1 {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 35px;
+    text-transform: uppercase;
+    margin: 0;
+  }
 
-    a {
-        text-decoration: none;
-        color: $main_color;
-    }
+  a {
+    text-decoration: none;
+    color: $main_color;
+  }
 }
 
-.theme_control {
-    @include flexible();
-    gap: 5px;
 
-    &_icon {
-        width: $left_img_weight;
-    }
-}
 
-.toggle_container {
-    width: 56px;
-    height: 23px;
-    background-color: $white;
-    cursor: pointer;
-    user-select: none;
-    border: 1px solid $black;
-    border-radius: 20px;
-    padding: 2px;
-    position: relative;
-
-    .dialog_button {
-        @include flexible();
-        width: 23px;
-        height: 23px;
-        justify-content: center;
-        background-color: $white;
-        color: $black;
-        border-radius: 50%;
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        position: absolute;
-        left: 34px;
-        transition: all 0.3s ease;
-    }
-
-    .disabled {
-        background-color: $black;
-        color: $white;
-        left: 2px;
-    }
-}
-
-.container_disable {
-    background-color: $black;
-}
 
 .user_level {
-    @include flexible();
-    gap: 10px;
+  @include flexible();
+  gap: 10px;
 
-    p {
-        font-style: normal;
-        font-weight: 500;
-        line-height: 23px;
-        margin: 0;
-        font-size: $font_size;
-    }
+  p {
+    font-style: normal;
+    font-weight: 500;
+    line-height: 23px;
+    margin: 0;
+    font-size: $font_size;
+  }
 
-    .current_user_level {
-        font-style: normal;
-        font-weight: 700;
-        font-size: 35px;
-        text-transform: uppercase;
-        color: $main_color;
-    }
+  .current_user_level {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 35px;
+    text-transform: uppercase;
+    color: $main_color;
+  }
 }
 
 .header_right {
-    @include flexible();
-    justify-content: space-between;
-    gap: 20px;
+  @include flexible();
+  justify-content: space-between;
+  gap: 30px;
 
-    .notification,
-    .favorite,
-    .dropdown_icon {
-        width: $right_img_weight;
-        height: $right_img_weight;
-        cursor: pointer;
-    }
+  .notification,
+  .favorite,
+  .dropdown_icon {
+    width: $right_img_weight;
+    height: $right_img_weight;
+    cursor: pointer;
+  }
 
-    .dropdown {
-        cursor: pointer;
-    }
+  .dropdown {
+    cursor: pointer;
+  }
 }
 
 .dropdown_arrow {
-    width: 12px;
+  width: 12px;
 }
 
 .rotate_arrow_180 {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .dropdown_container {
-    display: none;
-    position: absolute;
-    right: 0;
-    background-color: $white;
-    min-width: 160px;
-    overflow: auto;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    border-radius: 0px 0px 10px 10px;
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: $white;
+  min-width: 186px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 0px 0px 10px 10px;
 
-    .container_item {
-        color: $black;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-        font-weight: 700;
-        text-align: center;
+  .container_item {
+    color: $black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-weight: 700;
+    text-align: center;
 
-        &:hover {
-            background-color: $main_color;
-            color: $white;
-        }
+    p {
+      margin: 0;
     }
 
+    &:hover {
+      background-color: $main_color;
+      color: $white;
+    }
+  }
 }
 
 .show {
-    display: block;
+  display: block;
 }
 
 .hide {
+  display: none;
+}
+
+@media (max-width: 769px) {
+  .header {
     display: none;
+  }
 }

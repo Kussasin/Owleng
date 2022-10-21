@@ -1,22 +1,25 @@
 @import "../../../lightmode_colors.module.scss";
+$button_pudding: 25px;
 
-@mixin center {
+@mixin flex {
+  display: flex;
   align-items: center;
-  justify-content: center;
 }
 
 .choice_level_container {
   width: 100%;
   min-height: 100vh;
   background-color: $background;
-  display: flex;
-  @include center();
+  @include flex();
+  justify-content: center;
+
 }
 
 .form_container {
   width: 80%;
   text-align: center;
-  @include center();
+  align-items: center;
+  justify-content: center;
 
   p {
     font-weight: 700;
@@ -27,15 +30,104 @@
   }
 }
 
+.buttons_container {
+  @include flex();
+  justify-content: center;
+}
+
 .grid_container {
-  display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  padding-left: 10%;
-  padding-right: 10%;
-  @include center();
+  gap: 30px;
+  @include flex();
+  justify-content: center;
 
   .button_style {
-    width: 200px;
+    width: 150px;
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 1025px) {
+  .form_container {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid_container {
+    width: 65%;
+    gap: 20px;
+
+    .button_style {
+      width: 180px;
+      margin: 0;
+      padding-top: $button_pudding;
+      padding-bottom: $button_pudding;
+    }
+  }
+}
+
+@media (max-width: 586px) {
+  .form_container {
+    p {
+      font-size: 28px;
+    }
+  }
+
+  .grid_container {
+    flex-direction: column;
+    width: 60%;
+
+    a {
+      width: 100%;
+    }
+
+    .button_style {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 486px) {
+  $button_pudding: 22px;
+
+  .form_container {
+    p {
+      font-size: 26px;
+    }
+  }
+
+  .grid_container {
+    width: 70%;
+
+    a {
+      width: 100%;
+    }
+
+    .button_style {
+      width: 100%;
+      padding-top: $button_pudding;
+      padding-bottom: $button_pudding;
+    }
+  }
+}
+
+@media (max-width: 386px) {
+  .form_container {
+    p {
+      font-size: 26px;
+    }
+  }
+
+  .grid_container {
+    width: 90%;
+
+    a {
+      width: 100%;
+    }
+
+    .button_style {
+      width: 100%;
+    }
   }
 }

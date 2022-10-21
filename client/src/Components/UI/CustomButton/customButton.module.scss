@@ -1,24 +1,40 @@
 @import "../../../lightmode_colors.module.scss";
 
+$button_pudding: 29px;
+
 .custom_button {
   color: $white;
   font-weight: 700;
-  font-size: 130%;
+  font-size: 20px;
   line-height: 22px;
-  width: 100%;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
   box-sizing: border-box;
   background: $main_color;
   border: 1px solid $inactive_field;
   border-radius: 40px;
-  padding-top: 29px;
-  padding-bottom: 29px;
-  margin: 8px 8px 8px 8px;
+  padding-top: $button_pudding;
+  padding-bottom: $button_pudding;
+  margin: 8px 0;
   line-break: auto;
 
   &:hover {
     background-color: $button_hover;
+  }
+}
+
+@media (max-width: 1025px) {
+  .custom_button {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 769px) {
+  .custom_button {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 321px) {
+  .custom_button {
+    font-size: 14px;
   }
 }
