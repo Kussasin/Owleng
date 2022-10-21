@@ -204,7 +204,7 @@ const Video = () => {
   const windowDimensions = useWindowDimensions();
   const [showFilters, setshowFilters] = useState(false);
   const [showSort, setShowSort] = useState(false);
-  const [selectedSort, setselectedSort] = useState("");
+  const [selectedSort, setselectedSort] = useState("SortAlphAsc");
   const [categories, setCategories] = useState(categoriesList);
   const [numberVideosToDisplay, setnumberVideosToDisplay] = useState(8);
   const [currentVideoId, setcurrentVideoId] = useState("");
@@ -353,7 +353,7 @@ const Video = () => {
               {videoLoaded && (
                 <div className={styles.close_button_container}>
                   <CustomButton
-                    title="Close"
+                    title="X"
                     additionalStyles={styles.close_button}
                     onPress={() => {
                       setVideoLoaded(false);
@@ -374,19 +374,8 @@ const Video = () => {
             <div className={styles.video_background} />
           </>
         )}
-        {numberVideosToDisplay >= videoData.length ? (
-          <CustomButton
-            title="Zobać mniej"
-            additionalStyles={styles.load_more}
-            onPress={() => {
-              if (numberVideosToDisplay <= 8) {
-                return;
-              } else {
-                setnumberVideosToDisplay((prevState) => prevState - 8);
-              }
-            }}
-          />
-        ) : (
+
+        {numberVideosToDisplay <= videoData.length && videos.length > 7 ? (
           <CustomButton
             title="Zobać więcej"
             additionalStyles={styles.load_more}
@@ -398,6 +387,16 @@ const Video = () => {
               }
             }}
           />
+        ) : (
+          videos.length > 7 && (
+            <CustomButton
+              title="Zobać mniej"
+              additionalStyles={styles.load_more}
+              onPress={() => {
+                setnumberVideosToDisplay(8);
+              }}
+            />
+          )
         )}
       </div>
     </div>
