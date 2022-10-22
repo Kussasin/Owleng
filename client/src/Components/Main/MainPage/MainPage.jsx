@@ -30,9 +30,9 @@ function SquareButton(name, url, linkTo) {
 function MainPage() {
   const buttonData = [
     { url: Gramatyka, title: "Gramatyka", link: "/grammar" },
-    { url: Czytanie, title: "Czytanie", link: "/" },
+    { url: Czytanie, title: "Czytanie", link: "/reading" },
     { url: Testy, title: "Testy", link: "/" },
-    { url: Słuchanie, title: "Słuchanie", link: "/" },
+    { url: Słuchanie, title: "Słuchanie", link: "/listening" },
     { url: Wideo_materiały, title: "Wideo Materiały", link: "/video" },
     { url: Mówienie, title: "Mówienie", link: "/" },
   ];
