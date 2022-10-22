@@ -1,0 +1,56 @@
+@import '../../lightmode_colors.module.scss';
+$arrow_margin: 10px;
+@mixin flexible() {
+  display: flex;
+  align-items: center;
+}
+
+.container_content_left {
+  @include flexible();
+  flex-direction: column;
+  justify-content: space-between;
+  width: 35%;
+  height: 600px;
+  box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+
+  &_title {
+    color: $main_color;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+}
+
+.container_dropdown {
+  width: 80%;
+  height: 90%;
+  margin: 30px 0;
+  overflow: auto;
+}
+
+.dropdown{
+  margin-bottom: 5px;
+}
+
+.dropdown_arrow {
+  width: 12px;
+  margin-left: $arrow_margin;
+}
+
+.rotate_arrow_180 {
+  transform: rotate(180deg);
+  margin-left: $arrow_margin;
+}
+
+.dropdown_text {
+  margin: 0;
+  display: inline-block;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
