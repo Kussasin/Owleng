@@ -4,10 +4,15 @@ import Dropdown from "../../img/HeaderImg/Dropdown_arrow.png";
 import styles from "./leftSideMenu.module.scss";
 
 const LeftSideMenu = (props) => {
-  const [isActive, setIsActive] = useState(false);
+  const [rightIndex, setRightIndex] = useState();
+  const [isActive, setIsActive] = useState();
   function Toggle(index) {
-    return () => setIsActive(index);
+    return () => setRightIndex(index);
   }
+  function Toggling() {
+    return () => setIsActive((current) => !current);
+  }
+
   const ref = useRef();
   return (
     <div className={styles.container_content_left}>
@@ -15,10 +20,10 @@ const LeftSideMenu = (props) => {
         {props.title.map((element, index) => {
           const titleIndex = index;
           return (
-            <div key={index}>
+            <div key={index} onClick={Toggle(index)}>
               <div
                 className={styles.dropdown}
-                onClick={Toggle(index)}
+                onClick={Toggling()}
                 ref={ref}
                 role="button"
                 tabIndex={0}
@@ -27,10 +32,10 @@ const LeftSideMenu = (props) => {
                 <p className={styles.dropdown_text}>{element.theme}</p>
                 <img
                   className={`${styles.dropdown_arrow} ${
-                    isActive === index
-                      ? ref.current.classList.contains(styles.rotate_arrow_180)
-                        ? ""
-                        : styles.rotate_arrow_180
+                    rightIndex === index
+                      ? isActive
+                        ? styles.rotate_arrow_180
+                        : ""
                       : ""
                   }`}
                   src={Dropdown}
@@ -39,7 +44,11 @@ const LeftSideMenu = (props) => {
               </div>
               <div
                 className={`${styles.dropdown_container} ${
-                  isActive === index ? styles.show : styles.hide
+                  rightIndex === index
+                    ? isActive
+                      ? styles.show
+                      : styles.hide
+                    : styles.hide
                 }`}
               >
                 <div className={styles.dropdown_item}>

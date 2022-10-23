@@ -30,6 +30,11 @@ $arrow_margin: 10px;
 
 .dropdown{
   margin-bottom: 5px;
+  cursor: pointer;
+  &_text {
+    margin: 0;
+    display: inline-block;
+  }
 }
 
 .dropdown_arrow {
@@ -42,9 +47,8 @@ $arrow_margin: 10px;
   margin-left: $arrow_margin;
 }
 
-.dropdown_text {
-  margin: 0;
-  display: inline-block;
+.dropdown_item_text{
+  cursor: pointer;
 }
 
 .show {
