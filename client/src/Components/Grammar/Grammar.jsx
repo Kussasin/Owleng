@@ -1,69 +1,35 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./grammar.module.scss";
 import Header from "../Main/Header/Header";
 import MobileHeader from "../Main/MobileHeader/MobileHeader";
-import Dropdown from "../../img/HeaderImg/Dropdown_arrow.png";
+import LeftSideMenu from "../LeftSideMenu/LeftSideMenu";
 import CustomButton from "../UI/CustomButton/CustomButton";
 
-function MainPage() {
+function Grammar() {
+  const lorem = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Est quia nam velit dolor perspiciatis, adipisci aperiam quod repellendus culpa reprehenderit officiis sunt ut delectus dicta voluptate quas dolore? Dolorem, veniam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Est quia nam velit dolor perspiciatis, adipisci aperiam quod repellendus culpa reprehenderit officiis sunt ut delectus dicta voluptate quas dolore? Dolorem, veniam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Est quia nam velit dolor perspiciatis, adipisci aperiam quod repellendus culpa reprehenderit officiis sunt ut delectus dicta voluptate quas dolore? Dolorem, veniam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Est quia nam velit dolor perspiciatis, adipisci aperiam quod repellendus culpa reprehenderit officiis sunt ut delectus dicta voluptate quas dolore? Dolorem, veniam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Est quia nam velit dolor perspiciatis, adipisci aperiam quod repellendus culpa reprehenderit officiis sunt ut delectus dicta voluptate quas dolore? Dolorem, veniam?"; 
   const linkTo = "#";
-  const Subtopic = "Podtemat 1";
-  const Topic = "Temat 1";
-  const [isActive, setIsActive] = useState(false);
-  function Toggling() {
-    return setIsActive((current) => !current);
-  }
-  const ref = useRef();
+  const Theme = [{theme: "Temat 1", subt: ["podtemat 1","podtemat 2","podtemat 3"]},{theme: "Temat 2", subt: ["podtemat 1","podtemat 2"]},{theme: "Temat 3", subt: ["podtemat 1"]}];
   return (
     <div className={styles.container}>
       <div className={styles.container_header}>
-        <MobileHeader/>
+        <MobileHeader />
         <Header />
       </div>
       <div className={styles.container_content}>
-        <div className={styles.container_content_left}>
-          <div className={styles.container_dropdown}>
-            <div
-              className={styles.dropdown}
-              onClick={Toggling}
-              ref={ref}
-              role="button"
-              tabIndex={0}
-              aria-hidden="true"
-            >
-              <p className={styles.dropdown_text}>{Topic}</p>
-              <img
-                className={`${styles.dropdown_arrow} ${
-                  isActive ? styles.rotate_arrow_180 : ""
-                }`}
-                src={Dropdown}
-                alt="dropdown arrow"
-              />
-            </div>
-            <div
-              className={`${styles.dropdown_container} ${
-                isActive ? styles.show : styles.hide
-              }`}
-            >
-              <div className={styles.dropdown_item}>
-                <p className={styles.dropdown_item_text}>{Subtopic}</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <LeftSideMenu title={Theme}/>
         <div className={styles.container_content_right}>
-          <div className={styles.container_content_right_dk}>
-          <div className={styles.content}>
-            <p>a</p>
-          </div>
+          <div className={styles.container_content_right_content}>
+            <div className={styles.content}>
+              <p>{lorem}</p>
+            </div>
           </div>
           <div className={styles.content_button}>
             <Link to={linkTo}>
-            <CustomButton
-              title="Przejdź do testu"
-              additionalStyles={styles.button_style}
-            />
+              <CustomButton
+                title="Przejdź do tes[tu"
+                additionalStyles={styles.button_style}
+              />
             </Link>
           </div>
         </div>
@@ -72,4 +38,4 @@ function MainPage() {
   );
 }
 
-export default MainPage;
+export default Grammar;

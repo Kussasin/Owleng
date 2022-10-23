@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import styles from './toggleButton.module.scss';
-import Moon from '../../../../img/HeaderImg/Moon.png';
+import Moon from '../../../../img//HeaderImg/Moon.png';
 import Sun from '../../../../img//HeaderImg/Sun.png';
 
 class ToggleButton extends Component {
