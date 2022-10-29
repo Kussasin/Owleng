@@ -375,7 +375,7 @@ const Video = () => {
           </>
         )}
 
-        {numberVideosToDisplay <= videoData.length && videos.length > 7 ? (
+        {numberVideosToDisplay <= videos.length && videos.length > 7 ? (
           <CustomButton
             title="Zobać więcej"
             additionalStyles={styles.load_more}

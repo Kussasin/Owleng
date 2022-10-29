@@ -5,7 +5,6 @@ import Dropdown from "../../../img/HeaderImg/Dropdown_arrow.png";
 import People from "../../../img/HeaderImg/People.png";
 import Star from "../../../img/HeaderImg/Star.png";
 import ToggleButton from "./ToggleButton/ToggleButton";
-//import AboutUs from "../../AboutUs/AboutUs";
 
 function DropdownItem(title, link) {
   return (
@@ -36,8 +35,8 @@ function Header() {
     };
   }, [isActive]);
   const DropdownItems = [
-    { title: "Ustawenia", link: "/" },
-    { title: "Pomoc", link: "/" },
+    { title: "Ustawenia", link: "/settings" },
+    { title: "Pomoc", link: "/help" },
     { title: "O nas", link: "/aboutus" },
     { title: "Wyloguj się", link: "/login" },
   ];
