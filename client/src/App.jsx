@@ -7,10 +7,14 @@ import ChoiceLevel from "./Components/LevelCheckTest/ChoiceLevel/ChoiceLevel";
 import MainPage from "./Components/Main/MainPage/MainPage";
 import Login from "./Components/Registration/Login/Login";
 import SignUp from "./Components/Registration/SignUp/SignUp";
-import Video from "./Components/Main/Video/Video"; 
+import Video from "./Components/Main/Video/Video";
 import Grammar from "./Components/Grammar/Grammar";
 import Reading from "./Components/Reading/Reading";
 import Listening from "./Components/Listening/Listening";
+import Tests from "./Components/Tests/Tests";
+import AboutUs from "./Components/AboutUs/AboutUs";
+import Help from "./Components/Help/Help";
+import Settings from "./Components/Settings/Settings";
 
 class App extends Component {
   render() {
@@ -28,6 +32,10 @@ class App extends Component {
             <Route path="/grammar" exact element={<Grammar />} />
             <Route path="/reading" exact element={<Reading />} />
             <Route path="/listening" exact element={<Listening />} />
+            <Route path="/tests" exact element={<Tests />} />
+            <Route path="/aboutus" exact element={<AboutUs />} />
+            <Route path="/help" exact element={<Help />} />
+            <Route path="/settings" exact element={<Settings />} />
           </Routes>
         </BrowserRouter>
       </div>

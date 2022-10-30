@@ -1,83 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { ref, child, get } from "firebase/database";
+import { database } from "../../../utils/firebaseConfig";
 import styles from "./levelTest.module.scss";
 import CustomButton from "../../UI/CustomButton/CustomButton";
 import Card from "../../Card/Card";
 import { NavLink } from "react-router-dom";
 
-const TEST = [
-  {
-    id: 0,
-    question:
-      "Don't put your cup on the ...... of the table - someone will knock it off.",
-    correctAnswerId: 1,
-    answers: ["outside", "edge", "boundary", "border"],
-  },
-  {
-    id: 1,
-    question: "I will see you … 30 minutes!",
-    correctAnswerId: 0,
-    answers: ["in", "at"],
-  },
-  {
-    id: 2,
-    question: "Where … you from?",
-    correctAnswerId: 0,
-    answers: ["are", "is", "am"],
-  },
-  {
-    id: 3,
-    question: "Look at … sea.",
-    correctAnswerId: 1,
-    answers: ["a", "the", "an"],
-  },
-  {
-    id: 4,
-    question: "Present perfect continuous",
-    correctAnswerId: 0,
-    answers: [
-      "I have been listening to my music",
-      "I've been worked",
-      "I had not heard you",
-    ],
-  },
-  {
-    id: 5,
-    question: "That is the man ___ works in our company",
-    correctAnswerId: 3,
-    answers: ["which", "who's", "whose", "who"],
-  },
-  {
-    id: 6,
-    question:
-      "Can you buy some coffee on your way home? We don't have ___ left",
-    correctAnswerId: 3,
-    answers: ["some", "no", "a little", "much"],
-  },
-  {
-    id: 7,
-    question: "Andrew isn't at home. He ___ the dog",
-    correctAnswerId: 0,
-    answers: ["is walking", "is walk", "walks", "walk"],
-  },
-
-  {
-    id: 8,
-    question: "The most wonderful thing about baseball is __",
-    correctAnswerId: 0,
-    answers: ["teamworking", "deadline"],
-  },
-  {
-    id: 9,
-    question: "… anybody here?",
-    correctAnswerId: 0,
-    answers: ["Is", "Are", "Am"],
-  },
-];
-
 const Test = () => {
   const [isTestFinished, setIsTestFinished] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userScore, setUserScore] = useState(0);
+  const [TEST, setTEST] = useState([]);
 
   const onAnswerConfirm = (selectedAnswer) => {
     const isAnswerCorrect =
@@ -100,6 +33,22 @@ const Test = () => {
     }
   };
 
+  useEffect(() => {
+    const dbRef = ref(database);
+    get(child(dbRef, "tests/levelCheck"))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          console.log(snapshot.val());
+          setTEST(snapshot.val());
+        } else {
+          console.log("No data available");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
   return (
     <div className={styles.level_test_container}>
       {isTestFinished ? (
@@ -119,19 +68,21 @@ const Test = () => {
           </>
         </Card>
       ) : (
-        <div className={styles.form_container}>
-          <p>{TEST[currentQuestionIndex].question}</p>
-          <div className={styles.grid_container}>
-            {TEST[currentQuestionIndex].answers.map((answer) => (
-              <CustomButton
-                key={answer}
-                title={answer}
-                onPress={() => onAnswerConfirm(answer)}
-                additionalStyles={styles.answer_button}
-              />
-            ))}
+        TEST.length > 0 && (
+          <div className={styles.form_container}>
+            <p>{TEST[currentQuestionIndex].question}</p>
+            <div className={styles.grid_container}>
+              {TEST[currentQuestionIndex].answers.map((answer) => (
+                <CustomButton
+                  key={answer}
+                  title={answer}
+                  onPress={() => onAnswerConfirm(answer)}
+                  additionalStyles={styles.answer_button}
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        )
       )}
     </div>
   );
