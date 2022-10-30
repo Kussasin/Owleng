@@ -18,13 +18,13 @@ const LeftSideMenu = (props) => {
             <div key={index}>
               <div className={styles.dropdown} onClick={Toggle(index)} ref={ref} role="button" tabIndex={0} aria-hidden="true">
                 <p className={styles.dropdown_text}>{element.theme}</p>
-                <img className={`${styles.dropdown_arrow} ${isActive === index ? 
+                <img className={`${styles.dropdown_arrow} ${isActive === index ?
                   (ref.current.classList.contains(styles.rotate_arrow_180) ? "" : styles.rotate_arrow_180) : ""}`} src={Dropdown} alt="dropdown arrow" />
               </div>
               <div className={`${styles.dropdown_container} ${isActive === index ? styles.show : styles.hide}`}>
                 <div className={styles.dropdown_item} >
                   {element.subt.map((subtheme, index) => {
-                    return (  
+                    return (
                       <p className={styles.dropdown_item_text} key={index}>{subtheme}</p>
                     )
                   })}
