@@ -1,4 +1,6 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
+import { ref, child, get } from "firebase/database";
+import { database } from "../../utils/firebaseConfig";
 import styles from "../Tests/tests.module.scss";
 import Header from "../Main/Header/Header";
 import MobileHeader from "../Main/MobileHeader/MobileHeader";
@@ -6,72 +8,13 @@ import LeftSideMenu from "../LeftSideMenu/LeftSideMenu";
 import CustomButton from "../UI/CustomButton/CustomButton";
 import Card from "../Card/Card";
 
-const data = {
-  grammarTests: {
-    topic: "Grammar tests",
-    themes: [
-      {
-        id: 0,
-        name: "Temat 1",
-        questions: [
-          {
-            id: 1,
-            question: "some question?",
-            answers: ["answer1", "answer2"],
-            correctAnswerId: 0,
-          },
-        ],
-      },
-    ],
-  },
-  vocabularyTests: {
-    topic: "Vocabulary tests",
-    themes: [
-      {
-        id: 0,
-        name: "Vocabulary Temat 1",
-        questions: [
-          {
-            id: 1,
-            question: "some question?",
-            answers: ["answer1", "answer2"],
-            correctAnswerId: 0,
-          },
-          {
-            id: 1,
-            question: "some question 2?",
-            answers: ["answer1", "answer2"],
-            correctAnswerId: 0,
-          },
-        ],
-      },
-    ],
-  },
-  levelCheckTest: {
-    topic: "Level check test",
-    themes: [
-      {
-        id: 0,
-        name: "Level check test",
-        questions: [
-          {
-            id: 1,
-            question: "some question?",
-            answers: ["answer1", "answer2"],
-            correctAnswerId: 0,
-          },
-        ],
-      },
-    ],
-  },
-};
-
 function Tests() {
   const [selectedTopicId, setselectedTopicId] = useState(0);
   const [selectedThemeId, setSelectedThemeId] = useState(0);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userScore, setUserScore] = useState(0);
   const [testIsFinish, setTestIsFinish] = useState(false);
+  const [data, setData] = useState();
 
   const onAnswerConfirm = (selectedAnswer) => {
     const currentQuestion =
@@ -100,13 +43,31 @@ function Tests() {
   };
   const Theme = useMemo(() => {
     const themes = [];
-    for (const key in data) {
-      themes.push({
-        theme: data[key].topic,
-        subt: data[key].themes.map((theme) => theme.name),
-      });
+    if (data) {
+      for (const key in data) {
+        themes.push({
+          theme: data[key].topic,
+          subt: data[key].themes.map((theme) => theme.name),
+        });
+      }
     }
+
     return themes;
+  }, [data]);
+
+  useEffect(() => {
+    const dbRef = ref(database);
+    get(child(dbRef, "tests/mainTests"))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          setData(snapshot.val());
+        } else {
+          console.log("No data available");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
 
   return (
@@ -136,36 +97,40 @@ function Tests() {
                 </>
               </Card>
             ) : (
-              <div className={styles.content}>
-                <p>
-                  {
-                    data[Object.keys(data)[selectedTopicId]].themes[
-                      selectedThemeId
-                    ].name
-                  }
-                </p>
-                <div>
-                  <p>
+              data && (
+                <div className={styles.content}>
+                  <p className={styles.name_tests}>
                     {
                       data[Object.keys(data)[selectedTopicId]].themes[
                         selectedThemeId
-                      ].questions[currentQuestionIndex].question
+                      ].name
                     }
                   </p>
-                  <div className={styles.grid_container}>
-                    {data[Object.keys(data)[selectedTopicId]].themes[
-                      selectedThemeId
-                    ].questions[currentQuestionIndex].answers.map((answer) => (
-                      <CustomButton
-                        key={answer}
-                        title={answer}
-                        onPress={() => onAnswerConfirm(answer)}
-                        additionalStyles={styles.answer_button}
-                      />
-                    ))}
+                  <div>
+                    <p className={styles.question}>
+                      {
+                        data[Object.keys(data)[selectedTopicId]].themes[
+                          selectedThemeId
+                        ].questions[currentQuestionIndex].question
+                      }
+                    </p>
+                    <div className={styles.grid_container}>
+                      {data[Object.keys(data)[selectedTopicId]].themes[
+                        selectedThemeId
+                      ].questions[currentQuestionIndex].answers.map(
+                        (answer) => (
+                          <CustomButton
+                            key={answer}
+                            title={answer}
+                            onPress={() => onAnswerConfirm(answer)}
+                            additionalStyles={styles.answer_button}
+                          />
+                        )
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
+              )
             )}
           </div>
         </div>
