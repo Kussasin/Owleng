@@ -27,7 +27,7 @@ function Grammar() {
           <div className={styles.content_button}>
             <Link to={linkTo}>
               <CustomButton
-                title="Przejdź do tes[tu"
+                title="Przejdź do testu"
                 additionalStyles={styles.button_style}
               />
             </Link>
