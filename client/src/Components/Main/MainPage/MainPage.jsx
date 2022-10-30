@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import styles from "./mainPage.module.scss";
 import Header from "../Header/Header";
 import MobileHeader from "../MobileHeader/MobileHeader";
-import Gramatyka from "../../../img/MainImg/Gramatyka.png"
-import Czytanie from "../../../img/MainImg/Czytanie.png"
-import Testy from "../../../img/MainImg/Testy.png"
-import Słuchanie from "../../../img/MainImg/Słuchanie.png"
-import Wideo_materiały from "../../../img/MainImg/Wideo_materiały.png"
-import Mówienie from "../../../img/MainImg/Mówienie.png"
-import Arrow from "../../../img/MainImg/arrow.png"
-import ActiveArrow from "../../../img/MainImg/arrowactive.png"
+import Gramatyka from "../../../img/MainImg/Gramatyka.png";
+import Czytanie from "../../../img/MainImg/Czytanie.png";
+import Testy from "../../../img/MainImg/Testy.png";
+import Słuchanie from "../../../img/MainImg/Słuchanie.png";
+import Wideo_materiały from "../../../img/MainImg/Wideo_materiały.png";
+import Mówienie from "../../../img/MainImg/Mówienie.png";
+import Arrow from "../../../img/MainImg/arrow.png";
+import ActiveArrow from "../../../img/MainImg/arrowactive.png";
 
 function SquareButton(name, url, linkTo) {
   return (
@@ -31,7 +31,7 @@ function MainPage() {
   const buttonData = [
     { url: Gramatyka, title: "Gramatyka", link: "/grammar" },
     { url: Czytanie, title: "Czytanie", link: "/reading" },
-    { url: Testy, title: "Testy", link: "/" },
+    { url: Testy, title: "Testy", link: "/tests" },
     { url: Słuchanie, title: "Słuchanie", link: "/listening" },
     { url: Wideo_materiały, title: "Wideo Materiały", link: "/video" },
     { url: Mówienie, title: "Mówienie", link: "/" },
