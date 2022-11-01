@@ -13,7 +13,7 @@ import Reading from "./Components/Reading/Reading";
 import Listening from "./Components/Listening/Listening";
 import Tests from "./Components/Tests/Tests";
 import AboutUs from "./Components/AboutUs/AboutUs";
-import Help from "./Components/Help/Help";
+import FAQ from "./Components/FAQ/FAQ";
 import Settings from "./Components/Settings/Settings";
 
 class App extends Component {
@@ -34,7 +34,7 @@ class App extends Component {
             <Route path="/listening" exact element={<Listening />} />
             <Route path="/tests" exact element={<Tests />} />
             <Route path="/aboutus" exact element={<AboutUs />} />
-            <Route path="/help" exact element={<Help />} />
+            <Route path="/faq" exact element={<FAQ />} />
             <Route path="/settings" exact element={<Settings />} />
           </Routes>
         </BrowserRouter>

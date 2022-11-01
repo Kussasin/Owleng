@@ -36,7 +36,7 @@ function Header() {
   }, [isActive]);
   const DropdownItems = [
     { title: "Ustawenia", link: "/settings" },
-    { title: "Pomoc", link: "/help" },
+    { title: "FAQ", link: "/faq" },
     { title: "O nas", link: "/aboutus" },
     { title: "Wyloguj się", link: "/login" },
   ];

@@ -260,7 +260,7 @@ const Video = () => {
           marginTop: 70,
         }}
       >
-        <div>
+        <div className={styles.buttons}>
           <CustomButton
             title="Filtruj"
             additionalStyles={styles.button_style}
