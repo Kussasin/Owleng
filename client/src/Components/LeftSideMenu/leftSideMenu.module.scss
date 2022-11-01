@@ -47,8 +47,17 @@ $arrow_margin: 10px;
   margin-left: $arrow_margin;
 }
 
-.dropdown_item_text{
+.dropdown_item_element{
+  padding: 4px 6px;
+  margin: 8px 0;
   cursor: pointer;
+  &_text{
+    display: block;
+  }
+}
+
+.isActive{
+  background-color: $elementIsSelected;
 }
 
 .show {

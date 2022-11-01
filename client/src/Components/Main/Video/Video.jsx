@@ -4,6 +4,7 @@ import YouTube from "react-youtube";
 import styles from "./video.module.scss";
 
 import Header from "../Header/Header";
+import MobileHeader from "../MobileHeader/MobileHeader";
 import CustomButton from "../../UI/CustomButton/CustomButton";
 import VideoCard from "./innerBlocks/VideoCard";
 import useWindowDimensions from "../../../hooks/useWindowDimensions";
@@ -253,6 +254,7 @@ const Video = () => {
     <div className={styles.container}>
       <div className={styles.container_header}>
         <Header />
+        <MobileHeader />
       </div>
       <div
         style={{
