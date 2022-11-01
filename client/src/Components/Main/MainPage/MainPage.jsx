@@ -34,7 +34,7 @@ function MainPage() {
     { url: Testy, title: "Testy", link: "/tests" },
     { url: Słuchanie, title: "Słuchanie", link: "/listening" },
     { url: Wideo_materiały, title: "Wideo Materiały", link: "/video" },
-    { url: Mówienie, title: "Mówienie", link: "/" },
+    { url: Mówienie, title: "Mówienie", link: "/speaking" },
   ];
 
   return (

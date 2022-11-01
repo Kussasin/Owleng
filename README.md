@@ -46,7 +46,7 @@ ____
 `npm install node-sass`
 
 - Установите ``` Live Sass Compiler ``` в VSCode для работы с scss/saas прочитайте как он работает
-
+`npm i react-youtube`
 ____
 # Как делать pull и push проекта
 [:arrow_up:Оглавление](#Оглавление)

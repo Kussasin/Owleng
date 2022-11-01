@@ -4,23 +4,32 @@ import Dropdown from "../../img/HeaderImg/Dropdown_arrow.png";
 import styles from "./leftSideMenu.module.scss";
 
 const LeftSideMenu = (props) => {
-  const [rightIndex, setRightIndex] = useState();
+  const [themeIndex, setThemeIndex] = useState();
+  const [subIndex, setSubThemeIndex] = useState();
   const [isActive, setIsActive] = useState();
+  let id = 0;
+  let themeId = 0;
+  const ref = useRef();
+
   function Toggle(index) {
-    return () => setRightIndex(index);
+    return () => setThemeIndex(index);
   }
+  function SubToggle(index) {
+    return () => setSubThemeIndex(index);
+  }
+
   function Toggling() {
     return () => setIsActive((current) => !current);
   }
 
-  const ref = useRef();
   return (
     <div className={styles.container_content_left}>
       <div className={styles.container_dropdown}>
         {props.title.map((element, index) => {
           const titleIndex = index;
+          themeId ++;
           return (
-            <div key={index} onClick={Toggle(index)}>
+            <div key={index} onClick={Toggle(themeId)}>
               <div
                 className={styles.dropdown}
                 onClick={Toggling()}
@@ -28,44 +37,33 @@ const LeftSideMenu = (props) => {
                 role="button"
                 tabIndex={0}
                 aria-hidden="true"
-              >
+              > 
                 <p className={styles.dropdown_text}>{element.theme}</p>
                 <img
-                  className={`${styles.dropdown_arrow} ${
-                    rightIndex === index
-                      ? isActive
-                        ? styles.rotate_arrow_180
-                        : ""
-                      : ""
-                  }`}
+                  className={`${styles.dropdown_arrow} ${themeIndex === themeId ? (isActive ? styles.rotate_arrow_180 : "") : ""}`}
                   src={Dropdown}
                   alt="dropdown arrow"
                 />
               </div>
               <div
-                className={`${styles.dropdown_container} ${
-                  rightIndex === index
-                    ? isActive
-                      ? styles.show
-                      : styles.hide
-                    : styles.hide
-                }`}
+                className={`${styles.dropdown_container} ${themeIndex === themeId ? ( isActive ? styles.show : styles.hide): styles.hide}`}
               >
                 <div className={styles.dropdown_item}>
                   {element.subt.map((subtheme, index) => {
+                    id++;
                     return (
-                      <p
-                        onClick={() => {
-                          props.setSelectedThemeId(index);
-                          props.setselectedTopicId(titleIndex);
-                          props.setTestActive(false);
-                          props.setCurrentQuestionIndex(0);
-                          props.setUserScore(0);
-                        }}
-                        className={styles.dropdown_item_text}
-                        key={index}
-                      >
-                        {subtheme}
+                      <p onClick={() => {
+                        props.setSelectedThemeId(index);
+                        props.setselectedTopicId(titleIndex);
+                        props.setTestActive(false);
+                        props.setCurrentQuestionIndex(0);
+                        props.setUserScore(0);
+                      }}
+                        className={`${styles.dropdown_item_element} ${subIndex === id ? styles.isActive : ''}`}
+                        key={index}>
+                        <span onClick={SubToggle(id)} className={styles.dropdown_item_element_text}>
+                          {subtheme}
+                        </span>
                       </p>
                     );
                   })}

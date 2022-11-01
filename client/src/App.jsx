@@ -15,6 +15,7 @@ import Tests from "./Components/Tests/Tests";
 import AboutUs from "./Components/AboutUs/AboutUs";
 import FAQ from "./Components/FAQ/FAQ";
 import Settings from "./Components/Settings/Settings";
+import Speaking from "./Components/Speaking/Speaking";
 
 class App extends Component {
   render() {
@@ -36,6 +37,7 @@ class App extends Component {
             <Route path="/aboutus" exact element={<AboutUs />} />
             <Route path="/faq" exact element={<FAQ />} />
             <Route path="/settings" exact element={<Settings />} />
+            <Route path="/speaking" exact element={<Speaking />} />
           </Routes>
         </BrowserRouter>
       </div>

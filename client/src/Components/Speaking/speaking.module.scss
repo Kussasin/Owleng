@@ -1,0 +1,127 @@
+@import '../../lightmode_colors.module.scss';
+
+$button_height: 80px;
+
+@mixin flexible() {
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  @include flexible();
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+
+  &_header {
+    background-color: $white;
+    width: 100%;
+  }
+
+  &_content {
+    max-width: 1150px;
+    width: 90%;
+    margin-top: 50px;
+    @include flexible();
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+
+    a {
+      text-decoration: none;
+    }
+  }
+}
+
+.container_content_right {
+  @include flexible();
+  flex-direction: column;
+  justify-content: space-between;
+  width: 50%;
+  gap: 20px;
+
+  &_content {
+    width: 100%;
+    box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.05);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  &_title {
+    color: $black;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: start;
+    width: 100%;
+    margin: 0;
+  }
+}
+
+.content {
+  margin: 30px 0;
+  width: 85%;
+  overflow: auto;
+
+  &_title {
+    margin: 0;
+    text-align: center;
+  }
+}
+
+.emptyElement {
+  height: 10px;
+}
+
+.answer {
+  @include flexible();
+  justify-content: center;
+  width: 100%;
+}
+
+.answer_result {
+  @include flexible();
+  width: 60%;
+  border-radius: 10px;
+
+  &_text {
+    margin: 0px;
+    padding: 9px 10px;
+    text-align: center;
+    width: 100%;
+    color: #FFF;
+  }
+
+  &_img {
+    padding: 7px;
+    padding-left: 15px;
+  }
+}
+
+.wrongAnswer {
+  background-color: $error_color;
+}
+
+.rightAnswer {
+  background-color: $green;
+}
+
+.speack_button {
+  height: $button_height;
+  width: $button_height;
+  background: $white;
+  border: 2px solid $main_color;
+  border-radius: 65%;
+
+  &_micro {
+    width: 25px;
+  }
+}
+
+.listening {
+  border-color: $green;
+}
+
+.answer_button{
+  padding: 20px 25px;
+}

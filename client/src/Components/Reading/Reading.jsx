@@ -19,7 +19,7 @@ function Reading() {
         <Header />
       </div>
       <div className={styles.container_content}>
-        <LeftSideMenu title={Theme} />
+        <LeftSideMenu title={Theme}/>
         <div className={styles.container_content_right}>
           <div className={styles.container_content_right_content}>
             <div className={styles.content}>
