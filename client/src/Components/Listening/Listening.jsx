@@ -3,7 +3,6 @@ import styles from "./listening.module.scss";
 import Header from "../Main/Header/Header";
 import MobileHeader from "../Main/MobileHeader/MobileHeader";
 import LeftSideMenu from "../LeftSideMenu/LeftSideMenu";
-import PlaySound from "../PlaySound/PlaySound";
 
 function Listening() {
   const Theme = [
@@ -23,7 +22,6 @@ function Listening() {
           <p className={styles.container_content_right_title}>
             Wybierz poprawną odpowiedź:
           </p>
-          <PlaySound />
           <div className={styles.container_content_right_content}>
             <div className={styles.content}>
               <p className={styles.content_text}>{"Loremesrdtfyvgbuhinjmoknhubgyvftcdrsexdrcfvgbh"}</p>
