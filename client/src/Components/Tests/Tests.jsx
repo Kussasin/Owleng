@@ -16,18 +16,26 @@ function Tests() {
   const [testIsFinish, setTestIsFinish] = useState(false);
   const [data, setData] = useState();
   const [grade, setGrade] = useState("");
+  const [currentCorrectAnswerId, setCurrentCorrectAnswerId] = useState(-1);
+  const [currentTheme, setCurrentTheme] = useState(null);
+  const [selectedAnswerId, setSelectedAnswerId] = useState(undefined);
 
   const onAnswerConfirm = (selectedAnswer) => {
     const currentQuestion =
       data[Object.keys(data)[selectedTopicId]].themes[selectedThemeId]
         .questions[currentQuestionIndex];
+
     const currentTheme =
       data[Object.keys(data)[selectedTopicId]].themes[selectedThemeId];
+
     const selectedAnswerId = currentQuestion.answers.findIndex(
       (answer) => answer === selectedAnswer
     );
+    setSelectedAnswerId(selectedAnswerId);
+    setCurrentTheme(currentTheme);
     const correctAnswerId = currentQuestion.correctAnswerId;
     const isAnswerCorrect = selectedAnswerId === correctAnswerId;
+    setCurrentCorrectAnswerId(correctAnswerId);
 
     setUserScore((prevState) => {
       if (isAnswerCorrect) {
@@ -52,11 +60,17 @@ function Tests() {
         return "C1";
       }
     });
+  };
 
+  const nextQuestion = () => {
     if (currentQuestionIndex < currentTheme.questions.length - 1) {
       setCurrentQuestionIndex((prevState) => ++prevState);
+      setCurrentCorrectAnswerId(-1);
+      setSelectedAnswerId(undefined);
     } else {
       setTestIsFinish(true);
+      setCurrentCorrectAnswerId(-1);
+      setSelectedAnswerId(undefined);
     }
   };
 
@@ -103,6 +117,8 @@ function Tests() {
           setTestActive={setTestIsFinish}
           setUserScore={setUserScore}
           setCurrentQuestionIndex={setCurrentQuestionIndex}
+          setCurrentCorrectAnswerId={setCurrentCorrectAnswerId}
+          setSelectedAnswerId={setSelectedAnswerId}
         />
         <div className={styles.container_content_right}>
           <div className={styles.container_content_right_content}>
@@ -127,7 +143,7 @@ function Tests() {
                       ].name
                     }
                   </p>
-                  <div>
+                  <div className={styles.question_container}>
                     <p className={styles.question}>
                       {
                         data[Object.keys(data)[selectedTopicId]].themes[
@@ -135,19 +151,39 @@ function Tests() {
                         ].questions[currentQuestionIndex].question
                       }
                     </p>
+                    {selectedAnswerId !== currentCorrectAnswerId &&
+                      selectedAnswerId !== undefined && (
+                        <p className={styles.hint}>
+                          {
+                            data[Object.keys(data)[selectedTopicId]].themes[
+                              selectedThemeId
+                            ].questions[currentQuestionIndex].hint
+                          }
+                        </p>
+                      )}
+
                     <div className={styles.grid_container}>
                       {data[Object.keys(data)[selectedTopicId]].themes[
                         selectedThemeId
                       ].questions[currentQuestionIndex].answers.map(
-                        (answer) => (
+                        (answer, index) => (
                           <CustomButton
                             key={answer}
                             title={answer}
                             onPress={() => onAnswerConfirm(answer)}
-                            additionalStyles={styles.answer_button}
+                            additionalStyles={`${styles.answer_button} ${
+                              index === currentCorrectAnswerId
+                                ? styles.answer_button_correct
+                                : currentCorrectAnswerId !== -1 &&
+                                  styles.answer_button_wrong
+                            }`}
                           />
                         )
                       )}
+                      <CustomButton
+                        title={"Następne pytanie"}
+                        onPress={nextQuestion}
+                      />
                     </div>
                   </div>
                 </div>

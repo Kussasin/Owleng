@@ -166,7 +166,7 @@ const Video = () => {
           )}
         </div>
       </div>
-      {videoData == 0 ? (
+      {videoData.length == 0 ? (
         <div className={styles.videos_null}>Brak video</div>
       ) : (
         <div className={styles.container_content}>
