@@ -15,6 +15,7 @@ function Tests() {
   const [userScore, setUserScore] = useState(0);
   const [testIsFinish, setTestIsFinish] = useState(false);
   const [data, setData] = useState();
+  const [grade, setGrade] = useState("");
 
   const onAnswerConfirm = (selectedAnswer) => {
     const currentQuestion =
@@ -27,11 +28,28 @@ function Tests() {
     );
     const correctAnswerId = currentQuestion.correctAnswerId;
     const isAnswerCorrect = selectedAnswerId === correctAnswerId;
+
     setUserScore((prevState) => {
       if (isAnswerCorrect) {
         return ++prevState;
       } else {
         return prevState;
+      }
+    });
+
+    setGrade(() => {
+      if (userScore <= 5) {
+        return "A0";
+      } else if (userScore > 5 && userScore <= 10) {
+        return "A1";
+      } else if (userScore > 10 && userScore <= 15) {
+        return "A2";
+      } else if (userScore > 15 && userScore <= 20) {
+        return "B1";
+      } else if (userScore > 20 && userScore <= 25) {
+        return "B2";
+      } else if (userScore > 25) {
+        return "C1";
       }
     });
 
@@ -41,6 +59,7 @@ function Tests() {
       setTestIsFinish(true);
     }
   };
+
   const Theme = useMemo(() => {
     const themes = [];
     if (data) {
@@ -90,7 +109,9 @@ function Tests() {
             {testIsFinish ? (
               <Card additionalStyles={styles.card}>
                 <>
-                  <p className={styles.card_title}>Jesteś na poziomie A2!</p>
+                  <p className={styles.card_title}>
+                    Jesteś na poziomie {grade}
+                  </p>
                   <div>
                     <p>Twój wynik: {userScore}</p>
                   </div>
