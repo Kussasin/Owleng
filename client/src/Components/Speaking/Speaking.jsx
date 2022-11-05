@@ -10,7 +10,7 @@ import Cross from '../../img/MainImg/Cross.png';
 import CustomButton from "../UI/CustomButton/CustomButton";
 
 function Speaking() {
-  const lorem = `You are rat.`;
+  const lorem = `classic.`;
   const title = "Title 1";
   let answerIsRight = undefined;
   const Theme = [
