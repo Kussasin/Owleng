@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import styles from "./header.module.scss";
 import Dropdown from "../../../img/HeaderImg/Dropdown_arrow.png";
 import People from "../../../img/HeaderImg/People.png";
-import Star from "../../../img/HeaderImg/Star.png";
 import ToggleButton from "./ToggleButton/ToggleButton";
 
 function DropdownItem(title, link) {
@@ -36,7 +35,6 @@ function Header() {
   }, [isActive]);
   const DropdownItems = [
     { title: "Ustawenia", link: "/settings" },
-    { title: "FAQ", link: "/faq" },
     { title: "O nas", link: "/aboutus" },
     { title: "Wyloguj się", link: "/login" },
   ];
@@ -60,7 +58,6 @@ function Header() {
           </div>
         </div>
         <div className={styles.header_right}>
-          <img className={styles.favorite} src={Star} alt="favorite words" />
           <div
             className={styles.dropdown}
             onClick={Toggling}
