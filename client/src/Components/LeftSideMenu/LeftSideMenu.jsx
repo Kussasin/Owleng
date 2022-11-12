@@ -27,7 +27,7 @@ const LeftSideMenu = (props) => {
       <div className={styles.container_dropdown}>
         {props.title.map((element, index) => {
           const titleIndex = index;
-          themeId ++;
+          themeId++;
           return (
             <div key={index} onClick={Toggle(themeId)}>
               <div
@@ -37,31 +37,52 @@ const LeftSideMenu = (props) => {
                 role="button"
                 tabIndex={0}
                 aria-hidden="true"
-              > 
+              >
                 <p className={styles.dropdown_text}>{element.theme}</p>
                 <img
-                  className={`${styles.dropdown_arrow} ${themeIndex === themeId ? (isActive ? styles.rotate_arrow_180 : "") : ""}`}
+                  className={`${styles.dropdown_arrow} ${
+                    themeIndex === themeId
+                      ? isActive
+                        ? styles.rotate_arrow_180
+                        : ""
+                      : ""
+                  }`}
                   src={Dropdown}
                   alt="dropdown arrow"
                 />
               </div>
               <div
-                className={`${styles.dropdown_container} ${themeIndex === themeId ? ( isActive ? styles.show : styles.hide): styles.hide}`}
+                className={`${styles.dropdown_container} ${
+                  themeIndex === themeId
+                    ? isActive
+                      ? styles.show
+                      : styles.hide
+                    : styles.hide
+                }`}
               >
                 <div className={styles.dropdown_item}>
                   {element.subt.map((subtheme, index) => {
                     id++;
                     return (
-                      <p onClick={() => {
-                        props.setSelectedThemeId(index);
-                        props.setselectedTopicId(titleIndex);
-                        props.setTestActive(false);
-                        props.setCurrentQuestionIndex(0);
-                        props.setUserScore(0);
-                      }}
-                        className={`${styles.dropdown_item_element} ${subIndex === id ? styles.isActive : ''}`}
-                        key={index}>
-                        <span onClick={SubToggle(id)} className={styles.dropdown_item_element_text}>
+                      <p
+                        onClick={() => {
+                          props.setSelectedThemeId(index);
+                          props.setselectedTopicId(titleIndex);
+                          props.setTestActive(false);
+                          props.setCurrentQuestionIndex(0);
+                          props.setUserScore(0);
+                          props.setCurrentCorrectAnswerId(-1);
+                          props.setSelectedAnswerId(undefined);
+                        }}
+                        className={`${styles.dropdown_item_element} ${
+                          subIndex === id ? styles.isActive : ""
+                        }`}
+                        key={index}
+                      >
+                        <span
+                          onClick={SubToggle(id)}
+                          className={styles.dropdown_item_element_text}
+                        >
                           {subtheme}
                         </span>
                       </p>
@@ -85,6 +106,8 @@ LeftSideMenu.propTypes = {
   setTestActive: PropTypes.func,
   setCurrentQuestionIndex: PropTypes.func,
   setUserScore: PropTypes.func,
+  setCurrentCorrectAnswerId: PropTypes.func,
+  setSelectedAnswerId: PropTypes.func,
 };
 
 export default LeftSideMenu;
