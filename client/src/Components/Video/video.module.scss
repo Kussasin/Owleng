@@ -1,4 +1,4 @@
-@import "../../../lightmode_colors.module.scss";
+@import "../../lightmode_colors.module.scss";
 
 @mixin flexible() {
   display: flex;
@@ -96,9 +96,14 @@
   margin-left: 50px;
 }
 
-.buttons{
+.buttons {
   display: flex;
   gap: 10px;
   align-items: center;
   justify-content: flex-start;
+}
+
+.videos_null {
+  @include flexible();
+  font-size: 40px;
 }
