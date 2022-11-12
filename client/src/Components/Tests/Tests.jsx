@@ -180,10 +180,12 @@ function Tests() {
                           />
                         )
                       )}
-                      <CustomButton
-                        title={"Następne pytanie"}
-                        onPress={nextQuestion}
-                      />
+                      <div className={styles.block_custom_button}>
+                        <CustomButton
+                          title={"Następne pytanie"}
+                          onPress={nextQuestion}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
