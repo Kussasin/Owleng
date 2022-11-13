@@ -66,6 +66,7 @@ const LeftSideMenu = (props) => {
                     return (
                       <p
                         onClick={() => {
+                          // ustawienie stanu testu na poczatkowy
                           props.setSelectedThemeId(index);
                           props.setselectedTopicId(titleIndex);
                           props.setTestActive(false);
