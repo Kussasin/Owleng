@@ -18,6 +18,7 @@ function Speaking() {
     { theme: "Temat 2", subt: ["podtemat 1", "podtemat 2"] },
     { theme: "Temat 3", subt: ["podtemat 1"] },
   ];
+  
   function IsChange(text1, speaking) {
     if (listening == false && text1.toUpperCase() === speaking.toUpperCase() && text1 != "" && speaking != "") {
       answerIsRight = true;
@@ -28,6 +29,7 @@ function Speaking() {
       answerIsRight = undefined;
     }
   }
+
   const {
     transcript,
     listening,
