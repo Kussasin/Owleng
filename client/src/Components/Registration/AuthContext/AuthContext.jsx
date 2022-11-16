@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { auth } from "../../../utils/firebaseConfig";
 import {
   createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword,
-  signOut, sendPasswordResetEmail
+  signOut, sendPasswordResetEmail, updateEmail, updatePassword
 } from "firebase/auth";
 import PropTypes from 'prop-types';
 
@@ -30,12 +30,16 @@ export function AuthProvider({ children }) {
     return signOut(auth);
   }
 
-  function resetPassword(email) {
+  function resetUserPassword(email) {
     return sendPasswordResetEmail(auth, email)
   }
 
-  function updatePassword(password) {
-    return () => updatePassword(password)
+  function updateUserPassword(password) {
+    return updatePassword(currentUser, password);
+  }
+
+  function updateUserEmail(password) {
+    return updateEmail(currentUser, password);
   }
 
   useEffect(() => {
@@ -49,8 +53,9 @@ export function AuthProvider({ children }) {
     signup,
     login,
     logout,
-    resetPassword,
-    updatePassword
+    resetUserPassword,
+    updateUserPassword,
+    updateUserEmail
   }
 
   return (

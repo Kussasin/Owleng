@@ -6,12 +6,14 @@ import CustomButton from "../UI/CustomButton/CustomButton";
 import { useAuth } from "../Registration/AuthContext/AuthContext";
 
 function Settings() {
+  const emailRef = useRef()
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const { currentUser, updatePassword } = useAuth();
-  const [error, setError] = useState('');
+  const { currentUser, updateUserPassword, updateUserEmail } = useAuth();
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(false);
+
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -22,21 +24,35 @@ function Settings() {
       return setError("Hasła nie pasują do siebie");
     }
 
-    if (passwordRef.current.value.length < 6) {
+    if (passwordRef.current.value && passwordRef.current.value.length < 6) {
       return setError("Hasło musi zawieracz więcej 6 symbolów");
     }
+
+    if (emailRef.current.value != currentUser.email) {
+      promises.push(updateUserEmail(emailRef.current.value));
+    }
+
     if (passwordRef.current.value) {
-      promises.push(currentUser.email);
-      promises.push(updatePassword(passwordRef.current.value));
+      promises.push(updateUserPassword(passwordRef.current.value));
     }
 
     Promise.all(promises)
+      .then(() => {
+        setMessage("Dane zostałe zmienione");
+        setError("");
+      })
       .catch((error) => {
-        setError("Nie udało się zmienić hasło")
+        setMessage("");
+        if (error.message === "Firebase: Error (auth/requires-recent-login).") {
+          setError("Musisz zalogować sie ponownie żeby zmienic swoje dane");
+        } else if (error.message === "Firebase: Error (auth/email-already-in-use).") {
+          setError("Podany adres e-mail jest już istnieje");
+        } else {
+          setError("Nie udało się zmienić twoje dane");
+        }
         console.log(error.message);
       })
       .finally(() => {
-        setMessage("Hasło zostało zmienione");
         setLoading(false)
       })
 
@@ -56,22 +72,28 @@ function Settings() {
           <p>{currentUser && currentUser.email}</p>
           <form method="get" onSubmit={handleSubmit}>
             <div className={styles.change_password}>
+              <input
+                type="email"
+                placeholder="Email"
+                name="password"
+                ref={emailRef}
+                defaultValue={currentUser && currentUser.email}
+                className={styles.input}
+              />
               Wpisz nowe hasło:
             <input
                 type="password"
                 placeholder="Password"
                 name="password"
                 ref={passwordRef}
-                required
                 className={styles.input}
               />
                   Powtórz nowe hasło:
             <input
                 type="password"
-                placeholder="Password Confirmation"
+                placeholder="Potwierdzenie hasła"
                 name="password confirmation"
                 ref={passwordConfirmRef}
-                required
                 className={styles.input}
               />
               <p className={styles.error_msg}>{error}</p>

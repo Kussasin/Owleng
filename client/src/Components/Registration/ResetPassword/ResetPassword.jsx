@@ -8,7 +8,7 @@ import Header from "../RegHeader/RegHeader";
 function ResetPassword() {
 
   const emailRef = useRef();
-  const { resetPassword } = useAuth();
+  const { resetUserPassword } = useAuth();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(false);
@@ -20,7 +20,7 @@ function ResetPassword() {
       setMessage("");
       setError("");
       setLoading(true);
-      await resetPassword(emailRef.current.value);
+      await resetUserPassword(emailRef.current.value);
       setMessage("Sprawdź swoją skrzynkę pocztową");
     } catch (error) {
       setMessage("");
@@ -49,7 +49,7 @@ function ResetPassword() {
                     ref={emailRef}
                     className={styles.input}
                   />
-                  {error ?  error && <p className={styles.error_msg}>{error}</p>
+                  {error ? error && <p className={styles.error_msg}>{error}</p>
                     :
                     message && <p className={styles.reset_msg}>{message}</p>}
                   <button type="submit" disabled={loading} className={styles.submit_button}>

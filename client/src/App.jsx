@@ -16,7 +16,7 @@ import AboutUs from "./Components/AboutUs/AboutUs";
 import Settings from "./Components/Settings/Settings";
 import Speaking from "./Components/Speaking/Speaking";
 import { AuthProvider } from "./Components/Registration/AuthContext/AuthContext";
-// import PrivateRoute from "./Components/Registration/PrivateRoute/PrivateRoute";
+import PrivateRoute from "./Components/Registration/PrivateRoute/PrivateRoute";
 
 class App extends Component {
   render() {
@@ -25,7 +25,7 @@ class App extends Component {
         <Router>
           <AuthProvider>
             <Routes>
-              {/* <Route element={<PrivateRoute />}> */}
+              <Route element={<PrivateRoute />}>
                 <Route path="/" exact element={<MainPage />} />
                 <Route path="/levelCheck" exact element={<LevelCheck />} />
                 <Route path="/levelTest" exact element={<Test />} />
@@ -38,10 +38,10 @@ class App extends Component {
                 <Route path="/aboutus" exact element={<AboutUs />} />
                 <Route path="/settings" exact element={<Settings />} />
                 <Route path="/speaking" exact element={<Speaking />} />
-                <Route path="/reset-password" exact element={<ResetPassword />} />
-              {/* </Route> */}
-              <Route path="/login" exact element={<Login />} />
-              <Route path="/signup" exact element={<SignUp />} />
+              </Route>
+              <Route path="/reset-password"  element={<ResetPassword />} />
+              <Route path="/login"  element={<Login />} />
+              <Route path="/signup"  element={<SignUp />} />
             </Routes>
           </AuthProvider>
         </Router>

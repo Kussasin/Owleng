@@ -9,7 +9,7 @@ function Login() {
 
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { login,curentUser } = useAuth();
+  const { login, curentUser } = useAuth();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -25,9 +25,9 @@ function Login() {
       navigate('/');
     } catch (error) {
       setError("Niewłaściwy email lub hasło, spróbuj ponownie");
-      console.log(error);
+      console.log(error.message);
     }
-    
+
     setLoading(false);
   }
 
@@ -63,7 +63,7 @@ function Login() {
                   </button>
                 </form>
                 <div className={styles.container_content_subscribe}>
-                <p>
+                  <p>
                     <Link to="/reset-password" className={styles.link_styles}>
                       <span>Zapomniałeś hasło?</span>
                     </Link>

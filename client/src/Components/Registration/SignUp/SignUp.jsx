@@ -22,7 +22,7 @@ function Signup() {
     }
 
     if (passwordRef.current.value.length < 6) {
-      return setError("Hasło musi zawieracz więcej 6 symbolów");
+      return setError("Hasło musi zawierać więcej niż 6 symbolów");
     }
 
     try {
@@ -32,8 +32,8 @@ function Signup() {
       navigate('/levelCheck');
     } catch (error) {
       if (error.message === "Firebase: Error (auth/email-already-in-use).") {
-        setError("Podany adres e-mail jest już zejęty");
-      }else{
+        setError("Podany adres e-mail jest już istnieje");
+      } else {
         setError("Nie udało się utworzyć konta");
       }
       console.log(error.message);

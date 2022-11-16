@@ -1,11 +1,23 @@
 import React from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
-import { useAuth } from "../AuthContext/AuthContext";
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { getAuth } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 export default function PrivateRoute() {
-  let { curentUser } = useAuth();
-  console.log(curentUser);
+
+  const location = useLocation();
+
+  const auth = getAuth();
+  const [user, loading] = useAuthState(auth);
+
+  if (loading) {
+    return "";
+  }
+
+  console.log(user);
+  console.log(<Outlet />);
+
   return (
-      curentUser ? <Outlet /> : <Navigate to="/login" />
+    user ? <Outlet /> : <Navigate to="/login" state={{ from: location }} />
   )
 }
