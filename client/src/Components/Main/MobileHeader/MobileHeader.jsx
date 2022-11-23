@@ -18,13 +18,10 @@ function MobileHeader() {
   const [isActive, setIsActive] = useState(false);
   const [selected, setSelected] = useState(false);
   const NavItemsOver = [
-    { title: "Mój profil", link: "/" },
-    { title: "Ulubione", link: "/" },
+    { title: "Ustawenia", link: "/settings" },
+    { title: "O Nas", link: "/aboutus" },
   ];
   const NavItemsUnder = [
-    { title: "Ustawenia", link: "/" },
-    { title: "Pomoc", link: "/" },
-    { title: "O Nas", link: "/" },
     { title: "Wyloguj się", link: "/login" },
   ];
 

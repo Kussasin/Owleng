@@ -24,7 +24,7 @@ function Signup() {
     if (passwordRef.current.value.length < 6) {
       return setError("Hasło musi zawierać więcej niż 6 symbolów");
     }
-
+    
     try {
       setError("");
       setLoading(true);
@@ -35,8 +35,8 @@ function Signup() {
         setError("Podany adres e-mail jest już istnieje");
       } else {
         setError("Nie udało się utworzyć konta");
+        console.log(error.message);
       }
-      console.log(error.message);
     }
 
     setLoading(false);

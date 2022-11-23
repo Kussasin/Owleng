@@ -1,12 +1,13 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { auth } from "../../../utils/firebaseConfig";
 import {
   createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword,
   signOut, sendPasswordResetEmail, updateEmail, updatePassword
 } from "firebase/auth";
+
 import PropTypes from 'prop-types';
 
-const AuthContext = React.createContext();
+const AuthContext = createContext();
 
 export function useAuth() {
   return useContext(AuthContext);
@@ -55,7 +56,7 @@ export function AuthProvider({ children }) {
     logout,
     resetUserPassword,
     updateUserPassword,
-    updateUserEmail
+    updateUserEmail,
   }
 
   return (
