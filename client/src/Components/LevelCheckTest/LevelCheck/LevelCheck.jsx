@@ -13,7 +13,7 @@ function LevelCheck() {
   try{
     set(ref(database, 'users/' + user.uid), {
       email: user.email,
-      level: 0
+      level: "A0"
     });
   }catch(error){
     console.log(error.message);

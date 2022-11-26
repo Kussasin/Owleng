@@ -13,8 +13,6 @@ export default function PrivateRoute() {
     return "";
   }
 
-  console.log(user);
-
   return (
     user ? <Outlet /> : <Navigate to="/login" state={{ from: location }} />
   )

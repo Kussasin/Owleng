@@ -1,9 +1,12 @@
 import React, { useRef, useState } from "react";
+import { useAuth } from "../Registration/AuthContext/AuthContext";
+import { database, auth } from "../../utils/firebaseConfig";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { ref, update } from "firebase/database";
 import Header from "../Main/Header/Header";
 import MobileHeader from "../Main/MobileHeader/MobileHeader";
 import styles from "../Settings/settings.module.scss";
 import CustomButton from "../UI/CustomButton/CustomButton";
-import { useAuth } from "../Registration/AuthContext/AuthContext";
 
 function Settings() {
   const emailRef = useRef()
@@ -13,44 +16,59 @@ function Settings() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(false);
+  const [user] = useAuthState(auth);
 
+  function SetError(error){
+    setMessage("");
+    if (error.message === "Firebase: Error (auth/requires-recent-login).") {
+      setError("Musisz zalogować sie ponownie żeby zmienic swoje dane");
+    } else if (error.message === "Firebase: Error (auth/email-already-in-use).") {
+      setError("Podany adres e-mail jest już istnieje");
+    } else {
+      setError("Nie udało się zmienić twoje dane");
+    }
+    console.log(error.message);
+  }
+
+  function ChangeListener(promises,email,currentEmail,password,passwordConfirm) {
+    if (password !== passwordConfirm) {
+      return setError("Hasła nie pasują do siebie");
+    }
+
+    if (password && password.length < 6) {
+      return setError("Hasło musi zawieracz więcej 6 symbolów");
+    }
+
+    if (email != currentEmail) {
+      promises.push(updateUserEmail(email));
+    }
+
+    if (password) {
+      promises.push(updateUserPassword(password));
+    }
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
 
     const promises = []
-
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Hasła nie pasują do siebie");
-    }
-
-    if (passwordRef.current.value && passwordRef.current.value.length < 6) {
-      return setError("Hasło musi zawieracz więcej 6 symbolów");
-    }
-
-    if (emailRef.current.value != currentUser.email) {
-      promises.push(updateUserEmail(emailRef.current.value));
-    }
-
-    if (passwordRef.current.value) {
-      promises.push(updateUserPassword(passwordRef.current.value));
-    }
-
+    ChangeListener(promises,emailRef.current.value,currentUser.email,passwordRef.current
+      .value,passwordConfirmRef.current.value);
     Promise.all(promises)
       .then(() => {
+        try {
+          update(ref(database, 'users/' + user.uid), {
+            email: emailRef.current.value
+          });
+        } catch (error) {
+          console.log(error.message);
+        }
+
         setMessage("Dane zostałe zmienione");
         setError("");
       })
       .catch((error) => {
-        setMessage("");
-        if (error.message === "Firebase: Error (auth/requires-recent-login).") {
-          setError("Musisz zalogować sie ponownie żeby zmienic swoje dane");
-        } else if (error.message === "Firebase: Error (auth/email-already-in-use).") {
-          setError("Podany adres e-mail jest już istnieje");
-        } else {
-          setError("Nie udało się zmienić twoje dane");
-        }
-        console.log(error.message);
+        SetError(error);
       })
       .finally(() => {
         setLoading(false)
@@ -106,12 +124,6 @@ function Settings() {
               ></CustomButton>
             </div>
           </form>
-
-          <br />
-          <p className={styles.edit_info}>
-            <input></input>
-          </p>
-          <p className={styles.edit_photo}></p>
         </div>
       </div>
     </div>
