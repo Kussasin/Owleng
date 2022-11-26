@@ -20,14 +20,11 @@
 }
 
 .error_msg {
-	width: 370px;
-	padding: 15px;
-	margin: 5px 0;
-	font-size: 14px;
-	background-color: $error_color;
-	color: $white;
-	border-radius: 5px;
-	text-align: center;
+	width: 98%;
+	margin: 3px 0;
+	font-size: 16px;
+	color: $error_color;
+	text-align: left;
 }
 
 .login_container{
@@ -46,7 +43,7 @@
 		0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
 
 		.forms_container_content{
-			margin: 40px 20px 0;
+			margin: 30px 20px;
 
 			.form_container{
 				@include flexible();
@@ -94,6 +91,11 @@
 					text-decoration: none;
 					color: $main_color;
 				}
+			}
+
+			.link_styles{
+				text-decoration: none;
+    		color: $main_color;
 			}
 		}
 	}
@@ -217,7 +219,7 @@
 	}
 }
 @media (max-width: 450px){
-	$font_size: 20px;
+	$font_size: 19px;
 
 	.form_container{
 		h1{
@@ -237,7 +239,7 @@
 }
 
 @media (max-width: 350px){
-	$font_size: 17px;
+	$font_size: 16px;
 
 	.form_container{
 		h1{

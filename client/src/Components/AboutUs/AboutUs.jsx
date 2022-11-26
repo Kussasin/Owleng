@@ -52,7 +52,9 @@ function AboutUs() {
         </div>
         <div className={styles.grid_autors}>
           <div className={styles.autors}>
-            <img className={styles.autors_container_image} src={photo_yp} />
+            <a href="https://github.com/yuliaprysiazhna" target="_blank" rel="noreferrer" >
+              <img className={styles.autors_container_image} src={photo_yp} />
+            </a>
             <center>
               <p>
                 <b>Yuliia Prysiazhna</b>
@@ -60,7 +62,9 @@ function AboutUs() {
             </center>
           </div>
           <div className={styles.autors}>
-            <img className={styles.autors_container_image} src={photo_db} />
+            <a href="https://www.linkedin.com/in/daria-benediktowicz-a18973212/" target="_blank" rel="noreferrer" >
+              <img className={styles.autors_container_image} src={photo_db} />
+            </a>
             <center>
               <p>
                 <b>Darya Benedziktovich</b>
@@ -68,7 +72,9 @@ function AboutUs() {
             </center>
           </div>
           <div className={styles.autors}>
-            <img className={styles.autors_container_image} src={photo_bb} />
+            <a href="https://www.linkedin.com/in/bogdan-basisty-65b494212/" target="_blank" rel="noreferrer" >
+              <img className={styles.autors_container_image} src={photo_bb} />
+            </a>
             <center>
               <p>
                 <b>Bogdan Basistyi</b>

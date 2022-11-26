@@ -1,31 +1,31 @@
 import React, { useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "../AuthContext/AuthContext";
-import styles from "./loginStyle.module.scss";
+import styles from "./resetPasword.module.scss";
 import welcomeImg from "../../../img/LogRegImg/authentication-illustration.svg";
 import Header from "../RegHeader/RegHeader";
 
-function Login() {
+function ResetPassword() {
 
   const emailRef = useRef();
-  const passwordRef = useRef();
-  const { login, curentUser } = useAuth();
+  const { resetUserPassword } = useAuth();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+  const [message, setMessage] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
 
     try {
+      setMessage("");
       setError("");
       setLoading(true);
-      await login(emailRef.current.value, passwordRef.current.value);
-      console.log(curentUser);
-      navigate('/');
+      await resetUserPassword(emailRef.current.value);
+      setMessage("Sprawdź swoją skrzynkę pocztową");
     } catch (error) {
-      setError("Niewłaściwy email lub hasło, spróbuj ponownie");
-      console.log(error.message);
+      setMessage("");
+      setError("Nie udało się zresetować hasła");
+      console.log(error);
     }
 
     setLoading(false);
@@ -49,29 +49,17 @@ function Login() {
                     ref={emailRef}
                     className={styles.input}
                   />
-                  <input
-                    type="password"
-                    placeholder="Password"
-                    name="password"
-                    required
-                    ref={passwordRef}
-                    className={styles.input}
-                  />
-                  <p className={styles.error_msg}>{error}</p>
+                  {error ? error && <p className={styles.error_msg}>{error}</p>
+                    :
+                    message && <p className={styles.reset_msg}>{message}</p>}
                   <button type="submit" disabled={loading} className={styles.submit_button}>
-                    Zaloguj się
+                    Resetowanie hasła
                   </button>
                 </form>
                 <div className={styles.container_content_subscribe}>
                   <p>
-                    <Link to="/reset-password" className={styles.link_styles}>
-                      <span>Zapomniałeś hasło?</span>
-                    </Link>
-                  </p>
-                  <p>
-                    <span>Nie masz jeszcze profilu? </span>
-                    <Link to="/signup" className={styles.link_styles}>
-                      <span>Zarejestruj się</span>
+                    <Link to="/login" className={styles.link_styles}>
+                      <span>Zaloguj sie</span>
                     </Link>
                   </p>
                 </div>
@@ -100,4 +88,4 @@ function Login() {
     </div>
   );
 }
-export default Login;
+export default ResetPassword;
