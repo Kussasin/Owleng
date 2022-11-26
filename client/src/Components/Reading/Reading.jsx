@@ -1,8 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./reading.module.scss";
 import Header from "../Main/Header/Header";
 import MobileHeader from "../Main/MobileHeader/MobileHeader";
 import LeftSideMenu from "../LeftSideMenu/LeftSideMenu";
+import CustomButton from "../UI/CustomButton/CustomButton";
 
 function Reading() {
   const lorem = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Est quia nam velit dolor perspiciatis, adipisci aperiam quod repellendus culpa reprehenderit officiis sunt ut delectus dicta voluptate quas dolore? Dolorem, veniam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Est quia nam velit dolor perspiciatis, adipisci aperiam quod repellendus culpa reprehenderit officiis sunt ut delectus dicta voluptate quas dolore? Dolorem, veniam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Est quia nam velit dolor perspiciatis, adipisci aperiam quod repellendus culpa reprehenderit officiis sunt ut delectus dicta voluptate quas dolore? Dolorem, veniam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Est quia nam velit dolor perspiciatis, adipisci aperiam quod repellendus culpa reprehenderit officiis sunt ut delectus dicta voluptate quas dolore? Dolorem, veniam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Est quia nam velit dolor perspiciatis, adipisci aperiam quod repellendus culpa reprehenderit officiis sunt ut delectus dicta voluptate quas dolore? Dolorem, veniam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Est quia nam velit dolor perspiciatis, adipisci aperiam quod repellendus culpa reprehenderit officiis sunt ut delectus dicta voluptate quas dolore? Dolorem, veniam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Est quia nam velit dolor perspiciatis, adipisci aperiam quod repellendus culpa reprehenderit officiis sunt ut delectus dicta voluptate quas dolore? Dolorem, veniam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Est quia nam velit dolor perspiciatis, adipisci aperiam quod repellendus culpa reprehenderit officiis sunt ut delectus dicta voluptate quas dolore? Dolorem, veniam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Est quia nam velit dolor perspiciatis, adipisci aperiam quod repellendus culpa reprehenderit officiis sunt ut delectus dicta voluptate quas dolore? Dolorem, veniam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Est quia nam velit dolor perspiciatis, adipisci aperiam quod repellendus culpa reprehenderit officiis sunt ut delectus dicta voluptate quas dolore? Dolorem, veniam?"; 
@@ -12,6 +14,7 @@ function Reading() {
     { theme: "Temat 2", subt: ["podtemat 1", "podtemat 2"] },
     { theme: "Temat 3", subt: ["podtemat 1"] },
   ];
+  const linkTo = "#";
   return (
     <div className={styles.container}>
       <div className={styles.container_header}>
@@ -25,7 +28,15 @@ function Reading() {
             <div className={styles.content}>
               <h1 className={styles.content_title}>{title}</h1>
               <p className={styles.content_text}>{lorem}</p>
-            </div>
+            </div>           
+          </div>
+          <div className={styles.content_button}>
+            <Link to={linkTo}>
+              <CustomButton
+                title="Przejdź do testu"
+                additionalStyles={styles.button_style}
+              />
+            </Link>
           </div>
        </div>
       </div>
