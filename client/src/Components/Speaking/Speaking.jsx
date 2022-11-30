@@ -10,7 +10,7 @@ import Cross from '../../img/MainImg/Cross.png';
 import CustomButton from "../UI/CustomButton/CustomButton";
 
 function Speaking() {
-  const lorem = `classic.`;
+  const lorem = `London is the capital of great britain.`;
   const title = "Title 1";
   let answerIsRight = undefined;
   const Theme = [

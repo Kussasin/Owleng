@@ -21,7 +21,6 @@ function Reading() {
   const [testIsFinish, setTestIsFinish] = useState(false);
   // dane z bazy (encja 'mainTests')
   const [data, setData] = useState();
-
   // zmienna dla chronienia aktualnego poprawngo id odpowiedzi
   // poczatkowo ustawiona na -1 by uniknac problemow pdczas porownywania z indeksem wybranego pytania
   const [currentCorrectAnswerId, setCurrentCorrectAnswerId] = useState(-1);
@@ -29,6 +28,7 @@ function Reading() {
   const [currentTheme, setCurrentTheme] = useState(null);
   // zmienna dla chronienia id wybranej odpowiedzi
   const [selectedAnswerId, setSelectedAnswerId] = useState(undefined);
+  const [isFirstElement, setisFisrtElement] = useState(true);
 
   // funkcja dla potwierdzenia wybranej odpowiedzi
   const onAnswerConfirm = (selectedAnswer) => {
@@ -143,66 +143,106 @@ function Reading() {
           setCurrentQuestionIndex={setCurrentQuestionIndex}
           setCurrentCorrectAnswerId={setCurrentCorrectAnswerId}
           setSelectedAnswerId={setSelectedAnswerId}
+          setisFisrtElement={setisFisrtElement}
         />
         <div className={styles.container_content_right}>
           <div className={styles.container_content_right_content}>
-            {
-              testIsFinish ? (
-                <Card additionalStyles={styles.card}>
-                  <div>
-                    <p>Ilość prawidłowych odpowiedzi: {userScore}</p>
-                  </div>
-                </Card>
-              ) : (
-                // data (undefined | [{}]) && jsx, true && jsx -> jsx, false && jsx -> false
-                data && (
-                  <div className={styles.content}>
-                    <p className={styles.name_tests}>
-                      {
-                        // nazwa podtematu
-                        data[Object.keys(data)[selectedTopicId]].themes[
-                          selectedThemeId
-                        ].name
-                      }
-                    </p>
-                    <div className={styles.question_container}>
-                      <p className={styles.question}>
-                        {
-                          // tekst pytania
-                          data[Object.keys(data)[selectedTopicId]].themes[
-                            selectedThemeId
-                          ].questions[currentQuestionIndex].question
-                        }
-                      </p>
-                      <div className={styles.grid_container}>
-                        {data[Object.keys(data)[selectedTopicId]].themes[
-                          selectedThemeId
-                        ].questions[currentQuestionIndex].answers.map(
-                          (answer, index) => {
-                            let additionalStyle1;
-                            // ustawienie stylow dla wybranej odpowiedzi
-                            if (index === selectedAnswerId) {
-                              if (index === currentCorrectAnswerId) {
-                                additionalStyle1 = styles.answer_button_correct;
-                              } else if (currentCorrectAnswerId !== -1) {
-                                additionalStyle1 = styles.answer_button_wrong;
-                              }
-                            }
-                            let additionalStyle2;
-                            // ustawienie stylow dla poprawnej odpowiedzi
-                            if (index === currentCorrectAnswerId) {
-                              additionalStyle2 = styles.answer_button_correct;
-                            }
-                            return (
-                              <CustomButton
-                                key={answer}
-                                title={answer}
-                                onPress={() => onAnswerConfirm(answer)}
-                                additionalStyles={`${styles.answer_button} ${additionalStyle1} ${additionalStyle2}`}
-                              />
-                            );
+            {isFirstElement ?
+              (
+                data &&
+                (
+                  <div className={styles.data_container}>
+                    <div className={styles.content_container}>
+                      <div className={styles.content}>
+                        <p className={styles.name_tests}>
+                          {
+                            // nazwa podtematu
+                            data[Object.keys(data)[selectedTopicId]].themes[
+                              selectedThemeId
+                            ].name
                           }
-                        )}
+                        </p>
+                        <p className={styles.content_text}>
+                          {
+                            // tekst
+                            data[Object.keys(data)[selectedTopicId]].themes[
+                              selectedThemeId
+                            ].text
+                          }
+                        </p>
+                      </div>
+                    </div>
+                    <div className={styles.button_style}>
+                      <CustomButton
+                        title={"Przejdź do testu"}
+                        onPress={() => setisFisrtElement(false)}
+                      />
+                    </div>
+                  </div>
+                )
+              ) :
+              (
+                testIsFinish ?
+                  (
+                    <Card additionalStyles={styles.card}>
+                        <p>Ilość prawidłowych odpowiedzi: {userScore}</p>
+                    </Card>
+                  ) : ( 
+                    // data (undefined | [{}]) && jsx, true && jsx -> jsx, false && jsx -> false
+                    data && (
+                      <div className={styles.data_container}>
+                        <div >
+                          <p className={styles.name_tests}>
+                            {
+                              // nazwa podtematu
+                              data[Object.keys(data)[selectedTopicId]].themes[
+                                selectedThemeId
+                              ].name
+                            }
+                          </p>
+                          <div className={styles.question_container}>
+                            <div className={styles.question_container_text}>
+                              <p className={styles.question}>
+                                {
+                                  // tekst pytania
+                                  data[Object.keys(data)[selectedTopicId]].themes[
+                                    selectedThemeId
+                                  ].questions[currentQuestionIndex].question
+                                }
+                              </p>
+                            </div>
+                            <div className={styles.grid_container}>
+                              {data[Object.keys(data)[selectedTopicId]].themes[
+                                selectedThemeId
+                              ].questions[currentQuestionIndex].answers.map(
+                                (answer, index) => {
+                                  let additionalStyle1;
+                                  // ustawienie stylow dla wybranej odpowiedzi
+                                  if (index === selectedAnswerId) {
+                                    if (index === currentCorrectAnswerId) {
+                                      additionalStyle1 = styles.answer_button_correct;
+                                    } else if (currentCorrectAnswerId !== -1) {
+                                      additionalStyle1 = styles.answer_button_wrong;
+                                    }
+                                  }
+                                  let additionalStyle2;
+                                  // ustawienie stylow dla poprawnej odpowiedzi
+                                  if (index === currentCorrectAnswerId) {
+                                    additionalStyle2 = styles.answer_button_correct;
+                                  }
+                                  return (
+                                    <CustomButton
+                                      key={answer}
+                                      title={answer}
+                                      onPress={() => onAnswerConfirm(answer)}
+                                      additionalStyles={`${styles.answer_button} ${additionalStyle1} ${additionalStyle2}`}
+                                    />
+                                  );
+                                }
+                              )}
+                            </div>
+                          </div>
+                        </div>
                         <div className={styles.button_style}>
                           <CustomButton
                             title={"Następne pytanie"}
@@ -210,9 +250,8 @@ function Reading() {
                           />
                         </div>
                       </div>
-                    </div>
-                  </div>
-                )
+                    )
+                  )
               )
             }
           </div>
