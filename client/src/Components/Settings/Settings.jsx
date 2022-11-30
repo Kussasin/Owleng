@@ -18,7 +18,7 @@ function Settings() {
   const [message, setMessage] = useState(false);
   const [user] = useAuthState(auth);
 
-  function SetError(error){
+  function SetError(error) {
     setMessage("");
     if (error.message === "Firebase: Error (auth/requires-recent-login).") {
       setError("Musisz zalogować sie ponownie żeby zmienic swoje dane");
@@ -30,7 +30,7 @@ function Settings() {
     console.log(error.message);
   }
 
-  function ChangeListener(promises,email,currentEmail,password,passwordConfirm) {
+  function ChangeListener(promises, email, currentEmail, password, passwordConfirm) {
     if (password !== passwordConfirm) {
       return setError("Hasła nie pasują do siebie");
     }
@@ -52,8 +52,8 @@ function Settings() {
     e.preventDefault();
 
     const promises = []
-    ChangeListener(promises,emailRef.current.value,currentUser.email,passwordRef.current
-      .value,passwordConfirmRef.current.value);
+    ChangeListener(promises, emailRef.current.value, currentUser.email, passwordRef.current
+      .value, passwordConfirmRef.current.value);
     Promise.all(promises)
       .then(() => {
         try {
@@ -87,9 +87,9 @@ function Settings() {
           <h1>
             <center>Ustawienia</center>
           </h1>
-          <p>{currentUser && currentUser.email}</p>
           <form method="get" onSubmit={handleSubmit}>
-            <div className={styles.change_password}>
+            <div className={styles.settings_form}>
+              <span className={styles.input_span}>Email:</span>
               <input
                 type="email"
                 placeholder="Email"
@@ -98,16 +98,16 @@ function Settings() {
                 defaultValue={currentUser && currentUser.email}
                 className={styles.input}
               />
-              Wpisz nowe hasło:
-            <input
+              <span className={styles.input_span}>Wpisz nowe hasło:</span>
+              <input
                 type="password"
                 placeholder="Password"
                 name="password"
                 ref={passwordRef}
                 className={styles.input}
               />
-                  Powtórz nowe hasło:
-            <input
+              <span className={styles.input_span}>Powtórz nowe hasło:</span>
+              <input
                 type="password"
                 placeholder="Potwierdzenie hasła"
                 name="password confirmation"

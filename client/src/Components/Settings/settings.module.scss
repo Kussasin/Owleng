@@ -16,7 +16,7 @@
     width: 100%;
   }
 
-  &_content {
+  x &_content {
     max-width: 1150px;
     margin-top: 50px;
     margin-bottom: 50px;
@@ -29,6 +29,7 @@
 
   &_settings {
     padding-left: 30px;
+
     h1 {
       color: $main_color;
     }
@@ -37,5 +38,24 @@
   .edit_password {
     width: auto;
     padding: 20px;
+  }
+}
+
+.settings_form {
+  @include flexible();
+  justify-content: center;
+  flex-direction: column;
+}
+
+.input {
+  background: #FFFFFF;
+  border: 1px solid #B2B2B2;
+  border-radius: 10px;
+  width: 240px;
+  height: 40px;
+  padding: 0 8px;
+  &_span {
+    width: 100%;
+    margin: 16px 0 5px;
   }
 }
