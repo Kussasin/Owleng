@@ -9,43 +9,36 @@ import photo_bb from "./images/BogdanBasistyi.jpeg";
 function AboutUs() {
   return (
     <div className={styles.container}>
-      <div className={styles.container_header}>
-        <MobileHeader />
-        <Header />
-      </div>
+      <MobileHeader />
+      <Header />
       <div className={styles.container_content}>
+
         <div className={styles.container_info}>
           <h1>
             <center>O nas</center>
           </h1>
-          <p className={styles.info_about_owleng}>
-            <b>Owleng</b> - interaktywna aplikacja internetowa do nauki języka
-            angielskiego <br />
-            <br />
-            Aplikacja Owleng pozwala na kompleksową naukę języka angielskiego,
-            za pomocą takich rozdziałów jak:
+          <div className={styles.info_about_owleng}>
+            <p> <b>Owleng</b> &mdash;&nbsp;interaktywna aplikacja internetowa do&nbsp;nauki języka angielskiego</p>
+            <p>Aplikacja Owleng pozwala na&nbsp;kompleksową naukę języka angielskiego, za&nbsp;pomocą takich rozdział&oacute;w jak:</p>
             <li>
-              <b>Czytanie</b> - blok z tekstami do czytania
+              <b>Czytanie</b> &mdash;&nbsp;blok z&nbsp;tekstami do&nbsp;czytania
             </li>
             <li>
-              <b>Gramatyka</b> - blok z regułami do pisania
+              <b>Gramatyka</b> &mdash;&nbsp;blok z&nbsp;regułami do&nbsp;pisania
             </li>
             <li>
-              <b>Słuchanie</b> - blok z audiościeżkami do słuchania
+              <b>Słuchanie</b> &mdash;&nbsp;blok z&nbsp;audiościeżkami do&nbsp;słuchania
             </li>
             <li>
-              <b>Wideo materiały</b> - blok z wideo materiałami z różnymi
-              tematami
+              <b>Wideo materiały</b> &mdash;&nbsp;blok z&nbsp;wideo materiałami z&nbsp;r&oacute;żnymi tematami
             </li>
             <li>
-              <b>Mówienie</b> - blok, w którym jest możlisość sprawdzenia
-              poprawności mówienia
+              <b>Mówienie</b> &mdash;&nbsp;blok, w&nbsp;kt&oacute;rym jest możlisość sprawdzenia poprawności m&oacute;wienia
             </li>
             <li>
-              <b>Testy</b> - blok z testami na gramatykę, słownictwo, główny
-              test na poziom znajomości języka oraz inne.
+              <b>Testy</b> &mdash;&nbsp;blok z&nbsp;testami na&nbsp;gramatykę, słownictwo, gł&oacute;wny test na&nbsp;poziom znajomości języka oraz inne.
             </li>
-          </p>
+          </div>
           <h1>
             <center>Autorzy</center>
           </h1>
@@ -77,7 +70,7 @@ function AboutUs() {
             </a>
             <center>
               <p>
-                <b>Bogdan Basistyi</b>
+                <b>Bogdan Basisty</b>
               </p>
             </center>
           </div>

@@ -1,5 +1,6 @@
 @import '../../lightmode_colors.module.scss';
 $arrow_margin: 10px;
+
 @mixin flexible() {
   display: flex;
   align-items: center;
@@ -28,9 +29,10 @@ $arrow_margin: 10px;
   overflow: auto;
 }
 
-.dropdown{
+.dropdown {
   margin-bottom: 5px;
   cursor: pointer;
+
   &_text {
     margin: 0;
     display: inline-block;
@@ -47,16 +49,17 @@ $arrow_margin: 10px;
   margin-left: $arrow_margin;
 }
 
-.dropdown_item_element{
+.dropdown_item_element {
   padding: 4px 6px;
   margin: 8px 0;
   cursor: pointer;
-  &_text{
+
+  &_text {
     display: block;
   }
 }
 
-.isActive{
+.isActive {
   background-color: $elementIsSelected;
 }
 

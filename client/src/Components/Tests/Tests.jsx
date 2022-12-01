@@ -52,7 +52,7 @@ function Tests() {
   const [currentTheme, setCurrentTheme] = useState(null);
   // zmienna dla chronienia id wybranej odpowiedzi
   const [selectedAnswerId, setSelectedAnswerId] = useState(undefined);
-  const [isFirstElement, setisFisrtElement] = useState();
+  const [, setisFisrtElement] = useState();
   // funkcja dla potwierdzenia wybranej odpowiedzi
   const onAnswerConfirm = (selectedAnswer) => {
     // obiekt aktualnego zapytania
@@ -188,7 +188,6 @@ function Tests() {
       })
       .catch((error) => {
         console.error(error);
-        console.log(isFirstElement);
       });
   }, []);
 
