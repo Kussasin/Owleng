@@ -7,33 +7,32 @@ import styles from "./levelCheck.module.scss";
 import CustomButton from "../../UI/CustomButton/CustomButton";
 
 function LevelCheck() {
-
   const [user] = useAuthState(auth);
 
-  try{
-    set(ref(database, 'users/' + user.uid), {
+  try {
+    set(ref(database, "users/" + user.uid), {
       email: user.email,
-      level: "A0"
+      level: "A0",
     });
-  }catch(error){
+  } catch (error) {
     console.log(error.message);
   }
 
   return (
     <div className={styles.level_check_container}>
       <div className={styles.form_container}>
-        <p className={styles.form_container_h1}>Czy wiesz swój poziom języka?</p>
+        <p className={styles.form_container_h1}>
+          Czy wiesz swój poziom języka?
+        </p>
         <div className={styles.check_level}>
           <NavLink to="/ChoiceLevel" className={styles.link_container}>
             <CustomButton
               title="Wiem, jaki mam poziom"
               additionalStyles={styles.button_style}
-              onPress={() => {
-                console.log("text");
-              }}
+              onPress={() => {}}
             />
           </NavLink>
-          <NavLink to="" className={styles.link_container}>
+          <NavLink to="/" className={styles.link_container}>
             <CustomButton
               title="Tylko zaczynam naukę"
               additionalStyles={styles.button_style}
