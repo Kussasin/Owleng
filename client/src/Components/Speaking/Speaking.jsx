@@ -73,7 +73,7 @@ function Speaking() {
               )
             }
           </div>
-          <button className={`${styles.speack_button} ${listening ? styles.listening : ''}`} onClick={SpeechRecognition.startListening({ language: 'en-US' })}>
+          <button className={`${styles.speack_button} ${listening ? styles.listening : ''}`} onClick={ () => SpeechRecognition.startListening({ language: 'en-US' })}>
             <img className={styles.speack_button_micro} src={Microphone} alt="Microphone" />
           </button>
           <p>{transcript}</p>
