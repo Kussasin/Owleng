@@ -18,7 +18,7 @@ function Speaking() {
     { theme: "Temat 2", subt: ["podtemat 1", "podtemat 2"] },
     { theme: "Temat 3", subt: ["podtemat 1"] },
   ];
-  SpeechRecognition.startListening({ language: 'en-US' })
+
   function IsChange(text, speaking) {
     if (listening == false && text.toUpperCase() === speaking.toUpperCase() && text != "" && speaking != "") {
       answerIsRight = true;
@@ -73,7 +73,7 @@ function Speaking() {
               )
             }
           </div>
-          <button className={`${styles.speack_button} ${listening ? styles.listening : ''}`} onClick={SpeechRecognition.startListening}>
+          <button className={`${styles.speack_button} ${listening ? styles.listening : ''}`} onClick={SpeechRecognition.startListening({ language: 'en-US' })}>
             <img className={styles.speack_button_micro} src={Microphone} alt="Microphone" />
           </button>
           <p>{transcript}</p>
