@@ -10,7 +10,7 @@ import Cross from '../../img/MainImg/Cross.png';
 import CustomButton from "../UI/CustomButton/CustomButton";
 
 function Speaking() {
-  const lorem = `London is the capital of great britain.`;
+  const lorem = `London is the capital of Great Britain.`;
   const title = "Title 1";
   let answerIsRight = undefined;
   const Theme = [
@@ -20,17 +20,22 @@ function Speaking() {
   ];
 
   function IsChange(text, speaking) {
-    if (listening == false && text.toUpperCase() === speaking.toUpperCase() && text != "" && speaking != "") {
+
+    if (speaking.slice(-1) == "!" || speaking.slice(-1) == "." || speaking.slice(-1) == "?" ){
+      speaking = speaking.slice(0, -1);
+    }
+
+    if (listening == false && text.slice(0, -1).toUpperCase() === speaking.toUpperCase() && text != "" && speaking != "") {
       answerIsRight = true;
     }
-    else if (listening == false && text.toUpperCase() !== speaking.toUpperCase() && text != "" && speaking != "") {
+    else if (listening == false && text.slice(0, -1).toUpperCase()!== speaking.toUpperCase() && text != "" && speaking != "") {
       answerIsRight = false;
     } else {
       answerIsRight = undefined;
     }
   }
 
-  const {
+  let {
     transcript,
     listening,
     browserSupportsSpeechRecognition
