@@ -175,6 +175,7 @@ function Reading() {
                     <div className={styles.button_style}>
                       <CustomButton
                         title={"Przejdź do testu"}
+                        additionalStyles={styles.button_style}
                         onPress={() => setisFisrtElement(false)}
                       />
                     </div>
@@ -246,6 +247,7 @@ function Reading() {
                         <div className={styles.button_style}>
                           <CustomButton
                             title={"Następne pytanie"}
+                            additionalStyles={styles.button_style}
                             onPress={nextQuestion}
                           />
                         </div>
