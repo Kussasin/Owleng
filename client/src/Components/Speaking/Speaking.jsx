@@ -19,18 +19,42 @@ function Speaking() {
     { theme: "Temat 3", subt: ["podtemat 1"] },
   ];
   
-  function IsChange(text1, speaking) {
-    if (listening == false && text1.toUpperCase() === speaking.toUpperCase() && text1 != "" && speaking != "") {
+  function IsChange(text, speaking) {
+    switch (text.slice(-1)) {
+      case '!':
+        if (speaking.slice(-1) !== "!"){
+          transcript = speaking + `${text.slice(-1)}`;
+          speaking = speaking + `${text.slice(-1)}`;
+        }
+        break;
+      case '.':
+        if (speaking.slice(-1) !== "."){
+          transcript = speaking + `${text.slice(-1)}`;
+          speaking = speaking + `${text.slice(-1)}`;
+        }
+        break;
+      case '?':
+        if (speaking.slice(-1) !== "?"){
+          transcript = speaking + `${text.slice(-1)}`;
+          speaking = speaking + `${text.slice(-1)}`;
+        }
+        break;
+    
+      default:
+        break;
+    }
+
+    if (listening == false && text.toUpperCase() === speaking.toUpperCase() && text != "" && speaking != "") {
       answerIsRight = true;
     }
-    else if (listening == false && text1.toUpperCase() !== speaking.toUpperCase() && text1 != "" && speaking != "") {
+    else if (listening == false && text.toUpperCase() !== speaking.toUpperCase() && text != "" && speaking != "") {
       answerIsRight = false;
     } else {
       answerIsRight = undefined;
     }
   }
 
-  const {
+  let {
     transcript,
     listening,
     browserSupportsSpeechRecognition
@@ -78,13 +102,12 @@ function Speaking() {
           </button>
           <p>{transcript}</p>
           {
-            answerIsRight ? <CustomButton
+            <CustomButton
               key={title}
-              title="Przejdź dalej &#8594;"
+              title="Następne pytanie"
              // onPress={() => onAnswerConfirm(answer)}
               additionalStyles={styles.answer_button}
-            /> :
-              null
+            /> 
           }
         </div>
       </div>
