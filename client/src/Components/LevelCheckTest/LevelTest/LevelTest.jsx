@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { ref, child, get } from "firebase/database";
-import { database } from "../../../utils/firebaseConfig";
+import { ref, child, get, update } from "firebase/database";
+import { database, auth } from "../../../utils/firebaseConfig";
 import styles from "./levelTest.module.scss";
 import CustomButton from "../../UI/CustomButton/CustomButton";
 import Card from "../../Card/Card";
-import { NavLink } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import { getLevelBasedOnScore } from "../../../utils/getLevelBasedOnScore";
 
 const Test = () => {
   const [isTestFinished, setIsTestFinished] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userScore, setUserScore] = useState(0);
   const [TEST, setTEST] = useState([]);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [grade, setGrade] = useState("");
 
   const onAnswerConfirm = (selectedAnswer) => {
     const isAnswerCorrect =
@@ -26,11 +29,29 @@ const Test = () => {
         return prevState;
       }
     });
+
+    setGrade(getLevelBasedOnScore(userScore, TEST.length));
     if (currentQuestionIndex < TEST.length - 1) {
       setCurrentQuestionIndex((prevState) => ++prevState);
     } else {
       setIsTestFinished(true);
     }
+  };
+  const onStartStudy = () => {
+    const userId = auth.currentUser.uid;
+    const userEmail = auth.currentUser.email;
+    const updates = {};
+    updates[`/users/${userId}`] = {
+      email: userEmail,
+      level: getLevelBasedOnScore(userScore, TEST.length),
+    };
+    update(ref(database), updates)
+      .then(() => {
+        setIsSuccess(true);
+      })
+      .catch((e) => {
+        console.log(JSON.stringify(e));
+      });
   };
 
   useEffect(() => {
@@ -49,22 +70,24 @@ const Test = () => {
       });
   }, []);
 
+  if (isSuccess) {
+    return <Navigate to="/" replace={true} />;
+  }
+
   return (
     <div className={styles.level_test_container}>
       {isTestFinished ? (
         <Card additionalStyles={styles.card}>
           <>
-            <p className={styles.card_title}>Jesteś na poziomie A2!</p>
+            <p className={styles.card_title}>Jesteś na poziomie {grade}</p>
             <div>
               <p>Twój wynik: {userScore}</p>
             </div>
-            <NavLink to="/" className={styles.link_container}>
-              <CustomButton
-                title={"Zacznij naukę ->"}
-                onPress={() => {}}
-                additionalStyles={styles.card_result_button}
-              />
-            </NavLink>
+            <CustomButton
+              title={"Zacznij naukę ->"}
+              onPress={onStartStudy}
+              additionalStyles={styles.card_result_button}
+            />
           </>
         </Card>
       ) : (

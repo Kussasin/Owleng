@@ -1,12 +1,14 @@
 import React, { useMemo, useState, useEffect } from "react";
-import { ref, child, get } from "firebase/database";
-import { database } from "../../utils/firebaseConfig";
+import { ref, child, get, update } from "firebase/database";
+import { database, auth } from "../../utils/firebaseConfig";
 import styles from "../Tests/tests.module.scss";
 import Header from "../Main/Header/Header";
 import MobileHeader from "../Main/MobileHeader/MobileHeader";
 import LeftSideMenu from "../LeftSideMenu/LeftSideMenu";
 import CustomButton from "../UI/CustomButton/CustomButton";
 import Card from "../Card/Card";
+import { getLevelBasedOnScore } from "../../utils/getLevelBasedOnScore";
+import { Navigate } from "react-router-dom";
 
 // Porzyklad obiektu podtematu
 /*
@@ -45,14 +47,24 @@ function Tests() {
   const [data, setData] = useState();
   // zmienna dla chronienia poziomu obliczonego po zakonczeniu testu
   const [grade, setGrade] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
   // zmienna dla chronienia aktualnego poprawngo id odpowiedzi
   // poczatkowo ustawiona na -1 by uniknac problemow pdczas porownywania z indeksem wybranego pytania
   const [currentCorrectAnswerId, setCurrentCorrectAnswerId] = useState(-1);
   // zmienna dla chronienia objektu danych o aktualnym podtemacie
-  const [currentTheme, setCurrentTheme] = useState(null);
+  const [currentTheme, setCurrentTheme] = useState();
   // zmienna dla chronienia id wybranej odpowiedzi
   const [selectedAnswerId, setSelectedAnswerId] = useState(undefined);
   const [, setisFisrtElement] = useState();
+
+  useEffect(() => {
+    if (data) {
+      setCurrentTheme(
+        data[Object.keys(data)[selectedTopicId]].themes[selectedThemeId]
+      );
+    }
+  }, [selectedTopicId, selectedThemeId, data]);
+
   // funkcja dla potwierdzenia wybranej odpowiedzi
   const onAnswerConfirm = (selectedAnswer) => {
     // obiekt aktualnego zapytania
@@ -79,9 +91,7 @@ function Tests() {
     // przekazanie id aktualnej poprawnej odpowiedzi w useState dla dostepu
     // spoza funkcji
     setCurrentCorrectAnswerId(correctAnswerId);
-    // objekt z parametrami aktualnego tematu
-    const currentTheme =
-      data[Object.keys(data)[selectedTopicId]].themes[selectedThemeId];
+
     // wyszukanie id wybranej przez uzytkownika odpowiedzi
     const selectedAnswerId = currentQuestion.answers.findIndex(
       (answer) => answer === selectedAnswer
@@ -89,10 +99,6 @@ function Tests() {
     // przekazanie id wybranej odpowiedzie w useState dla dostepu
     // spoza funkcji
     setSelectedAnswerId(selectedAnswerId);
-
-    // przekazanie objekt wybranego podtematu w useState dla dostepu
-    // spoza funkcji
-    setCurrentTheme(currentTheme);
 
     // jezeli id wybranej odpowiedzi = id poprawnej odpowiedzi
     // zmienna = true, jeeli nie - false
@@ -108,21 +114,36 @@ function Tests() {
     });
 
     // wyznaczenie poziomu na podstawie aktualnego znaczenia wyniku testu
-    setGrade(() => {
-      if (userScore <= 5) {
-        return "A0";
-      } else if (userScore > 5 && userScore <= 10) {
-        return "A1";
-      } else if (userScore > 10 && userScore <= 15) {
-        return "A2";
-      } else if (userScore > 15 && userScore <= 20) {
-        return "B1";
-      } else if (userScore > 20 && userScore <= 25) {
-        return "B2";
-      } else if (userScore > 25) {
-        return "C1";
-      }
-    });
+    setGrade(
+      getLevelBasedOnScore(
+        userScore,
+        data[Object.keys(data)[selectedTopicId]].themes[selectedThemeId]
+          .questions.length
+      )
+    );
+  };
+
+  const onTestFinished = () => {
+    if (
+      data[Object.keys(data)[selectedTopicId]].topic == "Testy na poziom języka"
+    ) {
+      const userId = auth.currentUser.uid;
+      const userEmail = auth.currentUser.email;
+      const updates = {};
+      updates[`/users/${userId}`] = {
+        email: userEmail,
+        level: grade,
+      };
+      update(ref(database), updates)
+        .then(() => {
+          setIsSuccess(true);
+        })
+        .catch((e) => {
+          console.log(JSON.stringify(e));
+        });
+    } else {
+      return;
+    }
   };
 
   // funkcja dla przejscia do nastepnego pytania
@@ -136,6 +157,7 @@ function Tests() {
       // ustawienie id wybranej odpowidzi
       setSelectedAnswerId(undefined);
     } else {
+      onTestFinished();
       // zakonczenie testu
       setTestIsFinish(true);
       // ustawienie aktualnego poprawnego indeksu pytania na -1 (przejscie do stanu poczatkowego)
@@ -191,6 +213,9 @@ function Tests() {
       });
   }, []);
 
+  if (isSuccess) {
+    return <Navigate to="/" replace={true} />;
+  }
   return (
     <div className={styles.container}>
       <div className={styles.container_header}>
@@ -225,81 +250,81 @@ function Tests() {
                 </>
               </Card>
             ) : (
-                // data (undefined | [{}]) && jsx, true && jsx -> jsx, false && jsx -> false
-                data && (
-                  <div className={styles.content}>
-                    <p className={styles.name_tests}>
-                      {
-                        // nazwa podtematu
-                        data[Object.keys(data)[selectedTopicId]].themes[
-                          selectedThemeId
-                        ].name
-                      }
-                    </p>
-                    <div className={styles.question_container}>
-                      <div className={styles.question_container_text}>
-                        <p className={styles.question}>
+              // data (undefined | [{}]) && jsx, true && jsx -> jsx, false && jsx -> false
+              data && (
+                <div className={styles.content}>
+                  <p className={styles.name_tests}>
+                    {
+                      // nazwa podtematu
+                      data[Object.keys(data)[selectedTopicId]].themes[
+                        selectedThemeId
+                      ].name
+                    }
+                  </p>
+                  <div className={styles.question_container}>
+                    <div className={styles.question_container_text}>
+                      <p className={styles.question}>
+                        {
+                          // tekst pytania
+                          data[Object.keys(data)[selectedTopicId]].themes[
+                            selectedThemeId
+                          ].questions[currentQuestionIndex].question
+                        }
+                      </p>
+                    </div>
+                    {/* jezeli odpowiedz wybrana oraz jej id != id poprawnej odpowiedzi */}
+                    {selectedAnswerId !== currentCorrectAnswerId &&
+                      selectedAnswerId !== undefined && (
+                        <p className={styles.hint}>
                           {
-                            // tekst pytania
+                            // wybranie podpowiedzi
                             data[Object.keys(data)[selectedTopicId]].themes[
                               selectedThemeId
-                            ].questions[currentQuestionIndex].question
+                            ].questions[currentQuestionIndex].hint
                           }
                         </p>
-                      </div>
-                      {/* jezeli odpowiedz wybrana oraz jej id != id poprawnej odpowiedzi */}
-                      {selectedAnswerId !== currentCorrectAnswerId &&
-                        selectedAnswerId !== undefined && (
-                          <p className={styles.hint}>
-                            {
-                              // wybranie podpowiedzi
-                              data[Object.keys(data)[selectedTopicId]].themes[
-                                selectedThemeId
-                              ].questions[currentQuestionIndex].hint
-                            }
-                          </p>
-                        )}
+                      )}
 
-                      <div className={styles.grid_container}>
-                        {data[Object.keys(data)[selectedTopicId]].themes[
-                          selectedThemeId
-                        ].questions[currentQuestionIndex].answers.map(
-                          (answer, index) => {
-                            let additionalStyle1;
-                            // ustawienie stylow dla wybranej odpowiedzi
-                            if (index === selectedAnswerId) {
-                              if (index === currentCorrectAnswerId) {
-                                additionalStyle1 = styles.answer_button_correct;
-                              } else if (currentCorrectAnswerId !== -1) {
-                                additionalStyle1 = styles.answer_button_wrong;
-                              }
-                            }
-                            let additionalStyle2;
-                            // ustawienie stylow dla poprawnej odpowiedzi
+                    <div className={styles.grid_container}>
+                      {data[Object.keys(data)[selectedTopicId]].themes[
+                        selectedThemeId
+                      ].questions[currentQuestionIndex].answers.map(
+                        (answer, index) => {
+                          let additionalStyle1;
+                          // ustawienie stylow dla wybranej odpowiedzi
+                          if (index === selectedAnswerId) {
                             if (index === currentCorrectAnswerId) {
-                              additionalStyle2 = styles.answer_button_correct;
+                              additionalStyle1 = styles.answer_button_correct;
+                            } else if (currentCorrectAnswerId !== -1) {
+                              additionalStyle1 = styles.answer_button_wrong;
                             }
-                            return (
-                              <CustomButton
-                                key={answer}
-                                title={answer}
-                                onPress={() => onAnswerConfirm(answer)}
-                                additionalStyles={`${styles.answer_button} ${additionalStyle1} ${additionalStyle2}`}
-                              />
-                            );
                           }
-                        )}
-                        <div className={styles.block_custom_button}>
-                          <CustomButton
-                            title={"Następne pytanie"}
-                            onPress={nextQuestion}
-                          />
-                        </div>
+                          let additionalStyle2;
+                          // ustawienie stylow dla poprawnej odpowiedzi
+                          if (index === currentCorrectAnswerId) {
+                            additionalStyle2 = styles.answer_button_correct;
+                          }
+                          return (
+                            <CustomButton
+                              key={answer}
+                              title={answer}
+                              onPress={() => onAnswerConfirm(answer)}
+                              additionalStyles={`${styles.answer_button} ${additionalStyle1} ${additionalStyle2}`}
+                            />
+                          );
+                        }
+                      )}
+                      <div className={styles.block_custom_button}>
+                        <CustomButton
+                          title={"Następne pytanie"}
+                          onPress={nextQuestion}
+                        />
                       </div>
                     </div>
                   </div>
-                )
-              )}
+                </div>
+              )
+            )}
           </div>
         </div>
       </div>
