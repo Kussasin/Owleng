@@ -18,32 +18,8 @@ function Speaking() {
     { theme: "Temat 2", subt: ["podtemat 1", "podtemat 2"] },
     { theme: "Temat 3", subt: ["podtemat 1"] },
   ];
-  
+  SpeechRecognition.startListening({ language: 'en-US' })
   function IsChange(text, speaking) {
-    switch (text.slice(-1)) {
-      case '!':
-        if (speaking.slice(-1) !== "!"){
-          transcript = speaking + `${text.slice(-1)}`;
-          speaking = speaking + `${text.slice(-1)}`;
-        }
-        break;
-      case '.':
-        if (speaking.slice(-1) !== "."){
-          transcript = speaking + `${text.slice(-1)}`;
-          speaking = speaking + `${text.slice(-1)}`;
-        }
-        break;
-      case '?':
-        if (speaking.slice(-1) !== "?"){
-          transcript = speaking + `${text.slice(-1)}`;
-          speaking = speaking + `${text.slice(-1)}`;
-        }
-        break;
-    
-      default:
-        break;
-    }
-
     if (listening == false && text.toUpperCase() === speaking.toUpperCase() && text != "" && speaking != "") {
       answerIsRight = true;
     }
@@ -54,7 +30,7 @@ function Speaking() {
     }
   }
 
-  let {
+  const {
     transcript,
     listening,
     browserSupportsSpeechRecognition
