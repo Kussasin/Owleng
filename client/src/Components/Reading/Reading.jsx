@@ -186,7 +186,9 @@ function Reading() {
                 testIsFinish ?
                   (
                     <Card additionalStyles={styles.card}>
-                        <p>Ilość prawidłowych odpowiedzi: {userScore}</p>
+                        <p>Ilość prawidłowych odpowiedzi: {userScore} / {data[Object.keys(data)[selectedTopicId]].themes[
+                                    selectedThemeId
+                                  ].questions.length}</p>
                     </Card>
                   ) : ( 
                     // data (undefined | [{}]) && jsx, true && jsx -> jsx, false && jsx -> false
