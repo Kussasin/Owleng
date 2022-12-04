@@ -7,6 +7,7 @@ import MobileHeader from "../Main/MobileHeader/MobileHeader";
 import LeftSideMenu from "../LeftSideMenu/LeftSideMenu";
 import CustomButton from "../UI/CustomButton/CustomButton";
 import Card from "../Card/Card";
+import { formatText } from "../../utils/formatText";
 
 function Reading() {
   // zmienna dla kontroli aktualnego tematu
@@ -162,14 +163,15 @@ function Reading() {
                             ].name
                           }
                         </p>
-                        <p className={styles.content_text}>
+                        <div className={styles.content_text}>
                           {
                             // tekst
+                            formatText(
                             data[Object.keys(data)[selectedTopicId]].themes[
                               selectedThemeId
-                            ].text
+                            ].text,"_n")
                           }
-                        </p>
+                        </div>
                       </div>
                     </div>
                     <div className={styles.button_style}>

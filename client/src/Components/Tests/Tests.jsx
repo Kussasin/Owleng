@@ -9,6 +9,7 @@ import CustomButton from "../UI/CustomButton/CustomButton";
 import Card from "../Card/Card";
 import { getLevelBasedOnScore } from "../../utils/getLevelBasedOnScore";
 import { Navigate } from "react-router-dom";
+import Loader from "../UI/Preloader/loader";
 
 // Porzyklad obiektu podtematu
 /*
@@ -56,6 +57,7 @@ function Tests() {
   // zmienna dla chronienia id wybranej odpowiedzi
   const [selectedAnswerId, setSelectedAnswerId] = useState(undefined);
   const [, setisFisrtElement] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (data) {
@@ -196,7 +198,9 @@ function Tests() {
 
   // wykonanie zapytania do bazy danych w hooku dla unikniecia powtornych zapytan
   // przy rerenderingu
+
   useEffect(() => {
+    setIsLoading(true);
     // polaczenie sie z serwerem
     const dbRef = ref(database);
     get(child(dbRef, "tests/mainTests"))
@@ -207,9 +211,11 @@ function Tests() {
         } else {
           console.log("No data available");
         }
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error(error);
+        setIsLoading(false);
       });
   }, []);
 
@@ -222,112 +228,119 @@ function Tests() {
         <MobileHeader />
         <Header />
       </div>
-      <div className={styles.container_content}>
-        <LeftSideMenu
-          title={Theme}
-          // przekazanie funkcji niezbednych dla kontroli stanu testu
-          setSelectedThemeId={setSelectedThemeId}
-          setselectedTopicId={setselectedTopicId}
-          setTestActive={setTestIsFinish}
-          setUserScore={setUserScore}
-          setCurrentQuestionIndex={setCurrentQuestionIndex}
-          setCurrentCorrectAnswerId={setCurrentCorrectAnswerId}
-          setSelectedAnswerId={setSelectedAnswerId}
-          setisFisrtElement={setisFisrtElement}
-        />
-        <div className={styles.container_content_right}>
-          <div className={styles.container_content_right_content}>
-            {/* Wyswietlenie wyniku testu */}
-            {testIsFinish ? (
-              <Card additionalStyles={styles.card}>
-                <>
-                  <p className={styles.card_title}>
-                    Jesteś na poziomie {grade}
-                  </p>
-                  <div>
-                    <p>Ilość prawidłowych odpowiedzi: {userScore}</p>
-                  </div>
-                </>
-              </Card>
-            ) : (
-              // data (undefined | [{}]) && jsx, true && jsx -> jsx, false && jsx -> false
-              data && (
-                <div className={styles.content}>
-                  <p className={styles.name_tests}>
-                    {
-                      // nazwa podtematu
-                      data[Object.keys(data)[selectedTopicId]].themes[
-                        selectedThemeId
-                      ].name
-                    }
-                  </p>
-                  <div className={styles.question_container}>
-                    <div className={styles.question_container_text}>
-                      <p className={styles.question}>
-                        {
-                          // tekst pytania
-                          data[Object.keys(data)[selectedTopicId]].themes[
-                            selectedThemeId
-                          ].questions[currentQuestionIndex].question
-                        }
-                      </p>
+
+      {isLoading ? (
+        <div className={styles.loader}>
+          <Loader />
+        </div>
+      ) : (
+        <div className={styles.container_content}>
+          <LeftSideMenu
+            title={Theme}
+            // przekazanie funkcji niezbednych dla kontroli stanu testu
+            setSelectedThemeId={setSelectedThemeId}
+            setselectedTopicId={setselectedTopicId}
+            setTestActive={setTestIsFinish}
+            setUserScore={setUserScore}
+            setCurrentQuestionIndex={setCurrentQuestionIndex}
+            setCurrentCorrectAnswerId={setCurrentCorrectAnswerId}
+            setSelectedAnswerId={setSelectedAnswerId}
+            setisFisrtElement={setisFisrtElement}
+          />
+          <div className={styles.container_content_right}>
+            <div className={styles.container_content_right_content}>
+              {/* Wyswietlenie wyniku testu */}
+              {testIsFinish ? (
+                <Card additionalStyles={styles.card}>
+                  <>
+                    <p className={styles.card_title}>
+                      Jesteś na poziomie {grade}
+                    </p>
+                    <div>
+                      <p>Ilość prawidłowych odpowiedzi: {userScore}</p>
                     </div>
-                    {/* jezeli odpowiedz wybrana oraz jej id != id poprawnej odpowiedzi */}
-                    {selectedAnswerId !== currentCorrectAnswerId &&
-                      selectedAnswerId !== undefined && (
-                        <p className={styles.hint}>
+                  </>
+                </Card>
+              ) : (
+                // data (undefined | [{}]) && jsx, true && jsx -> jsx, false && jsx -> false
+                data && (
+                  <div className={styles.content}>
+                    <p className={styles.name_tests}>
+                      {
+                        // nazwa podtematu
+                        data[Object.keys(data)[selectedTopicId]].themes[
+                          selectedThemeId
+                        ].name
+                      }
+                    </p>
+                    <div className={styles.question_container}>
+                      <div className={styles.question_container_text}>
+                        <p className={styles.question}>
                           {
-                            // wybranie podpowiedzi
+                            // tekst pytania
                             data[Object.keys(data)[selectedTopicId]].themes[
                               selectedThemeId
-                            ].questions[currentQuestionIndex].hint
+                            ].questions[currentQuestionIndex].question
                           }
                         </p>
-                      )}
-
-                    <div className={styles.grid_container}>
-                      {data[Object.keys(data)[selectedTopicId]].themes[
-                        selectedThemeId
-                      ].questions[currentQuestionIndex].answers.map(
-                        (answer, index) => {
-                          let additionalStyle1;
-                          // ustawienie stylow dla wybranej odpowiedzi
-                          if (index === selectedAnswerId) {
-                            if (index === currentCorrectAnswerId) {
-                              additionalStyle1 = styles.answer_button_correct;
-                            } else if (currentCorrectAnswerId !== -1) {
-                              additionalStyle1 = styles.answer_button_wrong;
+                      </div>
+                      {/* jezeli odpowiedz wybrana oraz jej id != id poprawnej odpowiedzi */}
+                      {selectedAnswerId !== currentCorrectAnswerId &&
+                        selectedAnswerId !== undefined && (
+                          <p className={styles.hint}>
+                            {
+                              // wybranie podpowiedzi
+                              data[Object.keys(data)[selectedTopicId]].themes[
+                                selectedThemeId
+                              ].questions[currentQuestionIndex].hint
                             }
+                          </p>
+                        )}
+
+                      <div className={styles.grid_container}>
+                        {data[Object.keys(data)[selectedTopicId]].themes[
+                          selectedThemeId
+                        ].questions[currentQuestionIndex].answers.map(
+                          (answer, index) => {
+                            let additionalStyle1;
+                            // ustawienie stylow dla wybranej odpowiedzi
+                            if (index === selectedAnswerId) {
+                              if (index === currentCorrectAnswerId) {
+                                additionalStyle1 = styles.answer_button_correct;
+                              } else if (currentCorrectAnswerId !== -1) {
+                                additionalStyle1 = styles.answer_button_wrong;
+                              }
+                            }
+                            let additionalStyle2;
+                            // ustawienie stylow dla poprawnej odpowiedzi
+                            if (index === currentCorrectAnswerId) {
+                              additionalStyle2 = styles.answer_button_correct;
+                            }
+                            return (
+                              <CustomButton
+                                key={answer}
+                                title={answer}
+                                onPress={() => onAnswerConfirm(answer)}
+                                additionalStyles={`${styles.answer_button} ${additionalStyle1} ${additionalStyle2}`}
+                              />
+                            );
                           }
-                          let additionalStyle2;
-                          // ustawienie stylow dla poprawnej odpowiedzi
-                          if (index === currentCorrectAnswerId) {
-                            additionalStyle2 = styles.answer_button_correct;
-                          }
-                          return (
-                            <CustomButton
-                              key={answer}
-                              title={answer}
-                              onPress={() => onAnswerConfirm(answer)}
-                              additionalStyles={`${styles.answer_button} ${additionalStyle1} ${additionalStyle2}`}
-                            />
-                          );
-                        }
-                      )}
-                      <div className={styles.block_custom_button}>
-                        <CustomButton
-                          title={"Następne pytanie"}
-                          onPress={nextQuestion}
-                        />
+                        )}
+                        <div className={styles.block_custom_button}>
+                          <CustomButton
+                            title={"Następne pytanie"}
+                            onPress={nextQuestion}
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              )
-            )}
+                )
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
