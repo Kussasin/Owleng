@@ -7,6 +7,7 @@ import MobileHeader from "../Main/MobileHeader/MobileHeader";
 import LeftSideMenu from "../LeftSideMenu/LeftSideMenu";
 import CustomButton from "../UI/CustomButton/CustomButton";
 import Card from "../Card/Card";
+import { formatText } from "../../utils/formatText";
 
 function Reading() {
   // zmienna dla kontroli aktualnego tematu
@@ -147,113 +148,109 @@ function Reading() {
         />
         <div className={styles.container_content_right}>
           <div className={styles.container_content_right_content}>
-            {isFirstElement ?
-              (
-                data &&
-                (
-                  <div className={styles.data_container}>
-                    <div className={styles.content_container}>
-                      <div className={styles.content}>
-                        <p className={styles.name_tests}>
-                          {
-                            // nazwa podtematu
+            {isFirstElement ? (
+              data && (
+                <div className={styles.data_container}>
+                  <div className={styles.content_container}>
+                    <div className={styles.content}>
+                      <p className={styles.name_tests}>
+                        {
+                          // nazwa podtematu
+                          data[Object.keys(data)[selectedTopicId]].themes[
+                            selectedThemeId
+                          ].name
+                        }
+                      </p>
+                      <span className={styles.content_text}>
+                        {
+                          // tekst
+                          formatText(
                             data[Object.keys(data)[selectedTopicId]].themes[
                               selectedThemeId
-                            ].name
-                          }
-                        </p>
-                        <p className={styles.content_text}>
-                          {
-                            // tekst
-                            data[Object.keys(data)[selectedTopicId]].themes[
-                              selectedThemeId
-                            ].text
-                          }
-                        </p>
-                      </div>
-                    </div>
-                    <div className={styles.button_style}>
-                      <CustomButton
-                        title={"Przejdź do testu"}
-                        onPress={() => setisFisrtElement(false)}
-                      />
+                            ].text,
+                            "_n"
+                          )
+                        }
+                      </span>
                     </div>
                   </div>
-                )
-              ) :
-              (
-                testIsFinish ?
-                  (
-                    <Card additionalStyles={styles.card}>
-                        <p>Ilość prawidłowych odpowiedzi: {userScore}</p>
-                    </Card>
-                  ) : ( 
-                    // data (undefined | [{}]) && jsx, true && jsx -> jsx, false && jsx -> false
-                    data && (
-                      <div className={styles.data_container}>
-                        <div >
-                          <p className={styles.name_tests}>
-                            {
-                              // nazwa podtematu
-                              data[Object.keys(data)[selectedTopicId]].themes[
-                                selectedThemeId
-                              ].name
-                            }
-                          </p>
-                          <div className={styles.question_container}>
-                            <div className={styles.question_container_text}>
-                              <p className={styles.question}>
-                                {
-                                  // tekst pytania
-                                  data[Object.keys(data)[selectedTopicId]].themes[
-                                    selectedThemeId
-                                  ].questions[currentQuestionIndex].question
-                                }
-                              </p>
-                            </div>
-                            <div className={styles.grid_container}>
-                              {data[Object.keys(data)[selectedTopicId]].themes[
-                                selectedThemeId
-                              ].questions[currentQuestionIndex].answers.map(
-                                (answer, index) => {
-                                  let additionalStyle1;
-                                  // ustawienie stylow dla wybranej odpowiedzi
-                                  if (index === selectedAnswerId) {
-                                    if (index === currentCorrectAnswerId) {
-                                      additionalStyle1 = styles.answer_button_correct;
-                                    } else if (currentCorrectAnswerId !== -1) {
-                                      additionalStyle1 = styles.answer_button_wrong;
-                                    }
-                                  }
-                                  let additionalStyle2;
-                                  // ustawienie stylow dla poprawnej odpowiedzi
-                                  if (index === currentCorrectAnswerId) {
-                                    additionalStyle2 = styles.answer_button_correct;
-                                  }
-                                  return (
-                                    <CustomButton
-                                      key={answer}
-                                      title={answer}
-                                      onPress={() => onAnswerConfirm(answer)}
-                                      additionalStyles={`${styles.answer_button} ${additionalStyle1} ${additionalStyle2}`}
-                                    />
-                                  );
-                                }
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                        <div className={styles.button_style}>
-                          <CustomButton
-                            title={"Następne pytanie"}
-                            onPress={nextQuestion}
-                          />
-                        </div>
-                      </div>
-                    )
-                  )
+                  <div className={styles.button_style}>
+                    <CustomButton
+                      title={"Przejdź do testu"}
+                      onPress={() => setisFisrtElement(false)}
+                    />
+                  </div>
+                </div>
               )
-            }
+            ) : testIsFinish ? (
+              <Card additionalStyles={styles.card}>
+                <p>Ilość prawidłowych odpowiedzi: {userScore}</p>
+              </Card>
+            ) : (
+              // data (undefined | [{}]) && jsx, true && jsx -> jsx, false && jsx -> false
+              data && (
+                <div className={styles.data_container}>
+                  <div>
+                    <p className={styles.name_tests}>
+                      {
+                        // nazwa podtematu
+                        data[Object.keys(data)[selectedTopicId]].themes[
+                          selectedThemeId
+                        ].name
+                      }
+                    </p>
+                    <div className={styles.question_container}>
+                      <div className={styles.question_container_text}>
+                        <p className={styles.question}>
+                          {
+                            // tekst pytania
+                            data[Object.keys(data)[selectedTopicId]].themes[
+                              selectedThemeId
+                            ].questions[currentQuestionIndex].question
+                          }
+                        </p>
+                      </div>
+                      <div className={styles.grid_container}>
+                        {data[Object.keys(data)[selectedTopicId]].themes[
+                          selectedThemeId
+                        ].questions[currentQuestionIndex].answers.map(
+                          (answer, index) => {
+                            let additionalStyle1;
+                            // ustawienie stylow dla wybranej odpowiedzi
+                            if (index === selectedAnswerId) {
+                              if (index === currentCorrectAnswerId) {
+                                additionalStyle1 = styles.answer_button_correct;
+                              } else if (currentCorrectAnswerId !== -1) {
+                                additionalStyle1 = styles.answer_button_wrong;
+                              }
+                            }
+                            let additionalStyle2;
+                            // ustawienie stylow dla poprawnej odpowiedzi
+                            if (index === currentCorrectAnswerId) {
+                              additionalStyle2 = styles.answer_button_correct;
+                            }
+                            return (
+                              <CustomButton
+                                key={answer}
+                                title={answer}
+                                onPress={() => onAnswerConfirm(answer)}
+                                additionalStyles={`${styles.answer_button} ${additionalStyle1} ${additionalStyle2}`}
+                              />
+                            );
+                          }
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  <div className={styles.button_style}>
+                    <CustomButton
+                      title={"Następne pytanie"}
+                      onPress={nextQuestion}
+                    />
+                  </div>
+                </div>
+              )
+            )}
           </div>
         </div>
       </div>
