@@ -1,4 +1,4 @@
-@import '../../lightmode_colors.module.scss';
+@import "../../lightmode_colors.module.scss";
 $arrow_margin: 10px;
 
 @mixin flexible() {
@@ -10,10 +10,11 @@ $arrow_margin: 10px;
   @include flexible();
   flex-direction: column;
   justify-content: space-between;
-  width: 35%;
-  height: 600px;
+  min-width: 35%;
+  min-height: 400px;
   box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.05);
   border-radius: 20px;
+  align-self: flex-start;
 
   &_title {
     color: $main_color;
