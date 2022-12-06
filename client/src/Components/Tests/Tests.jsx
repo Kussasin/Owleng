@@ -101,12 +101,9 @@ function Tests() {
     setSelectedAnswerId(selectedAnswerId);
 
     // jezeli id wybranej odpowiedzi = id poprawnej odpowiedzi
-    // zmienna = true, jeeli nie - false
-    const isAnswerCorrect = selectedAnswerId === correctAnswerId;
-
     // jezeli wynik poprawny zwiekszamy o 1, jezeli nie zachowujemy poprzednie znaczenie
     setUserScore((prevState) => {
-      if (isAnswerCorrect) {
+      if (selectedAnswerId === correctAnswerId) {
         return ++prevState;
       } else {
         return prevState;
@@ -238,93 +235,96 @@ function Tests() {
         <div className={styles.container_content_right}>
           <div className={styles.container_content_right_content}>
             {/* Wyswietlenie wyniku testu */}
-            {testIsFinish ? (
-              <Card additionalStyles={styles.card}>
-                <>
-                  <p className={styles.card_title}>
-                    Jesteś na poziomie {grade}
-                  </p>
-                  <div>
-                    <p>Ilość prawidłowych odpowiedzi: {userScore}</p>
-                  </div>
-                </>
-              </Card>
-            ) : (
-              // data (undefined | [{}]) && jsx, true && jsx -> jsx, false && jsx -> false
-              data && (
-                <div className={styles.content}>
-                  <p className={styles.name_tests}>
-                    {
-                      // nazwa podtematu
-                      data[Object.keys(data)[selectedTopicId]].themes[
-                        selectedThemeId
-                      ].name
-                    }
-                  </p>
-                  <div className={styles.question_container}>
-                    <div className={styles.question_container_text}>
-                      <p className={styles.question}>
-                        {
-                          // tekst pytania
-                          data[Object.keys(data)[selectedTopicId]].themes[
-                            selectedThemeId
-                          ].questions[currentQuestionIndex].question
-                        }
-                      </p>
+            {testIsFinish ?
+              (
+                <Card additionalStyles={styles.card}>
+                  <>
+                    <p className={styles.card_title}>
+                      Jesteś na poziomie {grade}
+                    </p>
+                    <div>
+                      <p>Ilość prawidłowych odpowiedzi: {userScore}</p>
                     </div>
-                    {/* jezeli odpowiedz wybrana oraz jej id != id poprawnej odpowiedzi */}
-                    {selectedAnswerId !== currentCorrectAnswerId &&
-                      selectedAnswerId !== undefined && (
-                        <p className={styles.hint}>
+                  </>
+                </Card>
+              ) :
+              (
+                // data (undefined | [{}]) && jsx, true && jsx -> jsx, false && jsx -> false
+                data && (
+                  <div className={styles.content}>
+                    <p className={styles.name_tests}>
+                      {
+                        // nazwa podtematu
+                        data[Object.keys(data)[selectedTopicId]].themes[
+                          selectedThemeId
+                        ].name
+                      }
+                    </p>
+                    <div className={styles.question_container}>
+                      <div className={styles.question_container_text}>
+                        <p className={styles.question}>
                           {
-                            // wybranie podpowiedzi
+                            // tekst pytania
                             data[Object.keys(data)[selectedTopicId]].themes[
                               selectedThemeId
-                            ].questions[currentQuestionIndex].hint
+                            ].questions[currentQuestionIndex].question
                           }
                         </p>
-                      )}
-
-                    <div className={styles.grid_container}>
-                      {data[Object.keys(data)[selectedTopicId]].themes[
-                        selectedThemeId
-                      ].questions[currentQuestionIndex].answers.map(
-                        (answer, index) => {
-                          let additionalStyle1;
-                          // ustawienie stylow dla wybranej odpowiedzi
-                          if (index === selectedAnswerId) {
-                            if (index === currentCorrectAnswerId) {
-                              additionalStyle1 = styles.answer_button_correct;
-                            } else if (currentCorrectAnswerId !== -1) {
-                              additionalStyle1 = styles.answer_button_wrong;
+                      </div>
+                      {/* jezeli odpowiedz wybrana oraz jej id != id poprawnej odpowiedzi */}
+                      {selectedAnswerId !== currentCorrectAnswerId &&
+                        selectedAnswerId !== undefined && (
+                          <p className={styles.hint}>
+                            {
+                              // wybranie podpowiedzi
+                              data[Object.keys(data)[selectedTopicId]].themes[
+                                selectedThemeId
+                              ].questions[currentQuestionIndex].hint
                             }
+                          </p>
+                        )}
+
+                      <div className={styles.grid_container}>
+                        {data[Object.keys(data)[selectedTopicId]].themes[
+                          selectedThemeId
+                        ].questions[currentQuestionIndex].answers.map(
+                          (answer, index) => {
+                            let additionalStyle1;
+                            // ustawienie stylow dla wybranej odpowiedzi
+                            if (index === selectedAnswerId) {
+                              if (index === currentCorrectAnswerId) {
+                                additionalStyle1 = styles.answer_button_correct;
+                              } else if (currentCorrectAnswerId !== -1) {
+                                additionalStyle1 = styles.answer_button_wrong;
+                              }
+                            }
+                            let additionalStyle2;
+                            // ustawienie stylow dla poprawnej odpowiedzi
+                            if (index === currentCorrectAnswerId) {
+                              additionalStyle2 = styles.answer_button_correct;
+                            }
+                            return (
+                              <CustomButton
+                                key={answer}
+                                title={answer}
+                                onPress={() => onAnswerConfirm(answer)}
+                                additionalStyles={`${styles.answer_button} ${additionalStyle1} ${additionalStyle2}`}
+                              />
+                            );
                           }
-                          let additionalStyle2;
-                          // ustawienie stylow dla poprawnej odpowiedzi
-                          if (index === currentCorrectAnswerId) {
-                            additionalStyle2 = styles.answer_button_correct;
-                          }
-                          return (
-                            <CustomButton
-                              key={answer}
-                              title={answer}
-                              onPress={() => onAnswerConfirm(answer)}
-                              additionalStyles={`${styles.answer_button} ${additionalStyle1} ${additionalStyle2}`}
-                            />
-                          );
-                        }
-                      )}
-                      <div className={styles.block_custom_button}>
-                        <CustomButton
-                          title={"Następne pytanie"}
-                          onPress={nextQuestion}
-                        />
+                        )}
+                        <div className={styles.block_custom_button}>
+                          <CustomButton
+                            title={"Następne pytanie"}
+                            onPress={nextQuestion}
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                )
               )
-            )}
+            }
           </div>
         </div>
       </div>
