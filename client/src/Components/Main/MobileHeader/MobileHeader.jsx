@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Burger from "../../../img/HeaderImg/Burger.png"
 import Cross from "../../../img/HeaderImg/Cross.png"
 import styles from "./mobileheader.module.scss";
-import ToggleButton from '../Header/ToggleButton/ToggleButton';
+import DarkModeToggle from "react-dark-mode-toggle";
 
 function NavItem(name, link) {
   return (
@@ -16,7 +16,7 @@ function NavItem(name, link) {
 function MobileHeader() {
   const poziom = 'B1';
   const [isActive, setIsActive] = useState(false);
-  const [selected, setSelected] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(() => false);
   const NavItemsOver = [
     { title: "Ustawenia", link: "/settings" },
     { title: "O Nas", link: "/aboutus" },
@@ -60,7 +60,12 @@ function MobileHeader() {
                 )}
                 <div className={styles.change_theme}>
                   <p>Motyw</p>
-                  <ToggleButton selected={selected} toggleSelected={() => { setSelected(!selected); }} />
+                  <DarkModeToggle
+                    onChange={setIsDarkMode}
+                    checked={isDarkMode}
+                    size={58}
+                    className={styles.darkmodetoggle}
+                  />
                 </div>
                 {NavItemsUnder.map((item) =>
                   NavItem(item.title, item.link)
