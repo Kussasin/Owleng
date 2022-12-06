@@ -12,6 +12,7 @@ import Cross from '../../img/MainImg/Cross.png';
 import CustomButton from "../UI/CustomButton/CustomButton";
 import Card from "../Card/Card";
 import AudioImg from "../../img/Speaking/loudspeakers.png";
+import Loader from "../UI/Preloader/loader";
 
 function Speaking() {
 
@@ -20,14 +21,14 @@ function Speaking() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userScore, setUserScore] = useState(0);
   const [testIsFinish, setTestIsFinish] = useState(false);
+  const [isCorrect, setisCorrect] = useState(false);
   const [data, setData] = useState();
   const [text, setCurrentText] = useState();
   const [answerIsRight, setSelectedAnswerId] = useState(undefined);
+  const [isLoading, setIsLoading] = useState(false);
   const [, setisFisrtElement] = useState();
   const [, setCurrentCorrectAnswerId] = useState();
 
-  let isCorrect = false;
-  let correctAnswer = undefined;
   let {
     transcript,
     listening,
@@ -43,30 +44,33 @@ function Speaking() {
     }
   }, [selectedTopicId, selectedThemeId, data]);
 
-    if (data && text != undefined) {
+  useEffect(() => {
+
+    if (data && text != undefined && listening == false) {
       if (transcript.slice(-1) == "!" || transcript.slice(-1) == "." || transcript.slice(-1) == "?") {
         transcript = transcript.slice(0, -1);
       }
   
-      if (listening == false && text.slice(0, -1).toUpperCase() === transcript.toUpperCase() && text != "" && transcript != "") {
-        correctAnswer = true;
-        isCorrect = correctAnswer;
+      if (text.slice(0, -1).toUpperCase() === transcript.toUpperCase() && text != "" && transcript != "") {
+        console.log("true");
+        setSelectedAnswerId(true);
+        setisCorrect(answerIsRight);
       }
-      else if (listening == false && text.slice(0, -1).toUpperCase() !== transcript.toUpperCase() && text != "" && transcript != "") {
-        correctAnswer = false;
+      else if (text.slice(0, -1).toUpperCase() !== transcript.toUpperCase() && text != "" && transcript != "") {
+        console.log("false");
+        setSelectedAnswerId(false);
       }
       else {
-        correctAnswer = undefined;
+        console.log("undefined");
+        setSelectedAnswerId(undefined);
       }
     }
+  }, [transcript, answerIsRight, data]);
 
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser doesn&apos;t support speech recognition.</span>;
   }
 
-  if (listening) {
-    console.log(`${transcript}`);
-  }
   const onAnswerConfirm = () => {
 
     setUserScore((prevState) => {
@@ -87,7 +91,7 @@ function Speaking() {
 
   const nextQuestion = () => {
     onAnswerConfirm();
-
+    transcript="";
     if (currentQuestionIndex < data[Object.keys(data)[selectedTopicId]].themes[selectedThemeId].texts.length - 1) {
       setCurrentQuestionIndex((prevState) => ++prevState);
     } else {
@@ -112,6 +116,8 @@ function Speaking() {
   }, [data]);
 
   useEffect(() => {
+    setIsLoading(true);
+
     const dbRef = ref(database);
     get(child(dbRef, "speaking"))
       .then((snapshot) => {
@@ -120,8 +126,10 @@ function Speaking() {
         } else {
           console.log("No data available");
         }
+        setIsLoading(false);
       })
       .catch((error) => {
+        setIsLoading(false);
         console.error(error);
       });
   }, []);
@@ -132,6 +140,11 @@ function Speaking() {
         <MobileHeader />
         <Header />
       </div>
+      {isLoading ? (
+        <div className={styles.loader}>
+          <Loader />
+        </div>
+      ) : (
       <div className={styles.container_content}>
         <LeftSideMenu
           title={Theme}
@@ -178,7 +191,7 @@ function Speaking() {
                     </div>
                   </div>
                 </div>
-                <div className={styles.answer}>
+                <div className={styles.answer} /*onChange={IsChange}*/ >
                   {answerIsRight == undefined ?
                     <p className={styles.emptyElement}></p> :
                     (answerIsRight ?
@@ -208,6 +221,7 @@ function Speaking() {
           )
         }
       </div>
+      )}
     </div>
   );
 }

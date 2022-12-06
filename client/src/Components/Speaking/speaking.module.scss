@@ -7,6 +7,14 @@ $button_height: 80px;
   align-items: center;
 }
 
+.loader {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 250px;
+}
+
 .container {
   @include flexible();
   flex-direction: column;
