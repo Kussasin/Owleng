@@ -10,6 +10,7 @@ import Card from "../Card/Card";
 import { getLevelBasedOnScore } from "../../utils/getLevelBasedOnScore";
 import { Navigate } from "react-router-dom";
 import Loader from "../UI/Preloader/loader";
+import ActiveArrow from "../../img/MainImg/arrowactive.png";
 
 // Porzyklad obiektu podtematu
 /*
@@ -34,6 +35,7 @@ import Loader from "../UI/Preloader/loader";
 */
 
 function Tests() {
+  const [levelCheckTestData, setLevelCheckTestData] = useState();
   // zmienna dla kontroli aktualnego tematu
   const [selectedTopicId, setselectedTopicId] = useState(0);
   // zmienna dla kontroli aktualnego podtematu
@@ -103,12 +105,9 @@ function Tests() {
     setSelectedAnswerId(selectedAnswerId);
 
     // jezeli id wybranej odpowiedzi = id poprawnej odpowiedzi
-    // zmienna = true, jeeli nie - false
-    const isAnswerCorrect = selectedAnswerId === correctAnswerId;
-
     // jezeli wynik poprawny zwiekszamy o 1, jezeli nie zachowujemy poprzednie znaczenie
     setUserScore((prevState) => {
-      if (isAnswerCorrect) {
+      if (selectedAnswerId === correctAnswerId) {
         return ++prevState;
       } else {
         return prevState;
@@ -170,7 +169,7 @@ function Tests() {
   };
 
   // funkcja zwracajaca dane dla wyswitlenia menu po lewej stronie
-  const Theme = useMemo(() => {
+  const themes = useMemo(() => {
     /*
       [
         {
@@ -185,10 +184,14 @@ function Tests() {
     if (data) {
       // przeksztalcenie struktury danych
       for (const key in data) {
-        themes.push({
-          theme: data[key].topic, // nazwa tematu
-          subt: data[key].themes.map((theme) => theme.name), // tablica nazw podtematow
-        });
+        if (key !== "levelCheckTest") {
+          themes.push({
+            theme: data[key].topic, // nazwa tematu
+            subt: data[key].themes.map((theme) => theme.name), // tablica nazw podtematow
+          });
+        } else {
+          setLevelCheckTestData(data[key]);
+        }
       }
     }
     return themes;
@@ -198,7 +201,6 @@ function Tests() {
 
   // wykonanie zapytania do bazy danych w hooku dla unikniecia powtornych zapytan
   // przy rerenderingu
-
   useEffect(() => {
     setIsLoading(true);
     // polaczenie sie z serwerem
@@ -222,31 +224,65 @@ function Tests() {
   if (isSuccess) {
     return <Navigate to="/" replace={true} />;
   }
+
   return (
     <div className={styles.container}>
       <div className={styles.container_header}>
         <MobileHeader />
         <Header />
       </div>
-
       {isLoading ? (
         <div className={styles.loader}>
           <Loader />
         </div>
       ) : (
         <div className={styles.container_content}>
-          <LeftSideMenu
-            title={Theme}
-            // przekazanie funkcji niezbednych dla kontroli stanu testu
-            setSelectedThemeId={setSelectedThemeId}
-            setselectedTopicId={setselectedTopicId}
-            setTestActive={setTestIsFinish}
-            setUserScore={setUserScore}
-            setCurrentQuestionIndex={setCurrentQuestionIndex}
-            setCurrentCorrectAnswerId={setCurrentCorrectAnswerId}
-            setSelectedAnswerId={setSelectedAnswerId}
-            setisFisrtElement={setisFisrtElement}
-          />
+          <div>
+            <LeftSideMenu
+              title={themes}
+              // przekazanie funkcji niezbednych dla kontroli stanu testu
+              setSelectedThemeId={setSelectedThemeId}
+              setselectedTopicId={setselectedTopicId}
+              setTestActive={setTestIsFinish}
+              setUserScore={setUserScore}
+              setCurrentQuestionIndex={setCurrentQuestionIndex}
+              setCurrentCorrectAnswerId={setCurrentCorrectAnswerId}
+              setSelectedAnswerId={setSelectedAnswerId}
+              setisFisrtElement={setisFisrtElement}
+            />
+
+            <Card additionalStyles={styles.themeCard}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  padding: 15,
+                  cursor: "pointer",
+                }}
+                onClick={() => {
+                  setselectedTopicId(
+                    Object.keys(data).findIndex((t) => t === "levelCheckTest")
+                  );
+                  setSelectedThemeId(0);
+                  setTestIsFinish(false);
+                  setCurrentQuestionIndex(0);
+                  setUserScore(0);
+                  setCurrentCorrectAnswerId(-1);
+                  setSelectedAnswerId(undefined);
+                  setisFisrtElement(true);
+                }}
+              >
+                <p>{levelCheckTestData?.topic}</p>
+                <img
+                  className={styles.arrow_active}
+                  src={ActiveArrow}
+                  alt="arrow"
+                />
+              </div>
+            </Card>
+          </div>
+
           <div className={styles.container_content_right}>
             <div className={styles.container_content_right_content}>
               {/* Wyswietlenie wyniku testu */}
@@ -284,8 +320,15 @@ function Tests() {
                           }
                         </p>
                       </div>
-                      {/* jezeli odpowiedz wybrana oraz jej id != id poprawnej odpowiedzi */}
-                      {selectedAnswerId !== currentCorrectAnswerId &&
+
+                      {/* 
+                        aktualny test nie jest levelCheckTest-em 
+                        oraz jej id != id poprawnej odpowiedzi 
+                        jezeli odpowiedz wybrana
+                      */}
+                      {Object.keys(data)[selectedTopicId] !==
+                        "levelCheckTest" &&
+                        selectedAnswerId !== currentCorrectAnswerId &&
                         selectedAnswerId !== undefined && (
                           <p className={styles.hint}>
                             {
@@ -318,6 +361,7 @@ function Tests() {
                             }
                             return (
                               <CustomButton
+                                disabled={!!selectedAnswerId}
                                 key={answer}
                                 title={answer}
                                 onPress={() => onAnswerConfirm(answer)}

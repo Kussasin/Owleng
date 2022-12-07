@@ -32,6 +32,13 @@ $left_img_weight: 18px;
 	}
 }
 
+.darkmodetoggle{
+	svg{
+		position: relative;
+		top: 1px;
+	}
+}
+
 .user_level {
 	@include flexible();
 	gap: 10px;

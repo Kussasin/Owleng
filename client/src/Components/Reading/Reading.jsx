@@ -7,7 +7,6 @@ import MobileHeader from "../Main/MobileHeader/MobileHeader";
 import LeftSideMenu from "../LeftSideMenu/LeftSideMenu";
 import CustomButton from "../UI/CustomButton/CustomButton";
 import Card from "../Card/Card";
-import { formatText } from "../../utils/formatText";
 
 function Reading() {
   // zmienna dla kontroli aktualnego tematu
@@ -31,6 +30,14 @@ function Reading() {
   const [selectedAnswerId, setSelectedAnswerId] = useState(undefined);
   const [isFirstElement, setisFisrtElement] = useState(true);
 
+  useEffect(() => {
+    if (data) {
+      setCurrentTheme(
+        data[Object.keys(data)[selectedTopicId]].themes[selectedThemeId]
+      );
+    }
+  }, [selectedTopicId, selectedThemeId, data]);
+
   // funkcja dla potwierdzenia wybranej odpowiedzi
   const onAnswerConfirm = (selectedAnswer) => {
     const currentQuestion =
@@ -42,8 +49,6 @@ function Reading() {
     // spoza funkcji
     setCurrentCorrectAnswerId(correctAnswerId);
     // objekt z parametrami aktualnego tematu
-    const currentTheme =
-      data[Object.keys(data)[selectedTopicId]].themes[selectedThemeId];
     // wyszukanie id wybranej przez uzytkownika odpowiedzi
     const selectedAnswerId = currentQuestion.answers.findIndex(
       (answer) => answer === selectedAnswer
@@ -51,10 +56,6 @@ function Reading() {
     // przekazanie id wybranej odpowiedzie w useState dla dostepu
     // spoza funkcji
     setSelectedAnswerId(selectedAnswerId);
-
-    // przekazanie objekt wybranego podtematu w useState dla dostepu
-    // spoza funkcji
-    setCurrentTheme(currentTheme);
 
     // jezeli id wybranej odpowiedzi = id poprawnej odpowiedzi
     // zmienna = true, jeeli nie - false
@@ -188,11 +189,11 @@ function Reading() {
                 testIsFinish ?
                   (
                     <Card additionalStyles={styles.card}>
-                        <p>Ilość prawidłowych odpowiedzi: {userScore} / {data[Object.keys(data)[selectedTopicId]].themes[
-                                    selectedThemeId
-                                  ].questions.length}</p>
+                      <p>Ilość prawidłowych odpowiedzi: {userScore} / {data[Object.keys(data)[selectedTopicId]].themes[
+                        selectedThemeId
+                      ].questions.length}</p>
                     </Card>
-                  ) : ( 
+                  ) : (
                     // data (undefined | [{}]) && jsx, true && jsx -> jsx, false && jsx -> false
                     data && (
                       <div className={styles.data_container}>

@@ -7,6 +7,14 @@ $button_height: 80px;
   align-items: center;
 }
 
+.loader {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 250px;
+}
+
 .container {
   @include flexible();
   flex-direction: column;
@@ -58,14 +66,36 @@ $button_height: 80px;
   }
 }
 
-.content {
+.speak_container {
   margin: 30px 0;
-  width: 85%;
+  width: 90%;
   overflow: auto;
-
+  @include flexible();
+  gap: 24px;
   &_title {
     margin: 0;
     text-align: center;
+  }
+}
+
+.image{
+  width: 32px;
+  cursor: pointer;
+}
+
+.speak_container_content{
+  $fz: 16px;
+  $mg: 10px;
+  &_text{
+    font-size: $fz;
+    margin: 0 0 $mg ;
+    font-weight: 500;
+  }
+  &_translate{
+    font-size:  calc($fz - 2px);
+    font-weight: 400;
+    color: $grey;
+    margin: $mg 0 0;
   }
 }
 
@@ -113,6 +143,7 @@ $button_height: 80px;
   border: 2px solid $main_color;
   border-radius: 65%;
   cursor: pointer;
+
   &_micro {
     width: 25px;
   }
@@ -122,6 +153,6 @@ $button_height: 80px;
   border-color: $green;
 }
 
-.answer_button{
+.answer_button {
   padding: 20px 25px;
 }

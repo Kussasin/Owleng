@@ -40,8 +40,12 @@ $font_size: 20px;
   }
 }
 
-
-
+.darkmodetoggle{
+	svg{
+		position: relative;
+		top: 1px;
+	}
+}
 
 .user_level {
   @include flexible();

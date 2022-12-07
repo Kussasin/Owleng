@@ -3,10 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import styles from "./header.module.scss";
 import Dropdown from "../../../img/HeaderImg/Dropdown_arrow.png";
 import People from "../../../img/HeaderImg/People.png";
-import ToggleButton from "./ToggleButton/ToggleButton";
 import { auth } from "../../../utils/firebaseConfig";
 import { useAuth } from "../../Registration/AuthContext/AuthContext";
 import { getDatabase, ref as firebaseRef, child, get } from "firebase/database";
+import DarkModeToggle from "react-dark-mode-toggle";
 
 function DropdownItem(title, link) {
   const { logout } = useAuth();
@@ -20,27 +20,26 @@ function DropdownItem(title, link) {
       console.log(error.message);
     }
   }
-
   return title !== "Wyloguj się" ? (
     <Link className={styles.container_item} to={link} key={title}>
       <p>{title}</p>
     </Link>
   ) : (
-    <Link
-      className={styles.container_item}
-      to={link}
-      key={title}
-      onClick={handleLogout}
-    >
-      <p>{title}</p>
-    </Link>
-  );
+      <Link
+        className={styles.container_item}
+        to={link}
+        key={title}
+        onClick={handleLogout}
+      >
+        <p>{title}</p>
+      </Link>
+    );
 }
 
 function Header() {
   const [userLevel, setUserLevel] = useState("");
   const [isActive, setIsActive] = useState(false);
-  const [selected, setSelected] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(() => false);
 
   function Toggling() {
     return setIsActive((current) => !current);
@@ -92,11 +91,11 @@ function Header() {
           <Link to="/">
             <h1>Owleng</h1>
           </Link>
-          <ToggleButton
-            selected={selected}
-            toggleSelected={() => {
-              setSelected(!selected);
-            }}
+          <DarkModeToggle
+            onChange={setIsDarkMode}
+            checked={isDarkMode}
+            size={60}
+            className={styles.darkmodetoggle}
           />
           <div className={styles.user_level}>
             <p>Twój poziom: </p>
@@ -114,16 +113,14 @@ function Header() {
           >
             <img className={styles.dropdown_icon} src={People} alt="man icon" />
             <img
-              className={`${styles.dropdown_arrow} ${
-                isActive ? styles.rotate_arrow_180 : ""
-              }`}
+              className={`${styles.dropdown_arrow} ${isActive ? styles.rotate_arrow_180 : ""
+                }`}
               src={Dropdown}
               alt="dropdown arrow"
             />
             <div
-              className={`${styles.dropdown_container} ${
-                isActive ? styles.show : styles.hide
-              }`}
+              className={`${styles.dropdown_container} ${isActive ? styles.show : styles.hide
+                }`}
             >
               {DropdownItems.map((item) => DropdownItem(item.title, item.link))}
             </div>

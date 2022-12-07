@@ -1,6 +1,11 @@
 @import './lightmode_colors.module.scss';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&display=swap');
 
+@mixin scrollbar($a) {
+  background: rgba(72, 187, 248, $a);
+  border-radius: 20px;
+}
+
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;  
@@ -12,4 +17,34 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  @include scrollbar(0.1);
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @include scrollbar(0.5);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #0D99FF; 
+}
+
+@media (max-width: 1024px) {
+  ::-webkit-scrollbar {
+    width: 15px;
+  }
+}
+
+@media (max-width: 800px) {
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
 }

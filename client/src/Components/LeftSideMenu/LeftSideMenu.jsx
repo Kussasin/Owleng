@@ -4,9 +4,9 @@ import Dropdown from "../../img/HeaderImg/Dropdown_arrow.png";
 import styles from "./leftSideMenu.module.scss";
 
 const LeftSideMenu = (props) => {
-  const [themeIndex, setThemeIndex] = useState();
-  const [subIndex, setSubThemeIndex] = useState();
-  const [isActive, setIsActive] = useState();
+  const [themeIndex, setThemeIndex] = useState(1);
+  const [subIndex, setSubThemeIndex] = useState(1);
+  const [isActive, setIsActive] = useState(true);
   let id = 0;
   let themeId = 0;
   const ref = useRef();
