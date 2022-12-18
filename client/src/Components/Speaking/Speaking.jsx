@@ -23,49 +23,57 @@ function Speaking() {
   const [testIsFinish, setTestIsFinish] = useState(false);
   const [isCorrect, setisCorrect] = useState(false);
   const [data, setData] = useState();
-  const [text, setCurrentText] = useState();
+  const [text, setCurrentText] = useState(undefined);
   const [answerIsRight, setSelectedAnswerId] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
+  const [resTranscript, setResetTranscript] = useState(true);
+  const [errorMessageHide, seterrorMessageHide] = useState(true);
   const [, setisFisrtElement] = useState();
   const [, setCurrentCorrectAnswerId] = useState();
 
   let {
     transcript,
     listening,
-    browserSupportsSpeechRecognition
+    browserSupportsSpeechRecognition,
+    resetTranscript
   } = useSpeechRecognition();
 
   useEffect(() => {
 
+    if (resTranscript) {
+      resetTranscript();
+      setisCorrect(false);
+      setResetTranscript(false);
+    }
+
+  }, [resTranscript])
+
+  useEffect(() => {
     if (data) {
       setCurrentText(
         data[Object.keys(data)[selectedTopicId]].themes[selectedThemeId].texts[currentQuestionIndex].text
       );
-    }
-  }, [selectedTopicId, selectedThemeId, data]);
 
-  useEffect(() => {
+      if (text != undefined && transcript != undefined) {
+        if (transcript.slice(-1) == "!" || transcript.slice(-1) == "." || transcript.slice(-1) == "?") {
+          transcript = transcript.slice(0, -1);
+        }
 
-    if (data && text != undefined && listening == false) {
-      if (transcript.slice(-1) == "!" || transcript.slice(-1) == "." || transcript.slice(-1) == "?") {
-        transcript = transcript.slice(0, -1);
-      }
-  
-      if (text.slice(0, -1).toUpperCase() === transcript.toUpperCase() && text != "" && transcript != "") {
-        console.log("true");
-        setSelectedAnswerId(true);
-        setisCorrect(answerIsRight);
-      }
-      else if (text.slice(0, -1).toUpperCase() !== transcript.toUpperCase() && text != "" && transcript != "") {
-        console.log("false");
-        setSelectedAnswerId(false);
-      }
-      else {
-        console.log("undefined");
-        setSelectedAnswerId(undefined);
+        if (text.slice(0, -1).toUpperCase() === transcript.toUpperCase() && text != "" && transcript != "") {
+          setSelectedAnswerId(true);
+          setisCorrect(true);
+        }
+        else if (text.slice(0, -1).toUpperCase() !== transcript.toUpperCase() && text != "" && transcript != "") {
+          seterrorMessageHide(false);
+        }
+
+        if (listening == false && !errorMessageHide) {//nie działa
+          setSelectedAnswerId(false);
+          seterrorMessageHide(true);
+        }
       }
     }
-  }, [transcript, answerIsRight, data]);
+  }, [transcript, answerIsRight, data, selectedTopicId, selectedThemeId]);
 
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser doesn&apos;t support speech recognition.</span>;
@@ -80,6 +88,8 @@ function Speaking() {
         return prevState;
       }
     });
+    setSelectedAnswerId(undefined);
+    setisCorrect(false);
 
   };
 
@@ -87,11 +97,13 @@ function Speaking() {
 
     const AudioPlay = new Audio(audio);
     AudioPlay.play();
+
   }
 
   const nextQuestion = () => {
+
     onAnswerConfirm();
-    transcript="";
+    resetTranscript();
     if (currentQuestionIndex < data[Object.keys(data)[selectedTopicId]].themes[selectedThemeId].texts.length - 1) {
       setCurrentQuestionIndex((prevState) => ++prevState);
     } else {
@@ -145,83 +157,87 @@ function Speaking() {
           <Loader />
         </div>
       ) : (
-      <div className={styles.container_content}>
-        <LeftSideMenu
-          title={Theme}
-          // przekazanie funkcji niezbednych dla kontroli stanu testu
-          setSelectedThemeId={setSelectedThemeId}
-          setselectedTopicId={setselectedTopicId}
-          setTestActive={setTestIsFinish}
-          setUserScore={setUserScore}
-          setCurrentQuestionIndex={setCurrentQuestionIndex}
-          setCurrentCorrectAnswerId={setCurrentCorrectAnswerId}
-          setSelectedAnswerId={setSelectedAnswerId}
-          setisFisrtElement={setisFisrtElement}
-        />
-        {testIsFinish ?
-          (
-            <div className={styles.container_content_right}>
-              <Card additionalStyles={styles.card}>
-                <>
-                  <div>
-                    <p>Ilość prawidłowych odpowiedzi: {userScore} / {data[Object.keys(data)[selectedTopicId]].themes[selectedThemeId].texts.length}</p>
-                  </div>
-                </>
-              </Card>
-            </div>
-          ) :
-          (
-            data && (
-              <div className={styles.container_content_right}>
-                <p className={styles.container_content_right_title}>
-                  Naciśnij  na mikrofon i powiedź tekst:
+          <div className={styles.container_content}>
+            <LeftSideMenu
+              title={Theme}
+              // przekazanie funkcji niezbednych dla kontroli stanu testu
+              setSelectedThemeId={setSelectedThemeId}
+              setselectedTopicId={setselectedTopicId}
+              setTestActive={setTestIsFinish}
+              setUserScore={setUserScore}
+              setCurrentQuestionIndex={setCurrentQuestionIndex}
+              setSelectedAnswerId={setSelectedAnswerId}
+              setCurrentCorrectAnswerId={setCurrentCorrectAnswerId}
+              setisFisrtElement={setisFisrtElement}
+              setResetTranscript={setResetTranscript}
+              setisCorrect={setisCorrect}
+              setCurrentText={setCurrentText}
+              seterrorMessageHide={seterrorMessageHide}
+            />
+            {testIsFinish ?
+              (
+                <div className={styles.container_content_right}>
+                  <Card additionalStyles={styles.card}>
+                    <>
+                      <div>
+                        <p>Ilość prawidłowych odpowiedzi: {userScore} / {data[Object.keys(data)[selectedTopicId]].themes[selectedThemeId].texts.length}</p>
+                      </div>
+                    </>
+                  </Card>
+                </div>
+              ) :
+              (
+                data && (
+                  <div className={styles.container_content_right}>
+                    <p className={styles.container_content_right_title}>
+                      Naciśnij  na mikrofon i powiedź tekst:
                 </p>
-                <div className={styles.container_content_right_content}>
-                  <div className={styles.speak_container}>
-                    <div className={styles.audoi_container}>
-                      <img className={styles.image} onClick={() => PlayAudio(data[Object.keys(data)[selectedTopicId]].themes[selectedThemeId].texts[currentQuestionIndex].voicelink)} src={AudioImg} alt="loudspeakers" />
+                    <div className={styles.container_content_right_content}>
+                      <div className={styles.speak_container}>
+                        <div className={styles.audoi_container}>
+                          <img className={styles.image} onClick={() => PlayAudio(data[Object.keys(data)[selectedTopicId]].themes[selectedThemeId].texts[currentQuestionIndex].voicelink)} src={AudioImg} alt="loudspeakers" />
+                        </div>
+                        <div className={styles.speak_container_content}>
+                          <p className={styles.speak_container_content_text}>
+                            {data[Object.keys(data)[selectedTopicId]].themes[selectedThemeId].texts[currentQuestionIndex].text}
+                          </p>
+                          <p className={styles.speak_container_content_translate}>
+                            {data[Object.keys(data)[selectedTopicId]].themes[selectedThemeId].texts[currentQuestionIndex].translate}
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                    <div className={styles.speak_container_content}>
-                      <p className={styles.speak_container_content_text}>
-                        {data[Object.keys(data)[selectedTopicId]].themes[selectedThemeId].texts[currentQuestionIndex].text}
-                      </p>
-                      <p className={styles.speak_container_content_translate}>
-                        {data[Object.keys(data)[selectedTopicId]].themes[selectedThemeId].texts[currentQuestionIndex].translate}
-                      </p>
+                    <div className={styles.answer} /*onChange={IsChange}*/ >
+                      {answerIsRight == undefined ?
+                        <p className={styles.emptyElement}></p> :
+                        (answerIsRight ?
+                          <div className={`${styles.answer_result} ${styles.rightAnswer} `}>
+                            <img className={styles.answer_result_img} src={Check} alt="chek" />
+                            <p className={styles.answer_result_text}>Twoja odpowiedź jest poprawna </p>
+                          </div>
+                          :
+                          <div className={`${styles.answer_result} ${styles.wrongAnswer}`}>
+                            <img className={styles.answer_result_img} src={Cross} alt="cross" />
+                            <p className={styles.answer_result_text}>Twoja odpowiedź jest błędna </p>
+                          </div>
+                        )
+                      }
                     </div>
+                    <button className={`${styles.speack_button} ${listening ? styles.listening : ''}`} disabled={isCorrect} onClick={() => SpeechRecognition.startListening({ language: 'en-US' })}>
+                      <img className={styles.speack_button_micro} src={Microphone} alt="Microphone" />
+                    </button>
+                    <p>{transcript}</p>
+                    <CustomButton
+                      title="Następne pytanie"
+                      additionalStyles={styles.answer_button}
+                      onPress={nextQuestion}
+                    />
                   </div>
-                </div>
-                <div className={styles.answer} /*onChange={IsChange}*/ >
-                  {answerIsRight == undefined ?
-                    <p className={styles.emptyElement}></p> :
-                    (answerIsRight ?
-                      <div className={`${styles.answer_result} ${styles.rightAnswer} `}>
-                        <img className={styles.answer_result_img} src={Check} alt="chek" />
-                        <p className={styles.answer_result_text}>Twoja odpowiedź jest poprawna </p>
-                      </div>
-                      :
-                      <div className={`${styles.answer_result} ${styles.wrongAnswer}`}>
-                        <img className={styles.answer_result_img} src={Cross} alt="cross" />
-                        <p className={styles.answer_result_text}>Twoja odpowiedź jest błędna </p>
-                      </div>
-                    )
-                  }
-                </div>
-                <button className={`${styles.speack_button} ${listening ? styles.listening : ''}`} disabled={isCorrect} onClick={() => SpeechRecognition.startListening({ language: 'en-US' })}>
-                  <img className={styles.speack_button_micro} src={Microphone} alt="Microphone" />
-                </button>
-                <p>{transcript}</p>
-                <CustomButton
-                  title="Następne pytanie"
-                  additionalStyles={styles.answer_button}
-                  onPress={nextQuestion}
-                />
-              </div>
-            )
-          )
-        }
-      </div>
-      )}
+                )
+              )
+            }
+          </div>
+        )}
     </div>
   );
 }

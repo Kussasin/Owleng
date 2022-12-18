@@ -75,6 +75,10 @@ const LeftSideMenu = (props) => {
                           props.setCurrentCorrectAnswerId(-1);
                           props.setSelectedAnswerId(undefined);
                           props.setisFisrtElement(true);
+                          props.setResetTranscript(true);
+                          props.setisCorrect(false);
+                          props.setCurrentText(undefined);
+                          props.seterrorMessageHide(true);
                         }}
                         className={`${styles.dropdown_item_element} ${
                           subIndex === id ? styles.isActive : ""
@@ -110,7 +114,11 @@ LeftSideMenu.propTypes = {
   setUserScore: PropTypes.func,
   setCurrentCorrectAnswerId: PropTypes.func,
   setSelectedAnswerId: PropTypes.func,
-  setisFisrtElement: PropTypes.func
+  setisFisrtElement: PropTypes.func,
+  setResetTranscript: PropTypes.func,
+  setisCorrect: PropTypes.func,
+  setCurrentText: PropTypes.func,
+  seterrorMessageHide: PropTypes.func
 };
 
 export default LeftSideMenu;
