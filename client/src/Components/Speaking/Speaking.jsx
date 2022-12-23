@@ -49,6 +49,7 @@ function Speaking() {
   }, [resTranscript])
 
   useEffect(() => {
+
     if (data) {
       setCurrentText(
         data[Object.keys(data)[selectedTopicId]].themes[selectedThemeId].texts[currentQuestionIndex].text
@@ -66,17 +67,18 @@ function Speaking() {
         else if (text.slice(0, -1).toUpperCase() !== transcript.toUpperCase() && text != "" && transcript != "") {
           seterrorMessageHide(false);
         }
-
-        if (listening == false && !errorMessageHide) {//nie działa
-          setSelectedAnswerId(false);
-          seterrorMessageHide(true);
-        }
       }
     }
+
   }, [transcript, answerIsRight, data, selectedTopicId, selectedThemeId]);
 
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser doesn&apos;t support speech recognition.</span>;
+  }
+
+  if (listening == false && !errorMessageHide) {
+    setSelectedAnswerId(false);
+    seterrorMessageHide(true);
   }
 
   const onAnswerConfirm = () => {
@@ -88,6 +90,7 @@ function Speaking() {
         return prevState;
       }
     });
+
     setSelectedAnswerId(undefined);
     setisCorrect(false);
 
@@ -109,22 +112,23 @@ function Speaking() {
     } else {
       setTestIsFinish(true);
     }
+
   };
 
   const Theme = useMemo(() => {
+
     const themes = [];
 
     if (data) {
       for (const key in data) {
         themes.push({
-          theme: data[key].topic, // nazwa tematu
-          subt: data[key].themes.map((theme) => theme.name), // tablica nazw podtematow
+          theme: data[key].topic,
+          subt: data[key].themes.map((theme) => theme.name),
         });
       }
     }
     return themes;
 
-    // wykonuje sie przy kazdej zmianie zmiennej data
   }, [data]);
 
   useEffect(() => {
