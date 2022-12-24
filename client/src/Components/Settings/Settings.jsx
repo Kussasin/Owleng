@@ -20,10 +20,13 @@ function Settings() {
 
   function SetError(error) {
     setMessage("");
+    console.log(error);
     if (error.message === "Firebase: Error (auth/requires-recent-login).") {
       setError("Musisz zalogować sie ponownie żeby zmienic swoje dane");
     } else if (error.message === "Firebase: Error (auth/email-already-in-use).") {
       setError("Podany adres e-mail jest już istnieje");
+    } else if (error.message === "Firebase: Password should be at least 6 characters (auth/weak-password).") {
+      setError("Hasło musi zawieracz więcej 6 symbolów");
     } else {
       setError("Nie udało się zmienić twoje dane");
     }
@@ -31,20 +34,22 @@ function Settings() {
   }
 
   function ChangeListener(promises, email, currentEmail, password, passwordConfirm) {
-    if (password !== passwordConfirm) {
-      return setError("Hasła nie pasują do siebie");
+    setMessage("");
+
+    if (email != "") {
+      if (email != currentEmail) {
+        promises.push(updateUserEmail(email));
+      }
+    } else {
+      return setError("Pole email musi być wypełnione");
     }
 
-    if (password && password.length < 6) {
-      return setError("Hasło musi zawieracz więcej 6 symbolów");
-    }
-
-    if (email != currentEmail) {
-      promises.push(updateUserEmail(email));
-    }
-
-    if (password) {
+    if (password != "" && password == passwordConfirm) {
       promises.push(updateUserPassword(password));
+    }
+    else if (password != passwordConfirm) {
+      return setError("Hasła nie pasują do siebie");
+
     }
   }
 
@@ -52,28 +57,39 @@ function Settings() {
     e.preventDefault();
 
     const promises = []
-    ChangeListener(promises, emailRef.current.value, currentUser.email, passwordRef.current
-      .value, passwordConfirmRef.current.value);
-    Promise.all(promises)
-      .then(() => {
-        try {
-          update(ref(database, 'users/' + user.uid), {
-            email: emailRef.current.value
-          });
-        } catch (error) {
-          console.log(error.message);
-        }
+    ChangeListener(promises, emailRef.current.value, currentUser.email, passwordRef.current.value,
+      passwordConfirmRef.current.value);
+    if (emailRef.current.value && emailRef.current.value != "") {
+      if (passwordRef.current.value != "" && passwordConfirmRef.current.value != "" &&
+        passwordRef.current.value == passwordConfirmRef.current.value) {
+        SendData();
+      }
+      if (passwordRef.current.value == "" && passwordConfirmRef.current.value == "" &&
+        emailRef.current.value != currentUser.email) {
+        SendData();
+      }
+    }
 
-        setMessage("Dane zostałe zmienione");
-        setError("");
-      })
-      .catch((error) => {
-        SetError(error);
-      })
-      .finally(() => {
-        setLoading(false)
-      })
-
+    function SendData() {
+      Promise.all(promises)
+        .then(() => {
+          try {
+            update(ref(database, 'users/' + user.uid), {
+              email: emailRef.current.value
+            });
+          } catch (error) {
+            console.log(error.message);
+          }
+          setMessage("Dane zostałe zmienione");
+          setError("");
+        })
+        .catch((error) => {
+          SetError(error);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
   }
 
   return (

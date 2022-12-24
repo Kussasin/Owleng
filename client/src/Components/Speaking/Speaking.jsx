@@ -107,6 +107,7 @@ function Speaking() {
 
     onAnswerConfirm();
     resetTranscript();
+    
     if (currentQuestionIndex < data[Object.keys(data)[selectedTopicId]].themes[selectedThemeId].texts.length - 1) {
       setCurrentQuestionIndex((prevState) => ++prevState);
     } else {
@@ -235,6 +236,7 @@ function Speaking() {
                       title="Następne pytanie"
                       additionalStyles={styles.answer_button}
                       onPress={nextQuestion}
+                      disabled={listening ? true : false}
                     />
                   </div>
                 )
