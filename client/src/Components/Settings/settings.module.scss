@@ -46,17 +46,22 @@
   @include flexible();
   justify-content: center;
   flex-direction: column;
+  width: 300px;
 }
 
 .input {
   background: #FFFFFF;
   border: 1px solid #B2B2B2;
   border-radius: 10px;
-  width: 240px;
+  width: 280px;
   height: 40px;
   padding: 0 8px;
   &_span {
     width: 100%;
     margin: 16px 0 5px;
   }
+}
+
+.error_msg{
+  color: $error_color;
 }
