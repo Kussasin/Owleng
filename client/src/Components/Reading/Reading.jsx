@@ -7,7 +7,8 @@ import MobileHeader from "../Main/MobileHeader/MobileHeader";
 import LeftSideMenu from "../LeftSideMenu/LeftSideMenu";
 import CustomButton from "../UI/CustomButton/CustomButton";
 import Card from "../Card/Card";
-
+import {formatText} from "../../utils/formatText";
+import Loader from "../UI/Preloader/loader";
 function Reading() {
   // zmienna dla kontroli aktualnego tematu
   const [selectedTopicId, setselectedTopicId] = useState(0);
@@ -29,6 +30,7 @@ function Reading() {
   // zmienna dla chronienia id wybranej odpowiedzi
   const [selectedAnswerId, setSelectedAnswerId] = useState(undefined);
   const [isFirstElement, setisFisrtElement] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (data) {
@@ -112,6 +114,7 @@ function Reading() {
   // wykonanie zapytania do bazy danych w hooku dla unikniecia powtornych zapytan
   // przy rerenderingu
   useEffect(() => {
+    setIsLoading(true);
     // polaczenie sie z serwerem
     const dbRef = ref(database);
     get(child(dbRef, "reading"))
@@ -122,9 +125,11 @@ function Reading() {
         } else {
           console.log("No data available");
         }
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error(error);
+        setIsLoading(false);
       });
   }, []);
 
@@ -134,6 +139,11 @@ function Reading() {
         <MobileHeader />
         <Header />
       </div>
+      {isLoading ? (
+        <div className={styles.loader}>
+          <Loader />
+        </div>
+      ) : (
       <div className={styles.container_content}>
         <LeftSideMenu
           title={Theme}
@@ -264,6 +274,7 @@ function Reading() {
           </div>
         </div>
       </div>
+      )}
     </div>
   );
 }
