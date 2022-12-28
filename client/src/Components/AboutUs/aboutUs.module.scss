@@ -1,8 +1,41 @@
-@import "../../lightmode_colors.module.scss";
+@import '../../lightmode_colors.module.scss';
+@import '../../darkmode_colors.module.scss';
 
 @mixin flexible() {
   display: flex;
   align-items: center;
+}
+
+.lightTheme {
+  .container {
+
+    &_header {
+      background-color: $white;
+    }
+
+    &_info {
+
+      h1 {
+        color: $main_color;
+      }
+
+    }
+  }
+}
+
+.darkTheme {
+  .container {
+
+    &_header {
+      background-color: $white;
+    }
+
+    &_info {
+      h1 {
+        color: $main_color;
+      }
+    }
+  }
 }
 
 .container {
@@ -12,7 +45,6 @@
   height: 100%;
 
   &_header {
-    background-color: $white;
     width: 100%;
   }
 
@@ -31,10 +63,6 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-
-    h1 {
-      color: $main_color;
-    }
 
     .info_about_owleng {
       font-size: 19px;

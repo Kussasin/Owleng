@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import { ref, child, get, update } from "firebase/database";
 import { database, auth } from "../../../utils/firebaseConfig";
 import styles from "./levelTest.module.scss";
-import CustomButton from "../../UI/CustomButton/CustomButton";
-import Card from "../../Card/Card";
 import { Navigate } from "react-router-dom";
 import { getLevelBasedOnScore } from "../../../utils/getLevelBasedOnScore";
+import PropTypes from "prop-types";
 
-const Test = () => {
+import CustomButton from "../../UI/CustomButton/CustomButton";
+import Card from "../../Card/Card";
+
+function Test({ isDarkTheme }) {
   const [isTestFinished, setIsTestFinished] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userScore, setUserScore] = useState(0);
@@ -75,7 +77,7 @@ const Test = () => {
   }
 
   return (
-    <div className={styles.level_test_container}>
+    <div className={`${styles.level_test_container} ${isDarkTheme ? styles.darkTheme : styles.lightTheme}`}>
       {isTestFinished ? (
         <Card additionalStyles={styles.card}>
           <>
@@ -91,23 +93,28 @@ const Test = () => {
           </>
         </Card>
       ) : (
-        TEST.length > 0 && (
-          <div className={styles.form_container}>
-            <p>{TEST[currentQuestionIndex].question}</p>
-            <div className={styles.grid_container}>
-              {TEST[currentQuestionIndex].answers.map((answer) => (
-                <CustomButton
-                  key={answer}
-                  title={answer}
-                  onPress={() => onAnswerConfirm(answer)}
-                  additionalStyles={styles.answer_button}
-                />
-              ))}
+          TEST.length > 0 && (
+            <div className={styles.form_container}>
+              <p>{TEST[currentQuestionIndex].question}</p>
+              <div className={styles.grid_container}>
+                {TEST[currentQuestionIndex].answers.map((answer) => (
+                  <CustomButton
+                    key={answer}
+                    title={answer}
+                    onPress={() => onAnswerConfirm(answer)}
+                    additionalStyles={styles.answer_button}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
-        )
-      )}
+          )
+        )}
     </div>
   );
-};
+}
+
+Test.propTypes = {
+  isDarkTheme: PropTypes.bool
+}
+
 export default Test;

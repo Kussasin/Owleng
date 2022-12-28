@@ -1,4 +1,5 @@
-@import "../../../lightmode_colors.module.scss";
+@import '../../../lightmode_colors.module.scss';
+@import '../../../darkmode_colors.module.scss';
 
 @mixin flexible() {
   display: flex;
@@ -12,6 +13,15 @@
   justify-content: center;
   flex-direction: column;
 }
+
+.lightTheme{
+
+}
+
+.darkTheme{
+  
+}
+
 
 .level_check_container {
   width: 100%;

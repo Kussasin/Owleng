@@ -1,4 +1,5 @@
 @import '../../../lightmode_colors.module.scss';
+@import '../../../darkmode_colors.module.scss';
 
 $right_img_weight: 25px;
 $font_size: 20px;
@@ -7,6 +8,15 @@ $font_size: 20px;
   display: flex;
   align-items: center;
 }
+
+.lightTheme{
+
+}
+
+.darkTheme{
+  
+}
+
 
 .header {
   width: 100%;

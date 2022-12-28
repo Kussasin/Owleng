@@ -3,6 +3,7 @@ import YouTube from "react-youtube";
 import { database } from "../../utils/firebaseConfig";
 import { ref, child, get } from "firebase/database";
 import styles from "./video.module.scss";
+import PropTypes from "prop-types";
 
 import Header from "../Main/Header/Header";
 import MobileHeader from "../Main/MobileHeader/MobileHeader";
@@ -18,7 +19,7 @@ const categoriesList = [
   { name: "grammar", displayName: "Gramatyka", selected: true },
 ];
 
-const Video = () => {
+function Video({ isDarkTheme }) {
   const windowDimensions = useWindowDimensions();
   const [showFilters, setshowFilters] = useState(false);
   const [showSort, setShowSort] = useState(false);
@@ -88,7 +89,7 @@ const Video = () => {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${isDarkTheme ? styles.darkTheme : styles.lightTheme}`}>
       <div className={styles.container_header}>
         <Header />
         <MobileHeader />
@@ -98,158 +99,163 @@ const Video = () => {
           <Loader />
         </div>
       ) : (
-        <div>
-          <div
-            style={{
-              paddingLeft: "10%",
-              marginTop: 70,
-            }}
-          >
-            <div className={styles.buttons}>
-              <CustomButton
-                title="Filtruj"
-                additionalStyles={styles.button_style}
-                onPress={() => {
-                  setShowSort(false);
-                  setshowFilters(!showFilters);
-                }}
-              />
-              <CustomButton
-                title="Sortuj"
-                additionalStyles={styles.button_style}
-                onPress={() => {
-                  setshowFilters(false);
-                  setShowSort(!showSort);
-                }}
-              />
-            </div>
-            <div>
-              {showFilters &&
-                categories.map((category) => (
-                  <Checkbox
-                    key={category.name}
-                    label={category.displayName}
-                    value={category.selected}
-                    onChange={() => {
-                      setActiveCategory(category.name);
-                    }}
-                  />
-                ))}
-              {showSort && (
-                <div>
-                  <label className={styles.sort_and_filter}>
-                    <input
-                      type="radio"
-                      value="SortAlphAsc"
-                      checked={selectedSort === "SortAlphAsc"}
-                      onChange={() => setselectedSort("SortAlphAsc")}
+          <div>
+            <div
+              style={{
+                paddingLeft: "10%",
+                marginTop: 70,
+              }}
+            >
+              <div className={styles.buttons}>
+                <CustomButton
+                  title="Filtruj"
+                  additionalStyles={styles.button_style}
+                  onPress={() => {
+                    setShowSort(false);
+                    setshowFilters(!showFilters);
+                  }}
+                />
+                <CustomButton
+                  title="Sortuj"
+                  additionalStyles={styles.button_style}
+                  onPress={() => {
+                    setshowFilters(false);
+                    setShowSort(!showSort);
+                  }}
+                />
+              </div>
+              <div>
+                {showFilters &&
+                  categories.map((category) => (
+                    <Checkbox
+                      key={category.name}
+                      label={category.displayName}
+                      value={category.selected}
+                      onChange={() => {
+                        setActiveCategory(category.name);
+                      }}
                     />
+                  ))}
+                {showSort && (
+                  <div>
+                    <label className={styles.sort_and_filter}>
+                      <input
+                        type="radio"
+                        value="SortAlphAsc"
+                        checked={selectedSort === "SortAlphAsc"}
+                        onChange={() => setselectedSort("SortAlphAsc")}
+                      />
                     Sortuj A-Z
                   </label>
-                  <label className={styles.sort_and_filter}>
-                    <input
-                      type="radio"
-                      value="SortAlphDesc"
-                      checked={selectedSort === "SortAlphDesc"}
-                      onChange={() => setselectedSort("SortAlphDesc")}
-                    />
+                    <label className={styles.sort_and_filter}>
+                      <input
+                        type="radio"
+                        value="SortAlphDesc"
+                        checked={selectedSort === "SortAlphDesc"}
+                        onChange={() => setselectedSort("SortAlphDesc")}
+                      />
                     Sortuj Z-A
                   </label>
-                  <label className={styles.sort_and_filter}>
-                    <input
-                      type="radio"
-                      value="DurationAsc"
-                      checked={selectedSort === "DurationAsc"}
-                      onChange={() => setselectedSort("DurationAsc")}
-                    />
+                    <label className={styles.sort_and_filter}>
+                      <input
+                        type="radio"
+                        value="DurationAsc"
+                        checked={selectedSort === "DurationAsc"}
+                        onChange={() => setselectedSort("DurationAsc")}
+                      />
                     Czas rosnąco
                   </label>
-                  <label className={styles.sort_and_filter}>
-                    <input
-                      type="radio"
-                      value="DurationDesc"
-                      checked={selectedSort === "DurationDesc"}
-                      onChange={() => setselectedSort("DurationDesc")}
-                    />
+                    <label className={styles.sort_and_filter}>
+                      <input
+                        type="radio"
+                        value="DurationDesc"
+                        checked={selectedSort === "DurationDesc"}
+                        onChange={() => setselectedSort("DurationDesc")}
+                      />
                     Czas malejąco
                   </label>
-                </div>
-              )}
-            </div>
-          </div>
-          {videoData.length == 0 ? (
-            <div className={styles.videos_null}>Brak video</div>
-          ) : (
-            <div className={styles.container_content}>
-              <div className={styles.video_grid}>
-                {videos.map((item) => (
-                  <VideoCard
-                    key={item.id}
-                    name={item.title}
-                    videoId={item.videoId}
-                    onClick={() => play(item.videoId)}
-                  />
-                ))}
+                  </div>
+                )}
               </div>
-              {currentVideoId && (
-                <>
-                  <div
-                    className={styles.video}
-                    style={{ top: windowDimensions.height * 0.25 }}
-                  >
-                    {videoLoaded && (
-                      <div className={styles.close_button_container}>
-                        <CustomButton
-                          title="X"
-                          additionalStyles={styles.close_button}
-                          onPress={() => {
-                            setVideoLoaded(false);
-                            setcurrentVideoId("");
+            </div>
+            {videoData.length == 0 ? (
+              <div className={styles.videos_null}>Brak video</div>
+            ) : (
+                <div className={styles.container_content}>
+                  <div className={styles.video_grid}>
+                    {videos.map((item) => (
+                      <VideoCard
+                        key={item.id}
+                        name={item.title}
+                        videoId={item.videoId}
+                        onClick={() => play(item.videoId)}
+                      />
+                    ))}
+                  </div>
+                  {currentVideoId && (
+                    <>
+                      <div
+                        className={styles.video}
+                        style={{ top: windowDimensions.height * 0.25 }}
+                      >
+                        {videoLoaded && (
+                          <div className={styles.close_button_container}>
+                            <CustomButton
+                              title="X"
+                              additionalStyles={styles.close_button}
+                              onPress={() => {
+                                setVideoLoaded(false);
+                                setcurrentVideoId("");
+                              }}
+                            />
+                          </div>
+                        )}
+                        <YouTube
+                          videoId={currentVideoId}
+                          onReady={() => setVideoLoaded(true)}
+                          opts={{
+                            width: windowDimensions.width * 0.5,
+                            height: windowDimensions.height * 0.6,
                           }}
                         />
                       </div>
-                    )}
-                    <YouTube
-                      videoId={currentVideoId}
-                      onReady={() => setVideoLoaded(true)}
-                      opts={{
-                        width: windowDimensions.width * 0.5,
-                        height: windowDimensions.height * 0.6,
+                      <div className={styles.video_background} />
+                    </>
+                  )}
+
+                  {numberVideosToDisplay <= videos.length && videos.length > 7 ? (
+                    <CustomButton
+                      title="Zobać więcej"
+                      additionalStyles={styles.load_more}
+                      onPress={() => {
+                        if (numberVideosToDisplay >= videoData.length) {
+                          return;
+                        } else {
+                          setnumberVideosToDisplay((prevState) => prevState + 8);
+                        }
                       }}
                     />
-                  </div>
-                  <div className={styles.video_background} />
-                </>
+                  ) : (
+                      videos.length > 7 && (
+                        <CustomButton
+                          title="Zobać mniej"
+                          additionalStyles={styles.load_more}
+                          onPress={() => {
+                            setnumberVideosToDisplay(8);
+                          }}
+                        />
+                      )
+                    )}
+                </div>
               )}
-
-              {numberVideosToDisplay <= videos.length && videos.length > 7 ? (
-                <CustomButton
-                  title="Zobać więcej"
-                  additionalStyles={styles.load_more}
-                  onPress={() => {
-                    if (numberVideosToDisplay >= videoData.length) {
-                      return;
-                    } else {
-                      setnumberVideosToDisplay((prevState) => prevState + 8);
-                    }
-                  }}
-                />
-              ) : (
-                videos.length > 7 && (
-                  <CustomButton
-                    title="Zobać mniej"
-                    additionalStyles={styles.load_more}
-                    onPress={() => {
-                      setnumberVideosToDisplay(8);
-                    }}
-                  />
-                )
-              )}
-            </div>
-          )}
-        </div>
-      )}
+          </div>
+        )}
     </div>
   );
-};
+}
+
+Video.propTypes = {
+  isDarkTheme: PropTypes.bool
+}
+
 export default Video;

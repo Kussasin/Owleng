@@ -1,9 +1,44 @@
 @import '../../../lightmode_colors.module.scss';
+@import '../../../darkmode_colors.module.scss';
 
 @mixin flexible() {
   display: flex;
   align-items: center;
 }
+
+.lightTheme {
+  .container_header {
+    background-color: $white;
+  }
+
+  .button_container {
+    &_title {
+      color: $black;
+    }
+
+    &:hover {
+      background-color: $hover;
+    }
+  }
+
+}
+
+.darkTheme {
+  .container_header {
+    background-color: $white;
+  }
+
+  .button_container {
+    &_title {
+      color: $black;
+    }
+
+    &:hover {
+      background-color: $hover;
+    }
+  }
+}
+
 
 .container {
   @include flexible();
@@ -12,7 +47,6 @@
   width: 100%;
 
   &_header {
-    background-color: $white;
     width: 100%;
   }
 
@@ -43,7 +77,6 @@
   &_title {
     margin-bottom: 5px;
     margin-top: 10px;
-    color: $black;
     font-style: normal;
     font-weight: 900;
     font-size: 25px;
@@ -65,8 +98,6 @@
   }
 
   &:hover {
-    background-color: $hover;
-
     .arrow_active {
       display: block;
     }

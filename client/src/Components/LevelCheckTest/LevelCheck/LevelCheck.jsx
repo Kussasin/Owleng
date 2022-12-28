@@ -4,9 +4,11 @@ import { database, auth } from "../../../utils/firebaseConfig";
 import { ref, set } from "firebase/database";
 import { useAuthState } from "react-firebase-hooks/auth";
 import styles from "./levelCheck.module.scss";
+import PropTypes from "prop-types";
+
 import CustomButton from "../../UI/CustomButton/CustomButton";
 
-function LevelCheck() {
+function LevelCheck({ isDarkTheme }) {
   const [user] = useAuthState(auth);
 
   try {
@@ -19,7 +21,7 @@ function LevelCheck() {
   }
 
   return (
-    <div className={styles.level_check_container}>
+    <div className={`${styles.level_check_container} ${isDarkTheme ? styles.darkTheme : styles.lightTheme}`}>
       <div className={styles.form_container}>
         <p className={styles.form_container_h1}>
           Czy wiesz swój poziom języka?
@@ -29,7 +31,7 @@ function LevelCheck() {
             <CustomButton
               title="Wiem, jaki mam poziom"
               additionalStyles={styles.button_style}
-              onPress={() => {}}
+              onPress={() => { }}
             />
           </NavLink>
           <NavLink to="/" className={styles.link_container}>
@@ -49,4 +51,9 @@ function LevelCheck() {
     </div>
   );
 }
+
+LevelCheck.propTypes = {
+  isDarkTheme: PropTypes.bool
+}
+
 export default LevelCheck;

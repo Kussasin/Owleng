@@ -2,13 +2,15 @@ import React from "react";
 import Header from "../Main/Header/Header";
 import MobileHeader from "../Main/MobileHeader/MobileHeader";
 import styles from "../AboutUs/aboutUs.module.scss";
+import PropTypes from "prop-types";
+
 import photo_yp from "./images/YuliiaPrysiazhna.jpg";
 import photo_db from "./images/DaryaBenedziktovich.jpg";
 import photo_bb from "./images/BogdanBasistyi.jpeg";
 
-function AboutUs() {
+function AboutUs({ isDarkTheme }) {
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${isDarkTheme ? styles.darkTheme : styles.lightTheme}`}>
       <MobileHeader />
       <Header />
       <div className={styles.container_content}>
@@ -102,4 +104,9 @@ function AboutUs() {
     </div>
   );
 }
+
+AboutUs.propTypes = {
+  isDarkTheme: PropTypes.bool
+}
+
 export default AboutUs;

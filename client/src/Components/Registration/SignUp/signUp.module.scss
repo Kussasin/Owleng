@@ -1,10 +1,72 @@
-@import '../../../lightmode_colors.module';
+@import '../../../lightmode_colors.module.scss';
+@import '../../../darkmode_colors.module.scss';
 
 @mixin flexible() {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
 }
+
+.lightTheme {
+	.registration_page_container {
+		background-color: $white;
+	}
+
+	.forms_container_content {
+		
+		.form_container {
+
+			.input {
+				background-color: $inactive_field;
+			}
+
+			.input:focus {
+				background-color: $white;
+				border-color: $main_color;
+			}
+
+			.submit_button {
+				background-color: $main_color;
+				color: $white;
+			}
+		}
+
+		.link_styles {
+			color: $main_color;
+		}
+	}
+}
+
+.darkTheme {
+	.registration_page_container {
+		background-color: $white;
+	}
+
+	.forms_container_content {
+
+		.form_container {
+
+			.input {
+				background-color: $inactive_field;
+			}
+
+			.input:focus {
+				background-color: $white;
+				border-color: $main_color;
+			}
+
+			.submit_button {
+				background-color: $main_color;
+				color: $white;
+			}
+		}
+
+		.link_styles {
+			color: $main_color;
+		}
+	}
+}
+
 
 .registration_page {
 	display: flex;
@@ -15,7 +77,6 @@
 	&_container {
 		max-width: 992px;
 		@include flexible();
-		background-color: $white;
 	}
 }
 
@@ -62,37 +123,30 @@
 					width: 90%;
 					padding: 17px;
 					border-radius: 10px;
-					background-color: $inactive_field;
 					margin: 8px 0;
 					font-size: 14px;
 				}
 
 				.input:focus {
-					background-color: $white;
 					border: 1px solid;
-					border-color: $main_color;
-
 				}
 
 				.submit_button {
 					border: none;
 					outline: none;
 					padding: 15px 0;
-					background-color: $main_color;
 					border-radius: 10px;
 					width: 100%;
 					min-width: 180px;
 					margin: 8px 0;
 					font-weight: bold;
 					font-size: 14px;
-					color: $white;
 					cursor: pointer;
 				}
 			}
 
-			.link_styles{
+			.link_styles {
 				text-decoration: none;
-    		color: $main_color;
 			}
 
 			&_subscribe {

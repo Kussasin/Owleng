@@ -1,9 +1,19 @@
-@import "../../../lightmode_colors.module.scss";
+@import '../../../lightmode_colors.module.scss';
+@import '../../../darkmode_colors.module.scss';
 
 @mixin center {
   align-items: center;
   justify-content: center;
 }
+
+.lightTheme{
+
+}
+
+.darkTheme{
+  
+}
+
 
 .level_test_container {
   width: 100%;

@@ -2,10 +2,12 @@ import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext/AuthContext";
 import styles from "./signUp.module.scss";
+import PropTypes from "prop-types";
+
 import regestrationImg from "../../../img/LogRegImg/registration-illustration.svg";
 import Header from "../RegHeader/RegHeader";
 
-function Signup() {
+function Signup({ isDarkTheme }) {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
@@ -24,7 +26,7 @@ function Signup() {
     if (passwordRef.current.value.length < 6) {
       return setError("Hasło musi zawierać więcej niż 6 symbolów");
     }
-    
+
     try {
       setError("");
       setLoading(true);
@@ -43,7 +45,7 @@ function Signup() {
   }
 
   return (
-    <div className={styles.registration_page}>
+    <div className={`${styles.registration_page} ${isDarkTheme ? styles.darkTheme : styles.lightTheme}`}>
       <div className={styles.registration_page_container}>
         <Header />
         <div className={styles.registration_container}>
@@ -115,5 +117,8 @@ function Signup() {
       </div>
     </div>
   );
+}
+Signup.propTypes = {
+  isDarkTheme: PropTypes.bool
 }
 export default Signup;

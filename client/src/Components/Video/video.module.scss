@@ -1,9 +1,26 @@
-@import "../../lightmode_colors.module.scss";
+@import '../../lightmode_colors.module.scss';
+@import '../../darkmode_colors.module.scss';
 
 @mixin flexible() {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.lightTheme{
+  .button_style {
+    background-color: $white;
+    border: 2px solid $main_color;
+    color: $black;
+  }
+}
+
+.darkTheme{
+  .button_style {
+    background-color: $white;
+    border: 2px solid $main_color;
+    color: $black;
+  }
 }
 
 .loader {
@@ -45,9 +62,6 @@
 
 .button_style {
   width: auto;
-  background-color: $white;
-  border: 2px solid $main_color;
-  color: $black;
   padding: 10px 20px;
   margin-bottom: 20px;
 }

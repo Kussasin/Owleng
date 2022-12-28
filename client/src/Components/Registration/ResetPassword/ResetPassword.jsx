@@ -2,10 +2,12 @@ import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../AuthContext/AuthContext";
 import styles from "./resetPasword.module.scss";
+import PropTypes from "prop-types";
+
 import welcomeImg from "../../../img/LogRegImg/authentication-illustration.svg";
 import Header from "../RegHeader/RegHeader";
 
-function ResetPassword() {
+function ResetPassword({ isDarkTheme }) {
 
   const emailRef = useRef();
   const { resetUserPassword } = useAuth();
@@ -32,7 +34,7 @@ function ResetPassword() {
   }
 
   return (
-    <div className={styles.login_page}>
+    <div className={`${styles.login_page} ${isDarkTheme ? styles.darkTheme : styles.lightTheme}`}>
       <div className={styles.login_page_container}>
         <Header />
         <div className={styles.login_container}>
@@ -88,4 +90,9 @@ function ResetPassword() {
     </div>
   );
 }
+
+ResetPassword.propTypes = {
+  isDarkTheme: PropTypes.bool
+}
+
 export default ResetPassword;

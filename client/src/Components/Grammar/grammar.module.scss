@@ -1,13 +1,56 @@
 @import '../../lightmode_colors.module.scss';
+@import '../../darkmode_colors.module.scss';
 
 @mixin flexible() {
   display: flex;
   align-items: center;
 }
+
 @mixin setBack() {
   box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.05);
   border-radius: 20px;
 }
+
+.lightTheme {
+  .container_header {
+    background-color: $white;
+  }
+
+  .container_content_right_title {
+    color: $main_color;
+  }
+
+  .answer_button {
+    background-color: $white;
+    box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.05);
+    color: $black;
+  }
+
+  .question {
+    color: $black;
+  }
+}
+
+.darkTheme {
+  .container_header {
+    background-color: $white;
+  }
+
+  .container_content_right_title {
+    color: $main_color;
+  }
+
+  .answer_button {
+    background-color: $white;
+    box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.05);
+    color: $black;
+  }
+
+  .question {
+    color: $black;
+  }
+}
+
 
 .loader {
   position: relative;
@@ -24,7 +67,6 @@
   width: 100%;
 
   &_header {
-    background-color: $white;
     width: 100%;
   }
 
@@ -58,7 +100,6 @@
   }
 
   &_title {
-    color: $main_color;
     text-decoration: none;
     text-transform: uppercase;
   }
@@ -83,19 +124,21 @@
   margin: 24px 0;
   width: 85%;
   overflow: auto;
+
   &_title {
     margin: 0;
     text-align: center;
   }
-  &_text{
-  max-height: 300px;
-  padding: 0 3px;
+
+  &_text {
+    max-height: 300px;
+    padding: 0 3px;
   }
 }
- 
+
 .button_style {
   padding: 16px 24px;
-  font-size: 16px; 
+  font-size: 16px;
 }
 
 .name_tests {
@@ -114,9 +157,6 @@
 
 .answer_button {
   min-width: 40%;
-  background-color: $white;
-  box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.05);
-  color: $black;
   min-width: 112px;
   word-wrap: break-all;
 }
@@ -139,17 +179,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  &_text{
+
+  &_text {
     @include setBack();
-     margin-bottom: 20px;
-   }
+    margin-bottom: 20px;
+  }
 }
 
 .question {
   font-size: 24px;
   text-align: center;
   margin: 24px 12px;
-  color: $black;
   display: block;
   line-height: 1em;
   padding: 5px 10px;

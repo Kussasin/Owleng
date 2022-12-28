@@ -1,10 +1,22 @@
-@import "../../../lightmode_colors.module.scss";
+@import '../../../lightmode_colors.module.scss';
+@import '../../../darkmode_colors.module.scss';
+
 $button_pudding: 25px;
 
 @mixin flex {
   display: flex;
   align-items: center;
 }
+
+.lightTheme{
+
+}
+
+.darkTheme{
+  
+}
+
+
 
 .choice_level_container {
   width: 100%;

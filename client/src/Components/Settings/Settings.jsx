@@ -3,12 +3,14 @@ import { useAuth } from "../Registration/AuthContext/AuthContext";
 import { database, auth } from "../../utils/firebaseConfig";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { ref, update } from "firebase/database";
+import PropTypes from "prop-types";
+import styles from "../Settings/settings.module.scss";
+
 import Header from "../Main/Header/Header";
 import MobileHeader from "../Main/MobileHeader/MobileHeader";
-import styles from "../Settings/settings.module.scss";
 import CustomButton from "../UI/CustomButton/CustomButton";
 
-function Settings() {
+function Settings({ isDarkTheme }) {
   const emailRef = useRef()
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
@@ -93,7 +95,7 @@ function Settings() {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${isDarkTheme ? styles.darkTheme : styles.lightTheme}`}>
       <div className={styles.container_header}>
         <MobileHeader />
         <Header />
@@ -145,4 +147,9 @@ function Settings() {
     </div>
   );
 }
+
+Settings.propTypes = {
+  isDarkTheme: PropTypes.bool
+}
+
 export default Settings;

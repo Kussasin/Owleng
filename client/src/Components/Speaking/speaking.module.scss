@@ -1,10 +1,47 @@
 @import '../../lightmode_colors.module.scss';
+@import '../../darkmode_colors.module.scss';
 
 $button_height: 80px;
 
 @mixin flexible() {
   display: flex;
   align-items: center;
+}
+
+.lightTheme {
+  .container_header {
+    background-color: $white;
+  }
+
+  .container_content_right_title {
+    color: $black;
+  }
+
+  .speak_container_content_translate {
+    color: $grey;
+  }
+
+  .answer_result_text {
+    color: #FFF;
+  }
+}
+
+.darkTheme {
+  .container_header {
+    background-color: $white;
+  }
+
+  .container_content_right_title {
+    color: $black;
+  }
+
+  .speak_container_content_translate {
+    color: $grey;
+  }
+
+  .answer_result_text {
+    color: #FFF;
+  }
 }
 
 .loader {
@@ -22,7 +59,6 @@ $button_height: 80px;
   width: 100%;
 
   &_header {
-    background-color: $white;
     width: 100%;
   }
 
@@ -57,7 +93,6 @@ $button_height: 80px;
   }
 
   &_title {
-    color: $black;
     text-decoration: none;
     text-transform: uppercase;
     text-align: start;
@@ -72,29 +107,31 @@ $button_height: 80px;
   overflow: auto;
   @include flexible();
   gap: 24px;
+
   &_title {
     margin: 0;
     text-align: center;
   }
 }
 
-.image{
+.image {
   width: 32px;
   cursor: pointer;
 }
 
-.speak_container_content{
+.speak_container_content {
   $fz: 16px;
   $mg: 10px;
-  &_text{
+
+  &_text {
     font-size: $fz;
-    margin: 0 0 $mg ;
+    margin: 0 0 $mg;
     font-weight: 500;
   }
-  &_translate{
-    font-size:  calc($fz - 2px);
+
+  &_translate {
+    font-size: calc($fz - 2px);
     font-weight: 400;
-    color: $grey;
     margin: $mg 0 0;
   }
 }
@@ -119,7 +156,6 @@ $button_height: 80px;
     padding: 9px 10px;
     text-align: center;
     width: 100%;
-    color: #FFF;
   }
 
   &_img {

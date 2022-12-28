@@ -1,8 +1,20 @@
 @import '../../../lightmode_colors.module.scss';
+@import '../../../darkmode_colors.module.scss';
+
 $left_img_weight: 18px;
+
 @mixin flexible() {
 	display: flex;
 	align-items: center;
+}
+
+
+.lightTheme{
+
+}
+
+.darkTheme{
+  
 }
 
 .header {

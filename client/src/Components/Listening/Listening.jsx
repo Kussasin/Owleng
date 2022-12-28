@@ -2,13 +2,16 @@ import React, { useMemo, useState, useEffect } from "react";
 import { ref, child, get } from "firebase/database";
 import { database } from "../../utils/firebaseConfig";
 import styles from "./listening.module.scss";
+import PropTypes from "prop-types";
+
 import Header from "../Main/Header/Header";
 import MobileHeader from "../Main/MobileHeader/MobileHeader";
 import LeftSideMenu from "../LeftSideMenu/LeftSideMenu";
 import CustomButton from "../UI/CustomButton/CustomButton";
 import Card from "../Card/Card";
 import Loader from "../UI/Preloader/loader";
-function Listening() {
+
+function Listening({ isDarkTheme }) {
   // zmienna dla kontroli aktualnego tematu
   const [selectedTopicId, setselectedTopicId] = useState(0);
   // zmienna dla kontroli aktualnego podtematu
@@ -130,7 +133,7 @@ function Listening() {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${isDarkTheme ? styles.darkTheme : styles.lightTheme}`}>
       <div className={styles.container_header}>
         <MobileHeader />
         <Header />
@@ -140,31 +143,31 @@ function Listening() {
           <Loader />
         </div>
       ) : (
-        <div className={styles.container_content}>
-          <LeftSideMenu
-            title={Theme}
-            // przekazanie funkcji niezbednych dla kontroli stanu testu
-            setSelectedThemeId={setSelectedThemeId}
-            setselectedTopicId={setselectedTopicId}
-            setTestActive={setTestIsFinish}
-            setUserScore={setUserScore}
-            setCurrentQuestionIndex={setCurrentQuestionIndex}
-            setCurrentCorrectAnswerId={setCurrentCorrectAnswerId}
-            setSelectedAnswerId={setSelectedAnswerId}
-          />
-          <div className={styles.container_content_right}>
-            <div className={styles.container_content_right_content}>
-              {testIsFinish ?
-                (
-                  <Card additionalStyles={styles.card}>
-                    <p>Ilość prawidłowych odpowiedzi: {userScore} / {data[Object.keys(data)[selectedTopicId]].themes[
-                      selectedThemeId
-                    ].questions.length}</p>
-                  </Card>
-                ) : (
-                  // data (undefined | [{}]) && jsx, true && jsx -> jsx, false && jsx -> false
-                  data && (
-                    <div className={styles.data_container}>
+          <div className={styles.container_content}>
+            <LeftSideMenu
+              title={Theme}
+              // przekazanie funkcji niezbednych dla kontroli stanu testu
+              setSelectedThemeId={setSelectedThemeId}
+              setselectedTopicId={setselectedTopicId}
+              setTestActive={setTestIsFinish}
+              setUserScore={setUserScore}
+              setCurrentQuestionIndex={setCurrentQuestionIndex}
+              setCurrentCorrectAnswerId={setCurrentCorrectAnswerId}
+              setSelectedAnswerId={setSelectedAnswerId}
+            />
+            <div className={styles.container_content_right}>
+              <div className={styles.container_content_right_content}>
+                {testIsFinish ?
+                  (
+                    <Card additionalStyles={styles.card}>
+                      <p>Ilość prawidłowych odpowiedzi: {userScore} / {data[Object.keys(data)[selectedTopicId]].themes[
+                        selectedThemeId
+                      ].questions.length}</p>
+                    </Card>
+                  ) : (
+                    // data (undefined | [{}]) && jsx, true && jsx -> jsx, false && jsx -> false
+                    data && (
+                      <div className={styles.data_container}>
                         <p className={styles.name_tests}>
                           {
                             // nazwa podtematu
@@ -222,24 +225,28 @@ function Listening() {
                               }
                             )}
                           </div>
+                        </div>
+                        <div className={styles.button_style}>
+                          <CustomButton
+                            title={"Następne pytanie"}
+                            additionalStyles={styles.button_style}
+                            onPress={nextQuestion}
+                          />
+                        </div>
                       </div>
-                      <div className={styles.button_style}>
-                        <CustomButton
-                          title={"Następne pytanie"}
-                          additionalStyles={styles.button_style}
-                          onPress={nextQuestion}
-                        />
-                      </div>
-                    </div>
+                    )
                   )
-                )
-              }
+                }
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
     </div>
   );
+}
+
+Listening.propTypes = {
+  isDarkTheme: PropTypes.bool
 }
 
 export default Listening;

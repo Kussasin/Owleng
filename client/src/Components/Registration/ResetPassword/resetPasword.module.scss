@@ -1,9 +1,89 @@
-@import '../../../lightmode_colors.module';
+@import '../../../lightmode_colors.module.scss';
+@import '../../../darkmode_colors.module.scss';
 
 @mixin flexible() {
   display: flex;
   align-items: center;
   flex-direction: column;
+}
+
+
+.lightTheme {
+  .login_page_container {
+    background-color: $white;
+  }
+
+  .reset_msg {
+    color: $black;
+  }
+
+  .forms_container_content {
+
+    .form_container {
+      .input {
+        background-color: $inactive_field;
+      }
+
+      .input:focus {
+        background-color: $white;
+        border-color: $main_color;
+      }
+
+      .submit_button {
+        background-color: $main_color;
+        color: $white;
+      }
+    }
+
+    &_subscribe {
+      a {
+        color: $main_color;
+      }
+    }
+
+    .link_styles {
+      color: $main_color;
+    }
+  }
+}
+
+.darkTheme {
+  .login_page_container {
+    background-color: $white;
+  }
+
+  .reset_msg {
+    color: $black;
+  }
+
+  .forms_container_content {
+
+    .form_container {
+      .input {
+        background-color: $inactive_field;
+      }
+
+      .input:focus {
+        background-color: $white;
+        border-color: $main_color;
+      }
+
+      .submit_button {
+        background-color: $main_color;
+        color: $white;
+      }
+    }
+
+    &_subscribe {
+      a {
+        color: $main_color;
+      }
+    }
+
+    .link_styles {
+      color: $main_color;
+    }
+  }
 }
 
 .login_page {
@@ -15,7 +95,6 @@
   &_container {
     max-width: 992px;
     @include flexible();
-    background-color: $white;
   }
 }
 
@@ -26,11 +105,11 @@
   color: $error_color;
   text-align: left;
 }
-.reset_msg{
+
+.reset_msg {
   width: 98%;
   margin: 3px 0;
   font-size: 16px;
-  color: $black;
   text-align: left;
 }
 

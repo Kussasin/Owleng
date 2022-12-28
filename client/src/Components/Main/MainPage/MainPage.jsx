@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./mainPage.module.scss";
+import PropTypes from "prop-types";
+
 import Header from "../Header/Header";
 import MobileHeader from "../MobileHeader/MobileHeader";
 import Gramatyka from "../../../img/MainImg/Gramatyka.png";
@@ -27,7 +29,7 @@ function SquareButton(name, url, linkTo) {
   );
 }
 
-function MainPage() {
+function MainPage({ isDarkTheme }) {
   const buttonData = [
     { url: Gramatyka, title: "Gramatyka", link: "/grammar" },
     { url: Czytanie, title: "Czytanie", link: "/reading" },
@@ -38,7 +40,7 @@ function MainPage() {
   ];
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${isDarkTheme ? styles.darkTheme : styles.lightTheme}`}>
       <div className={styles.container_header}>
         <Header />
         <MobileHeader />
@@ -50,6 +52,10 @@ function MainPage() {
       </div>
     </div>
   );
+}
+
+MainPage.propTypes = {
+  isDarkTheme: PropTypes.bool
 }
 
 export default MainPage;

@@ -3,6 +3,8 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 import { ref, child, get } from "firebase/database";
 import { database } from "../../utils/firebaseConfig";
 import styles from "./speaking.module.scss";
+import PropTypes from "prop-types";
+
 import Header from "../Main/Header/Header";
 import MobileHeader from "../Main/MobileHeader/MobileHeader";
 import LeftSideMenu from "../LeftSideMenu/LeftSideMenu";
@@ -14,7 +16,7 @@ import Card from "../Card/Card";
 import AudioImg from "../../img/Speaking/loudspeakers.png";
 import Loader from "../UI/Preloader/loader";
 
-function Speaking() {
+function Speaking({ isDarkTheme }) {
 
   const [selectedTopicId, setselectedTopicId] = useState(0);
   const [selectedThemeId, setSelectedThemeId] = useState(0);
@@ -107,7 +109,7 @@ function Speaking() {
 
     onAnswerConfirm();
     resetTranscript();
-    
+
     if (currentQuestionIndex < data[Object.keys(data)[selectedTopicId]].themes[selectedThemeId].texts.length - 1) {
       setCurrentQuestionIndex((prevState) => ++prevState);
     } else {
@@ -152,7 +154,7 @@ function Speaking() {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${isDarkTheme ? styles.darkTheme : styles.lightTheme}`}>
       <div className={styles.container_header}>
         <MobileHeader />
         <Header />
@@ -246,6 +248,10 @@ function Speaking() {
         )}
     </div>
   );
+}
+
+Speaking.propTypes = {
+  isDarkTheme: PropTypes.bool
 }
 
 export default Speaking;

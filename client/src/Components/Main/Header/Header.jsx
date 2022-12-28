@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./header.module.scss";
-import Dropdown from "../../../img/HeaderImg/Dropdown_arrow.png";
-import People from "../../../img/HeaderImg/People.png";
 import { auth } from "../../../utils/firebaseConfig";
 import { useAuth } from "../../Registration/AuthContext/AuthContext";
 import { getDatabase, ref as firebaseRef, child, get } from "firebase/database";
+
 import DarkModeToggle from "react-dark-mode-toggle";
+import People from "../../../img/HeaderImg/People.png";
+import Dropdown from "../../../img/HeaderImg/Dropdown_arrow.png";
 
 function DropdownItem(title, link) {
   const { logout } = useAuth();
@@ -20,6 +21,7 @@ function DropdownItem(title, link) {
       console.log(error.message);
     }
   }
+
   return title !== "Wyloguj się" ? (
     <Link className={styles.container_item} to={link} key={title}>
       <p>{title}</p>
@@ -39,13 +41,17 @@ function DropdownItem(title, link) {
 function Header() {
   const [userLevel, setUserLevel] = useState("");
   const [isActive, setIsActive] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(() => false);
+  const [isDarkMode, setIsDarkMode] = useState(() => localStorage.getItem('Theme') != null ? "true" === localStorage.getItem('Theme') : false);
+  const ref = useRef();
 
   function Toggling() {
     return setIsActive((current) => !current);
   }
 
-  const ref = useRef();
+  useEffect(() => {
+    localStorage.setItem('Theme', isDarkMode);
+    window.dispatchEvent(new Event("storage"));
+  }, [isDarkMode]);
 
   useEffect(() => {
     const dbRef = firebaseRef(getDatabase());
@@ -55,7 +61,6 @@ function Header() {
         if (snapshot.exists()) {
           const userInfo = snapshot.val();
           setUserLevel(userInfo.level);
-          console.log(snapshot.val());
         } else {
           console.log("No data available");
         }
@@ -85,7 +90,7 @@ function Header() {
   ];
 
   return (
-    <nav className={styles.header}>
+    <nav className={`${styles.header} ${isDarkMode ? styles.darkTheme : styles.lightTheme}`} >
       <div className={styles.header_container}>
         <div className={styles.header_left}>
           <Link to="/">

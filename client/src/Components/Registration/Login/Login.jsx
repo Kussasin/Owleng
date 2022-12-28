@@ -2,10 +2,12 @@ import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext/AuthContext";
 import styles from "./loginStyle.module.scss";
+import PropTypes from "prop-types";
+
 import welcomeImg from "../../../img/LogRegImg/authentication-illustration.svg";
 import Header from "../RegHeader/RegHeader";
 
-function Login() {
+function Login({ isDarkTheme }) {
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -32,7 +34,7 @@ function Login() {
   }
 
   return (
-    <div className={styles.login_page}>
+    <div className={`${styles.login_page} ${isDarkTheme ? styles.darkTheme : styles.lightTheme}`}>
       <div className={styles.login_page_container}>
         <Header />
         <div className={styles.login_container}>
@@ -100,4 +102,9 @@ function Login() {
     </div>
   );
 }
+
+Login.propTypes = {
+  isDarkTheme: PropTypes.bool
+}
+
 export default Login;

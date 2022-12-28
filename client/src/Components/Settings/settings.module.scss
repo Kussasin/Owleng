@@ -1,9 +1,43 @@
-@import "../../lightmode_colors.module.scss";
+@import '../../lightmode_colors.module.scss';
+@import '../../darkmode_colors.module.scss';
 
 @mixin flexible() {
   display: flex;
   align-items: center;
 }
+
+.lightTheme {
+  .container {
+
+    &_header {
+      background-color: $white;
+    }
+
+    &_settings {
+
+      h1 {
+        color: $main_color;
+      }
+    }
+  }
+}
+
+.darkTheme {
+  .container {
+
+    &_header {
+      background-color: $white;
+    }
+
+    &_settings {
+
+      h1 {
+        color: $main_color;
+      }
+    }
+  }
+}
+
 
 .container {
   @include flexible();
@@ -12,11 +46,10 @@
   width: 100%;
 
   &_header {
-    background-color: $white;
     width: 100%;
   }
 
-  x &_content {
+  &_content {
     max-width: 1150px;
     margin-top: 50px;
     margin-bottom: 50px;
@@ -25,13 +58,6 @@
     height: 900px;
     box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.05);
     border-radius: 20px;
-  }
-
-  &_settings {
-
-    h1 {
-      color: $main_color;
-    }
   }
 
   .edit_password {
@@ -56,12 +82,13 @@
   width: 280px;
   height: 40px;
   padding: 0 8px;
+
   &_span {
     width: 100%;
     margin: 16px 0 5px;
   }
 }
 
-.error_msg{
+.error_msg {
   color: $error_color;
 }

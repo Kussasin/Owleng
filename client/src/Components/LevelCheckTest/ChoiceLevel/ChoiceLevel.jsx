@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 import styles from "./choiceLevel.module.scss";
-import CustomButton from "../../UI/CustomButton/CustomButton";
 import { auth, database } from "../../../utils/firebaseConfig";
 import { ref, update } from "firebase/database";
+import PropTypes from "prop-types";
 
-function ChoiceLevel() {
+import CustomButton from "../../UI/CustomButton/CustomButton";
+
+function ChoiceLevel({ isDarkTheme }) {
   const [isSuccess, setIsSuccess] = useState(false);
 
   const onConfirmLevel = (selectedLevel) => {
@@ -23,7 +25,7 @@ function ChoiceLevel() {
   };
 
   return (
-    <div className={styles.choice_level_container}>
+    <div className={`${styles.choice_level_container} ${isDarkTheme ? styles.darkTheme : styles.lightTheme}`}>
       {isSuccess && <Navigate to="/" replace={true} />}
       <div className={styles.form_container}>
         <p>Wybierz swój poziom</p>
@@ -55,4 +57,9 @@ function ChoiceLevel() {
     </div>
   );
 }
+
+ChoiceLevel.propTypes = {
+  isDarkTheme: PropTypes.bool
+}
+
 export default ChoiceLevel;

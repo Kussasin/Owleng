@@ -40,25 +40,23 @@ const LeftSideMenu = (props) => {
               >
                 <p className={styles.dropdown_text}>{element.theme}</p>
                 <img
-                  className={`${styles.dropdown_arrow} ${
-                    themeIndex === themeId
+                  className={`${styles.dropdown_arrow} ${themeIndex === themeId
                       ? isActive
                         ? styles.rotate_arrow_180
                         : ""
                       : ""
-                  }`}
+                    }`}
                   src={Dropdown}
                   alt="dropdown arrow"
                 />
               </div>
               <div
-                className={`${styles.dropdown_container} ${
-                  themeIndex === themeId
+                className={`${styles.dropdown_container} ${themeIndex === themeId
                     ? isActive
                       ? styles.show
                       : styles.hide
                     : styles.hide
-                }`}
+                  }`}
               >
                 <div className={styles.dropdown_item}>
                   {element.subt.map((subtheme, index) => {
@@ -80,9 +78,8 @@ const LeftSideMenu = (props) => {
                           props.setCurrentText(undefined);
                           props.seterrorMessageHide(true);
                         }}
-                        className={`${styles.dropdown_item_element} ${
-                          subIndex === id ? styles.isActive : ""
-                        }`}
+                        className={`${styles.dropdown_item_element} ${subIndex === id ? styles.isActive : ""
+                          }`}
                         key={index}
                       >
                         <span
