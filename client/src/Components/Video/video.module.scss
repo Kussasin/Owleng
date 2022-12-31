@@ -7,7 +7,7 @@
   justify-content: center;
 }
 
-.lightTheme{
+.lightTheme {
   .button_style {
     background-color: $white;
     border: 2px solid $main_color;
@@ -15,12 +15,20 @@
   }
 }
 
-.darkTheme{
+.darkTheme {
+
+  .close_button,
+  .load_more,
   .button_style {
-    background-color: $white;
-    border: 2px solid $main_color;
-    color: $black;
+    background-color: $dark_button_color;
+    color: $dark_white;
+    border: none;
+
+    &:hover {
+      background-color: $dark_button_hover_color;
+    }
   }
+
 }
 
 .loader {
@@ -56,7 +64,7 @@
   width: 100%;
   height: 100%;
   z-index: 1;
-  background: black;
+  background: $dark_back;
   opacity: 0.5;
 }
 

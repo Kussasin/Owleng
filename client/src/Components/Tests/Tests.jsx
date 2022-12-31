@@ -1,16 +1,18 @@
 import React, { useMemo, useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
 import { ref, child, get, update } from "firebase/database";
 import { database, auth } from "../../utils/firebaseConfig";
+import { getLevelBasedOnScore } from "../../utils/getLevelBasedOnScore";
 import styles from "../Tests/tests.module.scss";
+
 import Header from "../Main/Header/Header";
 import MobileHeader from "../Main/MobileHeader/MobileHeader";
 import LeftSideMenu from "../LeftSideMenu/LeftSideMenu";
 import CustomButton from "../UI/CustomButton/CustomButton";
 import Card from "../Card/Card";
-import { getLevelBasedOnScore } from "../../utils/getLevelBasedOnScore";
-import { Navigate } from "react-router-dom";
 import Loader from "../UI/Preloader/loader";
 import ActiveArrow from "../../img/MainImg/arrowactive.png";
+import DarkActiveArrow from "../../img/MainImg/dark_disabled.png";
 import PropTypes from "prop-types";
 
 // Porzyklad obiektu podtematu
@@ -277,7 +279,7 @@ function Tests({ isDarkTheme }) {
                   <p>{levelCheckTestData?.topic}</p>
                   <img
                     className={styles.arrow_active}
-                    src={ActiveArrow}
+                    src={isDarkTheme? DarkActiveArrow : ActiveArrow}
                     alt="arrow"
                   />
                 </div>
@@ -375,6 +377,7 @@ function Tests({ isDarkTheme }) {
                               <CustomButton
                                 title={"Następne pytanie"}
                                 onPress={nextQuestion}
+                                additionalStyles={styles.next_question_button}
                               />
                             </div>
                           </div>

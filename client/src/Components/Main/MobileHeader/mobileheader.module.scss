@@ -9,12 +9,85 @@ $left_img_weight: 18px;
 }
 
 
-.lightTheme{
+.lightTheme {
+	background-color: $white;
 
+	a {
+		color: $main_color;
+	}
+
+	.current_user_level {
+		color: $main_color;
+	}
+
+	.burger_menu {
+		background-color: $white;
+
+		&_item {
+			p {
+				color: $black;
+			}
+
+			&:hover {
+				p {
+					color: $white;
+				}
+
+				background-color: $main_color;
+			}
+		}
+	}
+
+	.change_theme {
+		p {
+			color: $black;
+		}
+	}
+
+	.background_blur {
+		background: $fade;
+	}
 }
 
-.darkTheme{
-  
+.darkTheme {
+	background-color: $header_color;
+
+	a {
+		color: $dark_main_color;
+	}
+
+	.current_user_level {
+		color: $dark_main_color;
+	}
+
+	.burger_menu {
+		background-color: $header_color;
+
+		&_item {
+			p {
+				color: $dark_white;
+			}
+
+			&:hover {
+				p {
+					color: $dark_white;
+				}
+
+				background-color: $hover_menu;
+			}
+		}
+	}
+
+	.change_theme {
+		p {
+			color: white;
+		}
+	}
+
+	.background_blur {
+		background: rgba(255, 255, 255, 0.3);
+		;
+	}
 }
 
 .header {
@@ -34,7 +107,6 @@ $left_img_weight: 18px;
 
 	a {
 		text-decoration: none;
-		color: $main_color;
 	}
 
 	&_container {
@@ -44,8 +116,8 @@ $left_img_weight: 18px;
 	}
 }
 
-.darkmodetoggle{
-	svg{
+.darkmodetoggle {
+	svg {
 		position: relative;
 		top: 1px;
 	}
@@ -68,7 +140,6 @@ $left_img_weight: 18px;
 		font-weight: 700;
 		font-size: 35px;
 		text-transform: uppercase;
-		color: $main_color;
 	}
 }
 
@@ -84,7 +155,6 @@ $left_img_weight: 18px;
 	top: 0;
 	right: 0;
 	z-index: 999;
-	background: $white;
 
 	&_item {
 		p {
@@ -100,7 +170,6 @@ $left_img_weight: 18px;
 	top: 0;
 	left: 0;
 	z-index: 1;
-	background: $fade;
 }
 
 .burger_icon_container {
@@ -119,18 +188,6 @@ $left_img_weight: 18px;
 	display: block;
 	font-weight: 700;
 	line-height: 24px;
-
-	p {
-		color: $black;
-	}
-
-	&:hover {
-		p {
-			color: $white;
-		}
-
-		background-color: $main_color;
-	}
 }
 
 .change_theme {
@@ -146,18 +203,22 @@ $left_img_weight: 18px;
 	}
 
 }
+
 .theme_control_icon {
 	width: $left_img_weight;
 	position: absolute;
 }
-.sun{
+
+.sun {
 	right: 6px;
 	bottom: 5px;
 }
-.moon{
+
+.moon {
 	left: 6px;
 	bottom: 5px;
 }
+
 .menu_disable {
 	display: none;
 }

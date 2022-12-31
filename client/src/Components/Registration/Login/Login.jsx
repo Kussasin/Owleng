@@ -5,6 +5,7 @@ import styles from "./loginStyle.module.scss";
 import PropTypes from "prop-types";
 
 import welcomeImg from "../../../img/LogRegImg/authentication-illustration.svg";
+import DarkwelcomeImg from "../../../img/LogRegImg/dark_login.svg";
 import Header from "../RegHeader/RegHeader";
 
 function Login({ isDarkTheme }) {
@@ -36,7 +37,9 @@ function Login({ isDarkTheme }) {
   return (
     <div className={`${styles.login_page} ${isDarkTheme ? styles.darkTheme : styles.lightTheme}`}>
       <div className={styles.login_page_container}>
-        <Header />
+        <div className={styles.header}>
+          <Header />
+        </div>
         <div className={styles.login_container}>
           <div className={styles.login_container_left}>
             <div className={styles.login_forms_container}>
@@ -92,7 +95,7 @@ function Login({ isDarkTheme }) {
               </div>
               <img
                 className={styles.content_container_picture}
-                src={welcomeImg}
+                src={isDarkTheme ? DarkwelcomeImg : welcomeImg}
                 alt="welcome_picture"
               />
             </div>

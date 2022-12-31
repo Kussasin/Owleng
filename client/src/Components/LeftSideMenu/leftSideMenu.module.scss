@@ -1,9 +1,41 @@
 @import "../../lightmode_colors.module.scss";
+@import '../../darkmode_colors.module.scss';
+
 $arrow_margin: 10px;
 
 @mixin flexible() {
   display: flex;
   align-items: center;
+}
+
+.lightTheme {
+  background-color: $white;
+  box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.05);
+
+  .container_content_left_title {
+      color: $main_color;
+  }
+
+  .isActive {
+    background-color: $elementIsSelected;
+  }
+}
+
+.darkTheme {
+  background-color: $header_color;
+  box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.05);
+
+  .dropdown_text{
+    color: $dark_white;
+  }
+
+  .container_content_left_title {
+      color: $black;
+  }
+  
+  .isActive {
+    background-color: $hover_menu;
+  }
 }
 
 .container_content_left {

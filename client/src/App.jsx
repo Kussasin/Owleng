@@ -18,7 +18,7 @@ import Settings from "./Components/Settings/Settings";
 import Speaking from "./Components/Speaking/Speaking";
 import { AuthProvider } from "./Components/Registration/AuthContext/AuthContext";
 import PrivateRoute from "./Components/Registration/PrivateRoute/PrivateRoute";
-
+import styles from "./App.module.scss";
 function App() {
 
   const [isDark, setisDark] = useState(false);
@@ -33,31 +33,33 @@ function App() {
       window.removeEventListener('storage', () => { });
     };
   }, []);
-  
+
   return (
-    <Router>
-      <AuthProvider>
-        <Routes>
-          <Route element={<PrivateRoute />}>
-            <Route path="/" exact element={<MainPage isDarkTheme={isDark}/>} />
-            <Route path="/levelCheck" exact element={<LevelCheck isDarkTheme={isDark}/>} />
-            <Route path="/levelTest" exact element={<Test isDarkTheme={isDark}/>} />
-            <Route path="/choiceLevel" exact element={<ChoiceLevel isDarkTheme={isDark}/>} />
-            <Route path="/video" exact element={<Video isDarkTheme={isDark}/>} />
-            <Route path="/grammar" exact element={<Grammar isDarkTheme={isDark}/>} />
-            <Route path="/reading" exact element={<Reading isDarkTheme={isDark}/>} />
-            <Route path="/listening" exact element={<Listening isDarkTheme={isDark}/>} />
-            <Route path="/tests" exact element={<Tests isDarkTheme={isDark}/>} />
-            <Route path="/aboutus" exact element={<AboutUs isDarkTheme={isDark}/>} />
-            <Route path="/settings" exact element={<Settings isDarkTheme={isDark}/>} />
-            <Route path="/speaking" exact element={<Speaking isDarkTheme={isDark}/>} />
-          </Route>
-          <Route path="/reset-password" element={<ResetPassword isDarkTheme={isDark}/>} />
-          <Route path="/login" element={<Login isDarkTheme={isDark}/>} />
-          <Route path="/signup" element={<SignUp isDarkTheme={isDark}/>} />
-        </Routes>
-      </AuthProvider>
-    </Router>
+    <div className={`${isDark ? styles.darkTheme : styles.lightTheme}`}>
+      <Router >
+        <AuthProvider>
+          <Routes>
+            <Route element={<PrivateRoute />}>
+              <Route path="/" exact element={<MainPage isDarkTheme={isDark} />} />
+              <Route path="/levelCheck" exact element={<LevelCheck isDarkTheme={isDark} />} />
+              <Route path="/levelTest" exact element={<Test isDarkTheme={isDark} />} />
+              <Route path="/choiceLevel" exact element={<ChoiceLevel isDarkTheme={isDark} />} />
+              <Route path="/video" exact element={<Video isDarkTheme={isDark} />} />
+              <Route path="/grammar" exact element={<Grammar isDarkTheme={isDark} />} />
+              <Route path="/reading" exact element={<Reading isDarkTheme={isDark} />} />
+              <Route path="/listening" exact element={<Listening isDarkTheme={isDark} />} />
+              <Route path="/tests" exact element={<Tests isDarkTheme={isDark} />} />
+              <Route path="/aboutus" exact element={<AboutUs isDarkTheme={isDark} />} />
+              <Route path="/settings" exact element={<Settings isDarkTheme={isDark} />} />
+              <Route path="/speaking" exact element={<Speaking isDarkTheme={isDark} />} />
+            </Route>
+            <Route path="/reset-password" element={<ResetPassword isDarkTheme={isDark} />} />
+            <Route path="/login" element={<Login isDarkTheme={isDark} />} />
+            <Route path="/signup" element={<SignUp isDarkTheme={isDark} />} />
+          </Routes>
+        </AuthProvider>
+      </Router>
+    </div>
   );
 }
 

@@ -14,19 +14,41 @@
   flex-direction: column;
 }
 
-.lightTheme{
+.lightTheme {
+  .level_check_container {
+    background-color: $background;
+  }
 
+  .form_container_h1 {
+    color: $black;
+  }
 }
 
-.darkTheme{
-  
+.darkTheme {
+  .level_check_container {
+    background-color: $dark_back;
+  }
+
+  .form_container_h1 {
+    color: $dark_white;
+  }
+
+  .button_style {
+    background-color: $dark_button_color;
+    color: $dark_white;
+    border: none;
+
+    &:hover {
+      background-color: $dark_button_hover_color;
+    }
+  }
+
 }
 
 
 .level_check_container {
   width: 100%;
   min-height: 100vh;
-  background-color: $background;
   @include flexible();
 }
 
@@ -38,7 +60,6 @@
 
 .form_container_h1 {
   font-weight: 700;
-  color: $black;
   font-size: 32px;
   line-height: 35px;
   margin-bottom: 70px;

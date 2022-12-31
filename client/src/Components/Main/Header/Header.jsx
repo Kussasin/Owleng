@@ -7,7 +7,9 @@ import { getDatabase, ref as firebaseRef, child, get } from "firebase/database";
 
 import DarkModeToggle from "react-dark-mode-toggle";
 import People from "../../../img/HeaderImg/People.png";
+import DarkPeople from "../../../img/HeaderImg/dark_user.png";
 import Dropdown from "../../../img/HeaderImg/Dropdown_arrow.png";
+import DarkDropdown from "../../../img/HeaderImg/dark_arrow.png";
 
 function DropdownItem(title, link) {
   const { logout } = useAuth();
@@ -116,11 +118,11 @@ function Header() {
             tabIndex={0}
             aria-hidden="true"
           >
-            <img className={styles.dropdown_icon} src={People} alt="man icon" />
+            <img className={styles.dropdown_icon} src={isDarkMode ? DarkPeople : People} alt="man icon" />
             <img
               className={`${styles.dropdown_arrow} ${isActive ? styles.rotate_arrow_180 : ""
                 }`}
-              src={Dropdown}
+              src={isDarkMode ? DarkDropdown : Dropdown}
               alt="dropdown arrow"
             />
             <div
