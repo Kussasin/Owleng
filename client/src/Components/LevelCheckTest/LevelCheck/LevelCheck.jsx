@@ -21,7 +21,11 @@ function LevelCheck({ isDarkTheme }) {
   }
 
   return (
-    <div className={`${styles.level_check_container} ${isDarkTheme ? styles.darkTheme : styles.lightTheme}`}>
+    <div
+      className={`${styles.level_check_container} ${
+        isDarkTheme ? styles.darkTheme : styles.lightTheme
+      }`}
+    >
       <div className={styles.form_container}>
         <p className={styles.form_container_h1}>
           Czy wiesz swój poziom języka?
@@ -29,14 +33,14 @@ function LevelCheck({ isDarkTheme }) {
         <div className={styles.check_level}>
           <NavLink to="/ChoiceLevel" className={styles.link_container}>
             <CustomButton
-              title="Wiem, jaki mam poziom"
+              title="Znam, jaki mam poziom"
               additionalStyles={styles.button_style}
-              onPress={() => { }}
+              onPress={() => {}}
             />
           </NavLink>
           <NavLink to="/" className={styles.link_container}>
             <CustomButton
-              title="Tylko zaczynam naukę"
+              title="Dopiero zaczynam naukę"
               additionalStyles={styles.button_style}
             />
           </NavLink>
@@ -53,7 +57,7 @@ function LevelCheck({ isDarkTheme }) {
 }
 
 LevelCheck.propTypes = {
-  isDarkTheme: PropTypes.bool
-}
+  isDarkTheme: PropTypes.bool,
+};
 
 export default LevelCheck;

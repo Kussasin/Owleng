@@ -23,8 +23,16 @@ function SquareButton(name, url, linkTo, isDark) {
         <h3 className={styles.button_container_title}>{name}</h3>
         <img className={styles.button_container_image} src={url} alt={name} />
         <div className={styles.button_container_arrow}>
-          <img className={styles.arrow_disable} src={isDark ? DarkArrow : Arrow} alt="arrow" />
-          <img className={styles.arrow_active} src={isDark ? DarkActiveArrow : ActiveArrow} alt="arrow" />
+          <img
+            className={styles.arrow_disable}
+            src={isDark ? DarkArrow : Arrow}
+            alt="arrow"
+          />
+          <img
+            className={styles.arrow_active}
+            src={isDark ? DarkActiveArrow : ActiveArrow}
+            alt="arrow"
+          />
         </div>
       </div>
     </Link>
@@ -37,12 +45,16 @@ function MainPage({ isDarkTheme }) {
     { url: Czytanie, title: "Czytanie", link: "/reading" },
     { url: Testy, title: "Testy", link: "/tests" },
     { url: Słuchanie, title: "Słuchanie", link: "/listening" },
-    { url: Wideo_materiały, title: "Wideo Materiały", link: "/video" },
+    { url: Wideo_materiały, title: "Materiały wideo", link: "/video" },
     { url: Mówienie, title: "Mówienie", link: "/speaking" },
   ];
 
   return (
-    <div className={`${styles.container} ${isDarkTheme ? styles.darkTheme : styles.lightTheme}`}>
+    <div
+      className={`${styles.container} ${
+        isDarkTheme ? styles.darkTheme : styles.lightTheme
+      }`}
+    >
       <div className={styles.container_header}>
         <Header />
         <MobileHeader />
@@ -57,7 +69,7 @@ function MainPage({ isDarkTheme }) {
 }
 
 MainPage.propTypes = {
-  isDarkTheme: PropTypes.bool
-}
+  isDarkTheme: PropTypes.bool,
+};
 
 export default MainPage;
