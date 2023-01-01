@@ -83,17 +83,14 @@
 }
 
 @media (max-width: 768px) {
-
   .card {
     padding: 56px 128px;
     width: 250px;
     height: 200px;
   }
-
 }
 
 @media (max-width: 680px) {
-
   .form_container {
     p {
       font-size: 1.6em;
@@ -113,7 +110,6 @@
 }
 
 @media (max-width: 468px) {
-
   .form_container {
     p {
       font-size: 1.4em;
@@ -133,7 +129,6 @@
 }
 
 @media (max-width: 400px) {
-
   .card {
     padding: 24px 32px;
     width: 250px;
@@ -142,7 +137,6 @@
 }
 
 @media (max-width: 375px) {
-
   .form_container {
     p {
       font-size: 1.2em;
@@ -153,4 +147,12 @@
   .answer_button {
     padding: 16px 5px;
   }
+}
+
+.loader {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 250px;
 }

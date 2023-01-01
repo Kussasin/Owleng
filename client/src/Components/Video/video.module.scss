@@ -129,3 +129,11 @@
   @include flexible();
   font-size: 40px;
 }
+
+.loader {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 250px;
+}
