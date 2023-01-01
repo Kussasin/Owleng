@@ -226,7 +226,7 @@ function Listening({ isDarkTheme }) {
                             )}
                           </div>
                         </div>
-                        <div className={styles.button_style}>
+                        <div >
                           <CustomButton
                             title={"Następne pytanie"}
                             additionalStyles={styles.button_style}

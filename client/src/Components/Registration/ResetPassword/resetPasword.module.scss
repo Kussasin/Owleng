@@ -17,73 +17,49 @@
     color: $black;
   }
 
-  .forms_container_content {
+  .submit_button {
+    background-color: $main_color;
+    color: $white;
 
-    .form_container {
-      .input {
-        background-color: $inactive_field;
-      }
-
-      .input:focus {
-        background-color: $white;
-        border-color: $main_color;
-      }
-
-      .submit_button {
-        background-color: $main_color;
-        color: $white;
-      }
+    &:hover {
+      background-color: $button_hover;
     }
+  }
 
-    &_subscribe {
-      a {
-        color: $main_color;
-      }
-    }
-
-    .link_styles {
-      color: $main_color;
-    }
+  .link_styles {
+    color: $main_color;
   }
 }
 
 .darkTheme {
   .login_page_container {
-    background-color: $white;
+    background-color: $dark_back;
   }
 
   .reset_msg {
-    color: $black;
+    color: $dark_white;
   }
 
-  .forms_container_content {
+	.submit_button {
+		background-color: $dark_button_color;
+		color: $dark_white;
 
-    .form_container {
-      .input {
-        background-color: $inactive_field;
-      }
+		&:hover {
+			background-color: $dark_button_hover_color;
+		}
+	}
 
-      .input:focus {
-        background-color: $white;
-        border-color: $main_color;
-      }
+	.link_styles {
+		color: $dark_main_color;
+	}
 
-      .submit_button {
-        background-color: $main_color;
-        color: $white;
-      }
-    }
+	.header {
+		color: $dark_main_color;
+	}
+}
 
-    &_subscribe {
-      a {
-        color: $main_color;
-      }
-    }
-
-    .link_styles {
-      color: $main_color;
-    }
-  }
+.header {
+  width: 100%;
 }
 
 .login_page {
@@ -147,29 +123,24 @@
           width: 90%;
           padding: 17px;
           border-radius: 10px;
-          background-color: $inactive_field;
           margin: 8px 0;
           font-size: 14px;
         }
 
         .input:focus {
-          background-color: $white;
           border: 1px solid;
-          border-color: $main_color;
         }
 
         .submit_button {
           border: none;
           outline: none;
           padding: 15px 0;
-          background-color: $main_color;
           border-radius: 10px;
           width: 100%;
           min-width: 180px;
           margin: 8px 0;
           font-weight: bold;
           font-size: 14px;
-          color: $white;
           cursor: pointer;
         }
       }
@@ -180,13 +151,11 @@
 
         a {
           text-decoration: none;
-          color: $main_color;
         }
       }
 
       .link_styles {
         text-decoration: none;
-        color: $main_color;
 
         span {
           display: inline-block;

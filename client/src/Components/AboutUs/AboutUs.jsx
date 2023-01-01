@@ -10,7 +10,11 @@ import photo_bb from "./images/BogdanBasistyi.jpeg";
 
 function AboutUs({ isDarkTheme }) {
   return (
-    <div className={`${styles.container} ${isDarkTheme ? styles.darkTheme : styles.lightTheme}`}>
+    <div
+      className={`${styles.container} ${
+        isDarkTheme ? styles.darkTheme : styles.lightTheme
+      }`}
+    >
       <MobileHeader />
       <Header />
       <div className={styles.container_content}>
@@ -20,7 +24,6 @@ function AboutUs({ isDarkTheme }) {
           </h1>
           <div className={styles.info_about_owleng}>
             <p>
-              {" "}
               <b>Owleng</b> &mdash;&nbsp;interaktywna aplikacja internetowa
               do&nbsp;nauki języka angielskiego
             </p>
@@ -50,6 +53,31 @@ function AboutUs({ isDarkTheme }) {
               <b>Testy</b> &mdash;&nbsp;blok z&nbsp;testami na&nbsp;gramatykę,
               słownictwo, gł&oacute;wny test na&nbsp;poziom znajomości języka
               oraz inne.
+            </li>
+          </div>
+          <center>
+            <h2>Materiały</h2>
+          </center>
+          <div className={styles.info_about_materials}>
+            <p>
+              <b>Materiały do aplikacji zostały zebrane z różnych źródeł:</b>
+            </p>
+            <li>
+              Na stronie z wideo materiałami są wideo autorów kanału&nbsp;
+              <a href="https://www.youtube.com/@darmowyangielski">
+                &quot;JĘZYK ANGIELSKI darmowy kurs wideo&quot;
+              </a>
+              &nbsp;ze strony YouTube
+            </li>
+            <li>
+              Na stronach z testami są kolekcje pytań ze strony&nbsp;
+              <a href="https://myenglishworld.pro/elementary-test">
+                &quot;MyEnglishWorld&quot;
+              </a>
+              &nbsp;oraz&nbsp;
+              <a href="https://myenglishworld.pro/elementary-test">
+                &quot;SpeakNow&quot;
+              </a>
             </li>
           </div>
           <h1>
@@ -106,7 +134,7 @@ function AboutUs({ isDarkTheme }) {
 }
 
 AboutUs.propTypes = {
-  isDarkTheme: PropTypes.bool
-}
+  isDarkTheme: PropTypes.bool,
+};
 
 export default AboutUs;

@@ -7,7 +7,9 @@ import { getDatabase, ref as firebaseRef, child, get } from "firebase/database";
 
 import DarkModeToggle from "react-dark-mode-toggle";
 import Cross from "../../../img/HeaderImg/Cross.png"
+import DarkCross from "../../../img/HeaderImg/dark_krestik.png"
 import Burger from "../../../img/HeaderImg/Burger.png"
+import DarkBurger from "../../../img/HeaderImg/dark_burger.png"
 
 function NavItem(title, link) {
   const { logout } = useAuth();
@@ -92,14 +94,14 @@ function MobileHeader() {
           <span className={styles.current_user_level}>{userLevel}</span>
         </div>
         <div>
-          <img className={styles.burger_icon} src={Burger} alt="burger"
+          <img className={styles.burger_icon} src={isDarkMode ? DarkBurger : Burger} alt="burger"
             onClick={Toggling} role="button" tabIndex={0} aria-hidden="true" />
           <div className={`${isActive ? styles.background_blur : ''}`} />
           <div className={`${styles.burger_menu} ${isActive ? '' : styles.menu_disable}`}>
             <div className={styles.burger_menu_container}>
               <div className={styles.burger_items}>
                 <div className={styles.burger_icon_container} onClick={Toggling} role="button" tabIndex={0} aria-hidden="true" >
-                  <img className={styles.burger_icon_cross} src={Cross} alt="close_cross" />
+                  <img className={styles.burger_icon_cross} src={isDarkMode ? DarkCross : Cross} alt="close_cross" />
                 </div>
                 {NavItemsOver.map((item) =>
                   NavItem(item.title, item.link)

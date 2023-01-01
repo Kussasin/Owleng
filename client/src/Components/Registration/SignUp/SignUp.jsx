@@ -4,7 +4,8 @@ import { useAuth } from "../AuthContext/AuthContext";
 import styles from "./signUp.module.scss";
 import PropTypes from "prop-types";
 
-import regestrationImg from "../../../img/LogRegImg/registration-illustration.svg";
+import RegestrationImg from "../../../img/LogRegImg/registration-illustration.svg";
+import DarkRegestrationImg from "../../../img/LogRegImg/dark_registration.svg";
 import Header from "../RegHeader/RegHeader";
 
 function Signup({ isDarkTheme }) {
@@ -47,7 +48,9 @@ function Signup({ isDarkTheme }) {
   return (
     <div className={`${styles.registration_page} ${isDarkTheme ? styles.darkTheme : styles.lightTheme}`}>
       <div className={styles.registration_page_container}>
-        <Header />
+        <div className={styles.header}>
+          <Header />
+        </div>
         <div className={styles.registration_container}>
           <div className={styles.registration_container_left}>
             <div className={styles.registration_forms_container}>
@@ -108,7 +111,7 @@ function Signup({ isDarkTheme }) {
               </div>
               <img
                 className={styles.content_container_picture}
-                src={regestrationImg}
+                src={isDarkTheme ? DarkRegestrationImg : RegestrationImg}
                 alt="welcome_picture"
               />
             </div>

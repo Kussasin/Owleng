@@ -12,42 +12,83 @@
 }
 
 .lightTheme {
-  .container_header {
-    background-color: $white;
-  }
-
-  .container_content_right_title {
-    color: $main_color;
-  }
 
   .answer_button {
     background-color: $white;
     box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.05);
     color: $black;
+
+    &:hover {
+      background-color: $button_hover;
+      color: $white;
+    }
   }
 
   .question {
     color: $black;
+  }
+
+  .answer_button_wrong {
+    color: red;
+  }
+
+  .answer_button_correct {
+    color: rgb(3, 151, 3);
   }
 }
 
 .darkTheme {
-  .container_header {
-    background-color: $white;
-  }
 
-  .container_content_right_title {
-    color: $main_color;
+  .question_container_text {
+    background-color: $header_color;
   }
 
   .answer_button {
-    background-color: $white;
+    background-color: $header_color;
     box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.05);
-    color: $black;
+    color: $dark_white;
+    border: none;
+
+    &:hover {
+      background-color: $hover_menu;
+      color: $dark_white;
+    }
   }
 
   .question {
-    color: $black;
+    color: $dark_white;
+  }
+
+  .answer_button_wrong {
+    color: $dark_red;
+  }
+
+  .answer_button_correct {
+    color: $dark_green;
+  }
+
+  .button_style {
+    background-color: $dark_button_color;
+    color: $dark_white;
+    border: none;
+
+    &:hover {
+      background-color: #2C6EA3;
+      color: $dark_white;
+    }
+  }
+
+  .content_container {
+    background-color: $header_color;
+  }
+
+  .card {
+    background-color: $header_color;
+    color: $dark_white;
+  }
+
+  .themeCard {
+    background-color: $header_color;
   }
 }
 
@@ -154,7 +195,6 @@
 
 .answer_button {
   min-width: 40%;
-  box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.05);
   min-width: 112px;
   word-wrap: break-all;
 }
@@ -163,14 +203,6 @@
   padding: 68px 95px 20px 87px;
   margin-top: 22%;
   margin-bottom: 22%;
-}
-
-.answer_button_wrong {
-  color: red;
-}
-
-.answer_button_correct {
-  color: rgb(3, 151, 3);
 }
 
 .question_container {

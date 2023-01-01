@@ -1,6 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import Dropdown from "../../img/HeaderImg/Dropdown_arrow.png";
+import DarkDropdown from "../../img/HeaderImg/dark_arrow.png";
 import styles from "./leftSideMenu.module.scss";
 
 const LeftSideMenu = (props) => {
@@ -10,7 +11,18 @@ const LeftSideMenu = (props) => {
   let id = 0;
   let themeId = 0;
   const ref = useRef();
+  const [isDark, setisDark] = useState(false);
+  useEffect(() => {
+    setisDark("true" === localStorage.getItem("Theme"));
 
+    window.addEventListener("storage", () => {
+      setisDark("true" === localStorage.getItem("Theme"));
+    });
+
+    return () => {
+      window.removeEventListener("storage", () => {});
+    };
+  }, []);
   function Toggle(index) {
     return () => setThemeIndex(index);
   }
@@ -23,7 +35,11 @@ const LeftSideMenu = (props) => {
   }
 
   return (
-    <div className={styles.container_content_left}>
+    <div
+      className={`${styles.container_content_left} ${
+        isDark ? styles.darkTheme : styles.lightTheme
+      }`}
+    >
       <div className={styles.container_dropdown}>
         {props.title.map((element, index) => {
           const titleIndex = index;
@@ -47,7 +63,7 @@ const LeftSideMenu = (props) => {
                         : ""
                       : ""
                   }`}
-                  src={Dropdown}
+                  src={isDark ? DarkDropdown : Dropdown}
                   alt="dropdown arrow"
                 />
               </div>

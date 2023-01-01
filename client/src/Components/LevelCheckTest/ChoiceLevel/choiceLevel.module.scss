@@ -8,12 +8,38 @@ $button_pudding: 25px;
   align-items: center;
 }
 
-.lightTheme{
+.lightTheme {
+  .choice_level_container {
+    background-color: $background;
+  }
 
+  .form_container {
+    p {
+      color: $black;
+    }
+  }
 }
 
-.darkTheme{
-  
+.darkTheme {
+  .choice_level_container {
+    background-color: $dark_back;
+  }
+
+  .form_container {
+    p {
+      color: $dark_white;
+    }
+  }
+
+  .button_style {
+    background-color: $dark_button_color;
+    color: $dark_white;
+    border: none;
+
+    &:hover {
+      background-color: $dark_button_hover_color;
+    }
+  }
 }
 
 
@@ -21,10 +47,8 @@ $button_pudding: 25px;
 .choice_level_container {
   width: 100%;
   min-height: 100vh;
-  background-color: $background;
   @include flex();
   justify-content: center;
-
 }
 
 .form_container {
@@ -35,7 +59,6 @@ $button_pudding: 25px;
 
   p {
     font-weight: 700;
-    color: $black;
     font-size: 32px;
     line-height: 35px;
     margin-bottom: 70px;

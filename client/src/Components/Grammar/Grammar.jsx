@@ -186,7 +186,7 @@ function Grammar({ isDarkTheme }) {
                             </div>
                           </div>
                         </div>
-                        <div className={styles.button_style}>
+                        <div>
                           <CustomButton
                             title={"Przejdź do testu"}
                             additionalStyles={styles.button_style}
@@ -260,7 +260,7 @@ function Grammar({ isDarkTheme }) {
                                 </div>
                               </div>
                             </div>
-                            <div className={styles.button_style}>
+                            <div>
                               <CustomButton
                                 title={"Następne pytanie"}
                                 additionalStyles={styles.button_style}

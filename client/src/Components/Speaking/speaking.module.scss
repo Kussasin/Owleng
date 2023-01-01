@@ -9,9 +9,6 @@ $button_height: 80px;
 }
 
 .lightTheme {
-  .container_header {
-    background-color: $white;
-  }
 
   .container_content_right_title {
     color: $black;
@@ -21,27 +18,85 @@ $button_height: 80px;
     color: $grey;
   }
 
+  .speack_button {
+    background: $white;
+    border: 2px solid $main_color;
+  }
+
   .answer_result_text {
     color: #FFF;
+  }
+
+
+  .wrongAnswer {
+    background-color: $error_color;
+  }
+
+  .rightAnswer {
+    background-color: $green;
+  }
+
+  .listening {
+    border-color: $green;
   }
 }
 
 .darkTheme {
-  .container_header {
-    background-color: $white;
-  }
 
   .container_content_right_title {
-    color: $black;
+    color: $dark_white;
+  }
+  .container_content_right_content {
+    background-color: $header_color;
   }
 
   .speak_container_content_translate {
-    color: $grey;
+    color: $dark_white;
+  }
+
+  .speack_button {
+    background-color: $dark_white;
+    border: 2px solid $dark_back;
   }
 
   .answer_result_text {
-    color: #FFF;
+    color: $dark_white;
   }
+
+  .answer_button {
+    background-color: $dark_button_color;
+    color: $dark_white;
+    border: none;
+
+    &:hover {
+      background-color: #2C6EA3;
+      color: $dark_white;
+    }
+  }
+
+  .wrongAnswer {
+    background-color: $dark_red;
+  }
+
+  .rightAnswer {
+    background-color: $dark_green;
+  }
+
+  .listening {
+    border-color: $dark_green;
+    border: 3px solid $dark_green;
+
+  }
+
+  .card {
+    background-color: $header_color;
+    color: $dark_white;
+  }
+
+  .themeCard {
+    background-color: $header_color;
+  }
+
 }
 
 .loader {
@@ -164,19 +219,9 @@ $button_height: 80px;
   }
 }
 
-.wrongAnswer {
-  background-color: $error_color;
-}
-
-.rightAnswer {
-  background-color: $green;
-}
-
 .speack_button {
   height: $button_height;
   width: $button_height;
-  background: $white;
-  border: 2px solid $main_color;
   border-radius: 65%;
   cursor: pointer;
 
@@ -185,10 +230,11 @@ $button_height: 80px;
   }
 }
 
-.listening {
-  border-color: $green;
-}
-
 .answer_button {
   padding: 20px 25px;
+}
+
+.card{
+  border-radius:20px;
+  padding: 20px 30px;
 }
