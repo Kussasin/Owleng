@@ -1,5 +1,4 @@
 import React, { useMemo, useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
 import { ref, child, get, update } from "firebase/database";
 import { database, auth } from "../../utils/firebaseConfig";
 import { getLevelBasedOnScore } from "../../utils/getLevelBasedOnScore";
@@ -53,7 +52,6 @@ function Tests({ isDarkTheme }) {
   const [data, setData] = useState();
   // zmienna dla chronienia poziomu obliczonego po zakonczeniu testu
   const [grade, setGrade] = useState("");
-  const [isSuccess, setIsSuccess] = useState(false);
   // zmienna dla chronienia aktualnego poprawngo id odpowiedzi
   // poczatkowo ustawiona na -1 by uniknac problemow pdczas porownywania z indeksem wybranego pytania
   const [currentCorrectAnswerId, setCurrentCorrectAnswerId] = useState(-1);
@@ -93,7 +91,6 @@ function Tests({ isDarkTheme }) {
     const currentQuestion =
       data[Object.keys(data)[selectedTopicId]].themes[selectedThemeId]
         .questions[currentQuestionIndex];
-    console.log(selectedAnswer);
     // zpisanie id poprawnej odpowiedzi do zmiennej
     const correctAnswerId = currentQuestion.correctAnswerId;
     // przekazanie id aktualnej poprawnej odpowiedzi w useState dla dostepu
@@ -140,14 +137,10 @@ function Tests({ isDarkTheme }) {
         level: grade,
       };
       update(ref(database), updates)
-        .then(() => {
-          setIsSuccess(true);
-        })
+        .then(() => {})
         .catch((e) => {
           console.log(JSON.stringify(e));
         });
-    } else {
-      return;
     }
   };
 
@@ -224,10 +217,6 @@ function Tests({ isDarkTheme }) {
         setIsLoading(false);
       });
   }, []);
-
-  if (isSuccess) {
-    return <Navigate to="/" replace={true} />;
-  }
 
   return (
     <div
