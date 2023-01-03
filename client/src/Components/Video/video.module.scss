@@ -192,7 +192,8 @@
   .buttons {
     width: 100%;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: 60px;
   }
 
   .button_style {
@@ -230,5 +231,15 @@
   .load_more {
     padding: 12px 20px;
     font-size: 16px;
+  }
+  .buttons {
+    gap: 40px;
+  }
+}
+
+@media (max-width: 370px) {
+
+  .buttons {
+    gap: 10px;
   }
 }
