@@ -70,8 +70,8 @@
 
     .info_about_materials {
       font-size: 17px;
-      margin-bottom: 15px;
-      margin: 0 24px 16px;
+      margin: 0 24px 16px 78px;
+
       p {
         margin: 6px 0;
       }
@@ -137,7 +137,22 @@
     .autors {
       width: 32%;
     }
+
+    &_info {
+      .info_about_materials {
+        font-size: 16px;
+        margin: 0 24px 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        p {
+          margin: 6px 0;
+        }
+      }
+    }
   }
+
 }
 
 @media (max-width: 900px) {
@@ -171,7 +186,8 @@
     }
 
     &_info {
-      .info_about_owleng {
+      .info_about_owleng, .info_about_materials {
+        margin: 0;
         font-size: 14px;
       }
     }

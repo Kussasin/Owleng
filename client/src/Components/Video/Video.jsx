@@ -89,9 +89,8 @@ function Video({ isDarkTheme }) {
 
   return (
     <div
-      className={`${styles.container} ${
-        isDarkTheme ? styles.darkTheme : styles.lightTheme
-      }`}
+      className={`${styles.container} ${isDarkTheme ? styles.darkTheme : styles.lightTheme
+        }`}
     >
       <div className={styles.container_header}>
         <Header />
@@ -102,156 +101,153 @@ function Video({ isDarkTheme }) {
           <Loader />
         </div>
       ) : (
-        <div>
-          <div
-            style={{
-              paddingLeft: "10%",
-              marginTop: 70,
-            }}
-          >
-            <div className={styles.buttons}>
-              <CustomButton
-                title="Filtruj"
-                additionalStyles={styles.button_style}
-                onPress={() => {
-                  setShowSort(false);
-                  setshowFilters(!showFilters);
-                }}
-              />
-              <CustomButton
-                title="Sortuj"
-                additionalStyles={styles.button_style}
-                onPress={() => {
-                  setshowFilters(false);
-                  setShowSort(!showSort);
-                }}
-              />
-            </div>
-            <div>
-              {showFilters &&
-                categories.map((category) => (
-                  <Checkbox
-                    key={category.name}
-                    label={category.displayName}
-                    value={category.selected}
-                    onChange={() => {
-                      setActiveCategory(category.name);
-                    }}
-                  />
-                ))}
-              {showSort && (
-                <div>
-                  <label className={styles.sort_and_filter}>
-                    <input
-                      type="radio"
-                      value="SortAlphAsc"
-                      checked={selectedSort === "SortAlphAsc"}
-                      onChange={() => setselectedSort("SortAlphAsc")}
-                    />
-                    Sortuj A-Z
-                  </label>
-                  <label className={styles.sort_and_filter}>
-                    <input
-                      type="radio"
-                      value="SortAlphDesc"
-                      checked={selectedSort === "SortAlphDesc"}
-                      onChange={() => setselectedSort("SortAlphDesc")}
-                    />
-                    Sortuj Z-A
-                  </label>
-                  <label className={styles.sort_and_filter}>
-                    <input
-                      type="radio"
-                      value="DurationAsc"
-                      checked={selectedSort === "DurationAsc"}
-                      onChange={() => setselectedSort("DurationAsc")}
-                    />
-                    Czas rosnąco
-                  </label>
-                  <label className={styles.sort_and_filter}>
-                    <input
-                      type="radio"
-                      value="DurationDesc"
-                      checked={selectedSort === "DurationDesc"}
-                      onChange={() => setselectedSort("DurationDesc")}
-                    />
-                    Czas malejąco
-                  </label>
-                </div>
-              )}
-            </div>
-          </div>
-          {videoData.length == 0 ? (
-            <div className={styles.videos_null}>Brak video</div>
-          ) : (
-            <div className={styles.container_content}>
-              <div className={styles.video_grid}>
-                {videos.map((item) => (
-                  <VideoCard
-                    key={item.id}
-                    name={item.title}
-                    videoId={item.videoId}
-                    onClick={() => play(item.videoId)}
-                  />
-                ))}
+          <div>
+            <div className={styles.sort_buttons_container}>
+              <div className={styles.buttons}>
+                <CustomButton
+                  title="Filtruj"
+                  additionalStyles={styles.button_style}
+                  onPress={() => {
+                    setShowSort(false);
+                    setshowFilters(!showFilters);
+                  }}
+                />
+                <CustomButton
+                  title="Sortuj"
+                  additionalStyles={styles.button_style}
+                  onPress={() => {
+                    setshowFilters(false);
+                    setShowSort(!showSort);
+                  }}
+                />
               </div>
-              {currentVideoId && (
-                <>
-                  <div
-                    className={styles.video}
-                    style={{ top: windowDimensions.height * 0.25 }}
-                  >
-                    {videoLoaded && (
-                      <div className={styles.close_button_container}>
-                        <CustomButton
-                          title="X"
-                          additionalStyles={styles.close_button}
-                          onPress={() => {
-                            setVideoLoaded(false);
-                            setcurrentVideoId("");
+              <div className={styles.sort_container}>
+                {showFilters &&
+                  categories.map((category) => (
+                    <Checkbox
+                      key={category.name}
+                      label={category.displayName}
+                      value={category.selected}
+                      onChange={() => {
+                        setActiveCategory(category.name);
+                      }}
+                    />
+                  ))}
+                {showSort && (
+                  <div className={styles.sort_and_filter_container}>
+                    <label className={styles.sort_and_filter}>
+                      <input
+                        type="radio"
+                        value="SortAlphAsc"
+                        checked={selectedSort === "SortAlphAsc"}
+                        onChange={() => setselectedSort("SortAlphAsc")}
+                      />
+                    Sortuj&nbsp;A&nbsp;-&nbsp;Z
+                  </label>
+                    <label className={styles.sort_and_filter}>
+                      <input
+                        type="radio"
+                        value="SortAlphDesc"
+                        checked={selectedSort === "SortAlphDesc"}
+                        onChange={() => setselectedSort("SortAlphDesc")}
+                      />
+                    Sortuj&nbsp;Z&nbsp;-&nbsp;A
+                  </label>
+                    <label className={styles.sort_and_filter}>
+                      <input
+                        type="radio"
+                        value="DurationAsc"
+                        checked={selectedSort === "DurationAsc"}
+                        onChange={() => setselectedSort("DurationAsc")}
+                      />
+                    Czas&nbsp;rosnąco
+                  </label>
+                    <label className={styles.sort_and_filter}>
+                      <input
+                        type="radio"
+                        value="DurationDesc"
+                        checked={selectedSort === "DurationDesc"}
+                        onChange={() => setselectedSort("DurationDesc")}
+                      />
+                    Czas&nbsp;malejąco
+                  </label>
+                  </div>
+                )}
+              </div>
+            </div>
+            {videoData.length == 0 ? (
+              <div className={styles.videos_null}>Brak video</div>
+            ) : (
+                <div className={styles.container_content}>
+                  <div className={styles.video_grid}>
+                    {videos.map((item) => (
+                      <VideoCard
+                        key={item.id}
+                        name={item.title}
+                        videoId={item.videoId}
+                        onClick={() => play(item.videoId)}
+                      />
+                    ))}
+                  </div>
+                  {currentVideoId && (
+                    <>
+                      <div
+                        className={styles.video}
+                        style={{ top: windowDimensions.height * 0.25 }}
+                      >
+                        {videoLoaded && (
+                          <div className={styles.close_button_container}>
+                            <CustomButton
+                              title="X"
+                              additionalStyles={styles.close_button}
+                              onPress={() => {
+                                setVideoLoaded(false);
+                                setcurrentVideoId("");
+                              }}
+                            />
+                          </div>
+                        )}
+                        <YouTube
+                          videoId={currentVideoId}
+                          onReady={() => setVideoLoaded(true)}
+                          opts={{
+                            width: windowDimensions.width * 0.5,
+                            height: windowDimensions.height * 0.6,
                           }}
                         />
                       </div>
-                    )}
-                    <YouTube
-                      videoId={currentVideoId}
-                      onReady={() => setVideoLoaded(true)}
-                      opts={{
-                        width: windowDimensions.width * 0.5,
-                        height: windowDimensions.height * 0.6,
+                      <div className={styles.video_background} />
+                    </>
+                  )}
+                </div>
+              )}
+            <div className={styles.load_container}>
+              {numberVideosToDisplay <= videos.length && videos.length > 7 ? (
+                <CustomButton
+                  title="Zobać więcej"
+                  additionalStyles={styles.load_more}
+                  onPress={() => {
+                    if (numberVideosToDisplay >= videoData.length) {
+                      return;
+                    } else {
+                      setnumberVideosToDisplay((prevState) => prevState + 8);
+                    }
+                  }}
+                />
+              ) : (
+                  videos.length > 7 && (
+                    <CustomButton
+                      title="Zobać mniej"
+                      additionalStyles={styles.load_more}
+                      onPress={() => {
+                        setnumberVideosToDisplay(8);
                       }}
                     />
-                  </div>
-                  <div className={styles.video_background} />
-                </>
-              )}
+                  )
+                )}
             </div>
-          )}
-          {numberVideosToDisplay <= videos.length && videos.length > 7 ? (
-            <CustomButton
-              title="Zobać więcej"
-              additionalStyles={styles.load_more}
-              onPress={() => {
-                if (numberVideosToDisplay >= videoData.length) {
-                  return;
-                } else {
-                  setnumberVideosToDisplay((prevState) => prevState + 8);
-                }
-              }}
-            />
-          ) : (
-            videos.length > 7 && (
-              <CustomButton
-                title="Zobać mniej"
-                additionalStyles={styles.load_more}
-                onPress={() => {
-                  setnumberVideosToDisplay(8);
-                }}
-              />
-            )
-          )}
-        </div>
-      )}
+          </div>
+        )}
     </div>
   );
 }

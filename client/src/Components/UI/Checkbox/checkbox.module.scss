@@ -1,10 +1,53 @@
 @import "../../../lightmode_colors.module.scss";
+
 .checkbox {
   transform: scale(1.7);
   margin-left: 50px;
 }
+
 .sort_and_filter {
   font-style: normal;
   font-size: 20px;
   padding: 0px 10px 0px 2px;
+}
+
+@media (max-width: 768px) {
+  .checkbox {
+    height: 12px;
+  }
+
+  .sort_and_filter {
+    font-size: 16px;
+    padding: 10px 10px 0px 2px;
+  }
+}
+
+@media (max-width: 520px) {
+  .checkbox {
+    height: 10px;
+    margin-left: 30px;
+  }
+
+  .sort_and_filter {
+    font-size: 16px;
+    padding: 10px 0px 0px;
+  }
+}
+
+@media (max-width: 520px) {
+  .checkbox {
+    height: 8px;
+    margin-left: 25px;
+  }
+
+  .sort_and_filter {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 375px) {
+  .checkbox {
+    height: 8px;
+    margin-left: 12px;
+  }
 }

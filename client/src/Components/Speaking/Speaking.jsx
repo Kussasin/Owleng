@@ -30,8 +30,6 @@ function Speaking({ isDarkTheme }) {
   const [isLoading, setIsLoading] = useState(false);
   const [resTranscript, setResetTranscript] = useState(true);
   const [errorMessageHide, seterrorMessageHide] = useState(true);
-  const [, setisFisrtElement] = useState();
-  const [, setCurrentCorrectAnswerId] = useState();
 
   let {
     transcript,
@@ -174,12 +172,13 @@ function Speaking({ isDarkTheme }) {
               setUserScore={setUserScore}
               setCurrentQuestionIndex={setCurrentQuestionIndex}
               setSelectedAnswerId={setSelectedAnswerId}
-              setCurrentCorrectAnswerId={setCurrentCorrectAnswerId}
-              setisFisrtElement={setisFisrtElement}
+              setCurrentCorrectAnswerId={() => { }}
+              setisFisrtElement={() => { }}
               setResetTranscript={setResetTranscript}
               setisCorrect={setisCorrect}
               setCurrentText={setCurrentText}
               seterrorMessageHide={seterrorMessageHide}
+              setisEnable={() => { }}
             />
             {testIsFinish ?
               (
@@ -198,7 +197,7 @@ function Speaking({ isDarkTheme }) {
                   <div className={styles.container_content_right}>
                     <p className={styles.container_content_right_title}>
                       Naciśnij  na mikrofon i powiedź tekst:
-                </p>
+                    </p>
                     <div className={styles.container_content_right_content}>
                       <div className={styles.speak_container}>
                         <div className={styles.audoi_container}>
@@ -214,7 +213,7 @@ function Speaking({ isDarkTheme }) {
                         </div>
                       </div>
                     </div>
-                    <div className={styles.answer} /*onChange={IsChange}*/ >
+                    <div className={styles.answer}>
                       {answerIsRight == undefined ?
                         <p className={styles.emptyElement}></p> :
                         (answerIsRight ?
@@ -233,10 +232,10 @@ function Speaking({ isDarkTheme }) {
                     <button className={`${styles.speack_button} ${listening ? styles.listening : ''}`} disabled={isCorrect} onClick={() => SpeechRecognition.startListening({ language: 'en-US' })}>
                       <img className={styles.speack_button_micro} src={Microphone} alt="Microphone" />
                     </button>
-                    <p>{transcript}</p>
+                    <p className={styles.transcript}>{transcript}</p>
                     <CustomButton
                       title="Następne pytanie"
-                      additionalStyles={styles.answer_button}
+                      additionalStyles={styles.next_button}
                       onPress={nextQuestion}
                       disabled={listening ? true : false}
                     />

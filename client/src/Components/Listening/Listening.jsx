@@ -32,9 +32,11 @@ function Listening({ isDarkTheme }) {
   // zmienna dla chronienia id wybranej odpowiedzi
   const [selectedAnswerId, setSelectedAnswerId] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
+  const [isEnable, setisEnable] = useState(false);
 
   // funkcja dla potwierdzenia wybranej odpowiedzi
   const onAnswerConfirm = (selectedAnswer) => {
+    setisEnable(true);
     const currentQuestion =
       data[Object.keys(data)[selectedTopicId]].themes[selectedThemeId]
         .questions[currentQuestionIndex];
@@ -74,6 +76,7 @@ function Listening({ isDarkTheme }) {
 
   // funkcja dla przejscia do nastepnego pytania
   const nextQuestion = () => {
+    setisEnable(false);
     // jezeli index aktualnego pytania < dlugosci tablicy z zapytaniami - 1
     if (currentQuestionIndex < currentTheme.questions.length - 1) {
       // zwiekszenie indeksu aktualnego pytania
@@ -154,6 +157,12 @@ function Listening({ isDarkTheme }) {
               setCurrentQuestionIndex={setCurrentQuestionIndex}
               setCurrentCorrectAnswerId={setCurrentCorrectAnswerId}
               setSelectedAnswerId={setSelectedAnswerId}
+              setisEnable={setisEnable}
+              setisFisrtElement={() => { }}
+              setResetTranscript={() => { }}
+              setisCorrect={() => { }}
+              setCurrentText={() => { }}
+              seterrorMessageHide={() => { }}
             />
             <div className={styles.container_content_right}>
               <div className={styles.container_content_right_content}>
@@ -216,6 +225,7 @@ function Listening({ isDarkTheme }) {
                                 }
                                 return (
                                   <CustomButton
+                                    disabled={isEnable}
                                     key={answer}
                                     title={answer}
                                     onPress={() => onAnswerConfirm(answer)}

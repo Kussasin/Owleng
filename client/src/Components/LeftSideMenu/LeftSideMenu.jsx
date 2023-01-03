@@ -38,7 +38,7 @@ const LeftSideMenu = (props) => {
     <div
       className={`${styles.container_content_left} ${
         isDark ? styles.darkTheme : styles.lightTheme
-      }`}
+      } ${props.additionalStyles}`}
     >
       <div className={styles.container_dropdown}>
         {props.title.map((element, index) => {
@@ -95,6 +95,7 @@ const LeftSideMenu = (props) => {
                           props.setisCorrect(false);
                           props.setCurrentText(undefined);
                           props.seterrorMessageHide(true);
+                          props.setisEnable(false);
                         }}
                         className={`${styles.dropdown_item_element} ${
                           subIndex === id ? styles.isActive : ""
@@ -131,10 +132,12 @@ LeftSideMenu.propTypes = {
   setCurrentCorrectAnswerId: PropTypes.func,
   setSelectedAnswerId: PropTypes.func,
   setisFisrtElement: PropTypes.func,
+  setisEnable: PropTypes.func,
   setResetTranscript: PropTypes.func,
   setisCorrect: PropTypes.func,
   setCurrentText: PropTypes.func,
   seterrorMessageHide: PropTypes.func,
+  additionalStyles: PropTypes.string,
 };
 
 export default LeftSideMenu;

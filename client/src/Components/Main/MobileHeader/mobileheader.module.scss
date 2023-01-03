@@ -80,12 +80,12 @@ $left_img_weight: 18px;
 
 	.change_theme {
 		p {
-			color: white;
+			color: $dark_white;
 		}
 	}
 
 	.background_blur {
-		background: rgba(255, 255, 255, 0.3);
+		background: rgba(0, 0, 0, 0.3);
 		;
 	}
 }

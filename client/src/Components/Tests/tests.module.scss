@@ -40,9 +40,9 @@
 
 .darkTheme {
 
-.question_container_text{
-  background-color: $header_color;
-}
+  .question_container_text {
+    background-color: $header_color;
+  }
 
   .answer_button {
     background-color: $header_color;
@@ -81,6 +81,10 @@
 
   .content_container {
     background-color: $header_color;
+  }
+
+  .hint {
+    margin: 0 0 20px;
   }
 
   .card {
@@ -122,17 +126,11 @@
   @include flexible();
   flex-direction: column;
   display: flex;
-
+  justify-content: center;
   width: 60%;
   gap: 20px;
-  height: 600px;
   //box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.05);
   border-radius: 20px;
-}
-
-.button_style {
-  padding: 22px 10px;
-  font-size: 16px;
 }
 
 .name_tests {
@@ -148,6 +146,12 @@
   gap: 12px;
 }
 
+.next_question_button {
+  padding: 16px 24px;
+  font-size: 16px;
+}
+
+
 .answer_button {
   min-width: 40%;
   min-width: 70px;
@@ -155,11 +159,19 @@
 }
 
 .card {
-  padding: 73px 196px 73px 196px;
-  margin-top: 10%;
+  padding: 68px 95px;
+  margin-bottom: 10%;
 }
 
+.left_menu {
+  width: 35%;
+}
 
+.questions_block {
+  @include flexible();
+  flex-direction: column;
+  gap: 20px;
+}
 
 .question_container {
   display: flex;
@@ -173,17 +185,13 @@
 }
 
 .question {
-  font-size: 30px;
+  font-size: 20px;
+  font-weight: 500;
   text-align: center;
-  margin-top: 40px;
+  margin: 24px 12px;
   display: block;
   line-height: 1em;
   padding: 5px 10px;
-}
-
-.block_custom_button {
-  position: absolute;
-  margin-top: 300px;
 }
 
 .loader {
@@ -205,4 +213,212 @@
   height: 50px;
   margin-left: 10px;
   margin-top: 6px;
+}
+
+@media (max-width: 1100px) {
+
+  .container_content_right {
+    width: 55%;
+  }
+
+  .name_tests {
+    font-size: 16px;
+  }
+
+  .content_text {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 995px) {
+  .left_menu {
+    min-width: 40%;
+  }
+}
+
+@media (max-width: 970px) {
+  .container_content_right {
+    width: 52%;
+  }
+
+  .container_content_right_content {
+    max-height: 500px;
+  }
+
+  .name_tests {
+    font-size: 14px;
+    margin-bottom: 30px;
+  }
+
+  .content_text {
+    font-size: 13px;
+  }
+
+  .question {
+    font-size: 17px;
+  }
+
+  .answer_button,
+  .hint {
+    font-size: 16px;
+  }
+
+  .next_question_button {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 890px) {
+  .container_content_right {
+    width: 52%;
+  }
+
+  .name_tests {
+    margin-bottom: 26px;
+  }
+}
+
+@media (max-width: 790px) {
+  .left_menu {
+    min-width: 40%;
+  }
+}
+
+@media (max-width: 768px) {
+  .left_menu {
+    align-self: center;
+    min-height: 310px;
+    width: 75%;
+  }
+
+  .left_side_menu {
+    width: 100% !important;
+  }
+
+  .container_content {
+    flex-direction: column;
+  }
+
+  .container_content_right {
+    width: 75%;
+  }
+
+  .name_tests {
+    font-size: 16px;
+  }
+
+  .content_text {
+    font-size: 15px;
+  }
+
+  .question {
+    font-size: 16px;
+    line-height: 24px;
+    margin: 18px 12px;
+  }
+
+  .answer_button,
+  .hint {
+    font-size: 15px;
+  }
+
+  .container {
+    padding-bottom: 25px;
+  }
+}
+
+@media (max-width: 678px) {
+  .container_content_right {
+    width: 85%;
+  }
+
+  .left_menu {
+    width: 85%;
+  }
+
+  .name_tests {
+    font-size: 15px;
+  }
+
+  .content_text {
+    font-size: 14px;
+  }
+
+  .next_question_button {
+    padding: 12px 20px;
+  }
+
+  .left_menu_card {
+    padding: 0 !important;
+  }
+
+  .container_content_right_content {
+    width: 100%;
+  }
+}
+
+@media (max-width: 549px) {
+
+  .container_content_right {
+    width: 90%;
+  }
+
+  .left_menu {
+    width: 90%;
+  }
+
+  .container_content_right_content {
+    font-size: 14px;
+  }
+
+  .name_tests {
+    font-size: 14px;
+  }
+
+  .content_text {
+    font-size: 13px;
+  }
+
+  .question {
+    font-size: 15px;
+  }
+
+  .answer_button,
+  .hint {
+    font-size: 14px;
+  }
+
+  .answer_button {
+    padding: 16px 10px !important;
+  }
+
+  .left_menu_card {
+    font-size: 14px;
+  }
+
+  .arrow_active {
+    width: 45px;
+    height: 45px;
+  }
+}
+
+@media (max-width: 375px) {
+
+  .container_content_right {
+    width: 100%;
+  }
+
+  .left_menu {
+    width: 100%;
+  }
+
+  .container_content_right_content,
+  .left_menu_card {
+    font-size: 13px;
+  }
+
+  .arrow_active {
+    width: 40px;
+    height: 40px;
+  }
 }

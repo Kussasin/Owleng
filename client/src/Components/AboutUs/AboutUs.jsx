@@ -11,9 +11,7 @@ import photo_bb from "./images/BogdanBasistyi.jpeg";
 function AboutUs({ isDarkTheme }) {
   return (
     <div
-      className={`${styles.container} ${
-        isDarkTheme ? styles.darkTheme : styles.lightTheme
-      }`}
+      className={`${styles.container} ${isDarkTheme ? styles.darkTheme : styles.lightTheme}`}
     >
       <MobileHeader />
       <Header />
@@ -32,25 +30,25 @@ function AboutUs({ isDarkTheme }) {
               angielskiego, za&nbsp;pomocą takich rozdział&oacute;w jak:
             </p>
             <li>
-              <b>Czytanie</b> &mdash;&nbsp;blok z&nbsp;tekstami do&nbsp;czytania
+              <b>Czytanie</b> &nbsp;&mdash; blok z&nbsp;tekstami do&nbsp;czytania
             </li>
             <li>
-              <b>Gramatyka</b> &mdash;&nbsp;blok z&nbsp;regułami do&nbsp;pisania
+              <b>Gramatyka</b> &nbsp;&mdash;&nbsp;blok z&nbsp;regułami do&nbsp;pisania
             </li>
             <li>
-              <b>Słuchanie</b> &mdash;&nbsp;blok z&nbsp;audiościeżkami
+              <b>Słuchanie</b> &nbsp;&mdash;&nbsp;blok z&nbsp;audiościeżkami
               do&nbsp;słuchania
             </li>
             <li>
-              <b>Wideo materiały</b> &mdash;&nbsp;blok z&nbsp;wideo materiałami
+              <b>Wideo materiały</b> &nbsp;&mdash;&nbsp;blok z&nbsp;wideo materiałami
               z&nbsp;r&oacute;żnymi tematami
             </li>
             <li>
-              <b>Mówienie</b> &mdash;&nbsp;blok, w&nbsp;kt&oacute;rym jest
+              <b>Mówienie</b> &nbsp;&mdash;&nbsp;blok, w&nbsp;kt&oacute;rym jest
               możlisość sprawdzenia poprawności m&oacute;wienia
             </li>
             <li>
-              <b>Testy</b> &mdash;&nbsp;blok z&nbsp;testami na&nbsp;gramatykę,
+              <b>Testy</b> &nbsp;&mdash;&nbsp;blok z&nbsp;testami na&nbsp;gramatykę,
               słownictwo, gł&oacute;wny test na&nbsp;poziom znajomości języka
               oraz inne.
             </li>
@@ -64,19 +62,51 @@ function AboutUs({ isDarkTheme }) {
             </p>
             <li>
               Na stronie z wideo materiałami są wideo autorów kanału&nbsp;
-              <a href="https://www.youtube.com/@darmowyangielski">
+              <a href="https://www.youtube.com/@darmowyangielski" target="_blank" rel="noreferrer">
                 &quot;JĘZYK ANGIELSKI darmowy kurs wideo&quot;
               </a>
               &nbsp;ze strony YouTube
             </li>
             <li>
               Na stronach z testami są kolekcje pytań ze strony&nbsp;
-              <a href="https://myenglishworld.pro/elementary-test">
+              <a href="https://myenglishworld.pro/elementary-test" target="_blank" rel="noreferrer">
                 &quot;MyEnglishWorld&quot;
               </a>
               &nbsp;oraz&nbsp;
-              <a href="https://myenglishworld.pro/elementary-test">
+              <a href="https://myenglishworld.pro/elementary-test" target="_blank" rel="noreferrer">
                 &quot;SpeakNow&quot;
+              </a>
+            </li>
+            <li>
+              Na stronie z tekstami do czytania są teksty oraz pytania ze strony&nbsp;
+              <a href="https://lingua.com/" target="_blank" rel="noreferrer">
+                &quot;Lingua.com&quot;
+              </a>
+            </li>
+            <li>
+              Na&nbsp;stronie z&nbsp;gramatyką są&nbsp;materiały teoretyczne ze&nbsp;strony
+              <a href="http://angielski.nauczaj.com/" target="_blank" rel="noreferrer">
+                &quot;Angielski w&nbsp;pigułce&quot;
+              </a>
+              , oraz pytania są&nbsp;ze&nbsp;stron&nbsp;
+              <a href="https://test-english.com/" target="_blank" rel="noreferrer">
+                &quot;test&nbsp;&mdash;&nbsp;english&quot;
+              </a>
+              &nbsp;i&nbsp;
+              <a href="https://englishclub.com/" target="_blank" rel="noreferrer">
+                &quot;EnglishClub &quot;
+              </a>
+            </li>
+            <li>
+              Na stronie z słuchaniem są audio materialy z ksiazki&nbsp;
+              <a href="https://elt.oup.com/student/englishfile/?cc=pl&selLanguage=pl" target="_blank" rel="noreferrer">
+                &quot;English File Elementary&quot;
+              </a>
+            </li>
+            <li>
+              Na stronie z mówieniem są audio materialy oraz pytania ze strony&nbsp;
+              <a href="https://www.englishdom.com/skills/phrasebook/wordset/kak-projti-ii/" target="_blank" rel="noreferrer">
+                &quot;Englishdom&quot;
               </a>
             </li>
           </div>

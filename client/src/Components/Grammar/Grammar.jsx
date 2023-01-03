@@ -34,9 +34,11 @@ function Grammar({ isDarkTheme }) {
   const [selectedAnswerId, setSelectedAnswerId] = useState(undefined);
   const [isFirstElement, setisFisrtElement] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [isEnable, setisEnable] = useState(false);
 
   // funkcja dla potwierdzenia wybranej odpowiedzi
   const onAnswerConfirm = (selectedAnswer) => {
+    setisEnable(true);
     const currentQuestion =
       data[Object.keys(data)[selectedTopicId]].themes[selectedThemeId]
         .questions[currentQuestionIndex];
@@ -76,6 +78,7 @@ function Grammar({ isDarkTheme }) {
 
   // funkcja dla przejscia do nastepnego pytania
   const nextQuestion = () => {
+    setisEnable(false);
     // jezeli index aktualnego pytania < dlugosci tablicy z zapytaniami - 1
     if (currentQuestionIndex < currentTheme.questions.length - 1) {
       // zwiekszenie indeksu aktualnego pytania
@@ -157,6 +160,11 @@ function Grammar({ isDarkTheme }) {
               setCurrentCorrectAnswerId={setCurrentCorrectAnswerId}
               setSelectedAnswerId={setSelectedAnswerId}
               setisFisrtElement={setisFisrtElement}
+              setisEnable={setisEnable}
+              setResetTranscript={() => { }}
+              setisCorrect={() => { }}
+              setCurrentText={() => { }}
+              seterrorMessageHide={() => { }}
             />
             <div className={styles.container_content_right}>
               <div className={styles.container_content_right_content}>
@@ -228,6 +236,18 @@ function Grammar({ isDarkTheme }) {
                                     }
                                   </p>
                                 </div>
+                                {
+                                  selectedAnswerId !== currentCorrectAnswerId &&
+                                  selectedAnswerId !== undefined && (
+                                    <p className={styles.hint}>
+                                      {
+                                        // wybranie podpowiedzi
+                                        data[Object.keys(data)[selectedTopicId]].themes[
+                                          selectedThemeId
+                                        ].questions[currentQuestionIndex].hint
+                                      }
+                                    </p>
+                                  )}
                                 <div className={styles.grid_container}>
                                   {data[Object.keys(data)[selectedTopicId]].themes[
                                     selectedThemeId
@@ -249,6 +269,7 @@ function Grammar({ isDarkTheme }) {
                                       }
                                       return (
                                         <CustomButton
+                                          disabled={isEnable}
                                           key={answer}
                                           title={answer}
                                           onPress={() => onAnswerConfirm(answer)}
