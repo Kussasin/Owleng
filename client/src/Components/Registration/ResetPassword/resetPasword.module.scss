@@ -1,5 +1,5 @@
-@import '../../../lightmode_colors.module.scss';
-@import '../../../darkmode_colors.module.scss';
+@import "../../../lightmode_colors.module.scss";
+@import "../../../darkmode_colors.module.scss";
 
 @mixin flexible() {
   display: flex;
@@ -7,10 +7,18 @@
   flex-direction: column;
 }
 
-
 .lightTheme {
   .login_page_container {
     background-color: $white;
+  }
+
+  .input {
+    background-color: $inactive_field;
+  }
+
+  .input:focus {
+    background-color: $white;
+    border-color: $main_color;
   }
 
   .reset_msg {
@@ -40,22 +48,22 @@
     color: $dark_white;
   }
 
-	.submit_button {
-		background-color: $dark_button_color;
-		color: $dark_white;
+  .submit_button {
+    background-color: $dark_button_color;
+    color: $dark_white;
 
-		&:hover {
-			background-color: $dark_button_hover_color;
-		}
-	}
+    &:hover {
+      background-color: $dark_button_hover_color;
+    }
+  }
 
-	.link_styles {
-		color: $dark_main_color;
-	}
+  .link_styles {
+    color: $dark_main_color;
+  }
 
-	.header {
-		color: $dark_main_color;
-	}
+  .header {
+    color: $dark_main_color;
+  }
 }
 
 .header {
@@ -114,7 +122,6 @@
         h1 {
           font-size: 26px;
           line-height: 24px;
-
         }
 
         .input {
@@ -161,7 +168,6 @@
           display: inline-block;
           width: 100%;
           text-align: center;
-
         }
       }
     }
@@ -174,9 +180,7 @@
   flex-direction: column;
 
   .login_content {
-
     .content_container {
-
       &_title {
         font-size: 30px;
         line-height: 42px;
@@ -199,7 +203,6 @@
 }
 
 @media (max-width: 1026px) {
-
   .login_container {
     display: flex;
     flex-direction: column;
@@ -212,12 +215,10 @@
     width: 100%;
 
     .login_forms_container {
-
       .forms_container_content {
         width: 80%;
 
         .form_container {
-
           .submit_button {
             width: 97%;
           }
@@ -231,7 +232,6 @@
     align-items: center;
 
     .login_content {
-
       .content_container {
         &_title {
           text-align: center;
@@ -240,31 +240,24 @@
         &_subtitle {
           text-align: center;
         }
-
       }
-
     }
   }
 }
 
 @media (max-width: 680px) {
-
   .login_page {
-
     &_container {
       margin: 0 20px;
     }
   }
 
   .login_container_left {
-
     .login_forms_container {
-
       .forms_container_content {
         width: 80%;
 
         .form_container {
-
           .submit_button {
             width: 97%;
           }
@@ -274,17 +267,12 @@
   }
 
   .login_container_right {
-
     .login_content {
-
       .content_container {
-
         &_subtitle {
           text-align: center;
         }
-
       }
-
     }
   }
 }

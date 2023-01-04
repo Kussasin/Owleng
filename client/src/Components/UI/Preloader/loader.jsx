@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./loader.module.scss";
-import loaderImg from "./img/owleng_owl.png";
+import loaderImg from "../Preloader/img/owleng_owl.png";
 
 const Loader = () => {
   return (

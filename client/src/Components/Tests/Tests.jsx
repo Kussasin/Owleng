@@ -128,7 +128,7 @@ function Tests({ isDarkTheme }) {
 
   const onTestFinished = () => {
     if (
-      data[Object.keys(data)[selectedTopicId]].topic == "Testy na poziom języka"
+      data[Object.keys(data)[selectedTopicId]].topic == "Test na poziom języka"
     ) {
       const userId = auth.currentUser.uid;
       const userEmail = auth.currentUser.email;
@@ -138,7 +138,7 @@ function Tests({ isDarkTheme }) {
         level: grade,
       };
       update(ref(database), updates)
-        .then(() => { })
+        .then(() => {})
         .catch((e) => {
           console.log(JSON.stringify(e));
         });
@@ -222,8 +222,9 @@ function Tests({ isDarkTheme }) {
 
   return (
     <div
-      className={`${styles.container} ${isDarkTheme ? styles.darkTheme : styles.lightTheme
-        }`}
+      className={`${styles.container} ${
+        isDarkTheme ? styles.darkTheme : styles.lightTheme
+      }`}
     >
       <div className={styles.container_header}>
         <MobileHeader />
@@ -234,172 +235,178 @@ function Tests({ isDarkTheme }) {
           <Loader />
         </div>
       ) : (
-          <div className={styles.container_content}>
-            <div className={styles.left_menu}>
-              <LeftSideMenu
-                additionalStyles={styles.left_side_menu}
-                title={themes}
-                // przekazanie funkcji niezbednych dla kontroli stanu testu
-                setSelectedThemeId={setSelectedThemeId}
-                setselectedTopicId={setselectedTopicId}
-                setTestActive={setTestIsFinish}
-                setUserScore={setUserScore}
-                setCurrentQuestionIndex={setCurrentQuestionIndex}
-                setCurrentCorrectAnswerId={setCurrentCorrectAnswerId}
-                setSelectedAnswerId={setSelectedAnswerId}
-                setisEnable={setisEnable}
-                setisFisrtElement={() => { }}
-                setResetTranscript={() => { }}
-                setisCorrect={() => { }}
-                setCurrentText={() => { }}
-                seterrorMessageHide={() => { }}
-              />
+        <div className={styles.container_content}>
+          <div className={styles.left_menu}>
+            <LeftSideMenu
+              additionalStyles={styles.left_side_menu}
+              title={themes}
+              // przekazanie funkcji niezbednych dla kontroli stanu testu
+              setSelectedThemeId={setSelectedThemeId}
+              setselectedTopicId={setselectedTopicId}
+              setTestActive={setTestIsFinish}
+              setUserScore={setUserScore}
+              setCurrentQuestionIndex={setCurrentQuestionIndex}
+              setCurrentCorrectAnswerId={setCurrentCorrectAnswerId}
+              setSelectedAnswerId={setSelectedAnswerId}
+              setisEnable={setisEnable}
+              setisFisrtElement={() => {}}
+              setResetTranscript={() => {}}
+              setisCorrect={() => {}}
+              setCurrentText={() => {}}
+              seterrorMessageHide={() => {}}
+            />
 
-              <Card additionalStyles={`${styles.themeCard} ${styles.left_menu_card}`}>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    padding: 15,
-                    justifyContent: "space-around",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => {
-                    setselectedTopicId(
-                      Object.keys(data).findIndex((t) => t === "3_levelCheckTest")
-                    );
-                    setSelectedThemeId(0);
-                    setTestIsFinish(false);
-                    setisEnable(false);
-                    setCurrentQuestionIndex(0);
-                    setUserScore(0);
-                    setCurrentCorrectAnswerId(-1);
-                    setSelectedAnswerId(undefined);
-                  }}
-                >
-                  <p>{levelCheckTestData?.topic}</p>
-                  <img
-                    className={styles.arrow_active}
-                    src={isDarkTheme ? DarkActiveArrow : ActiveArrow}
-                    alt="arrow"
-                  />
-                </div>
-              </Card>
-            </div>
+            <Card
+              additionalStyles={`${styles.themeCard} ${styles.left_menu_card}`}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  padding: 15,
+                  justifyContent: "space-around",
+                  cursor: "pointer",
+                }}
+                onClick={() => {
+                  setselectedTopicId(
+                    Object.keys(data).findIndex((t) => t === "3_levelCheckTest")
+                  );
+                  setSelectedThemeId(0);
+                  setTestIsFinish(false);
+                  setisEnable(false);
+                  setCurrentQuestionIndex(0);
+                  setUserScore(0);
+                  setCurrentCorrectAnswerId(-1);
+                  setSelectedAnswerId(undefined);
+                }}
+              >
+                <p>{levelCheckTestData?.topic}</p>
+                <img
+                  className={styles.arrow_active}
+                  src={isDarkTheme ? DarkActiveArrow : ActiveArrow}
+                  alt="arrow"
+                />
+              </div>
+            </Card>
+          </div>
 
-            <div className={styles.container_content_right}>
-              <div className={styles.container_content_right_content}>
-                {/* Wyswietlenie wyniku testu */}
-                {testIsFinish ? (
-                  <Card additionalStyles={styles.card}>
-                    <>
-                      {data[Object.keys(data)[selectedTopicId]].themes[selectedThemeId]
-                        .name == "Całość (A1-C1)" ?
-                        (
-                          <p className={styles.card_title}>
-                            Jesteś na poziomie {grade}
-                          </p>
-                        )
-                        :
-                        ""
-                      }
-                      <p>Ilość prawidłowych odpowiedzi: {userScore} / {data[Object.keys(data)[selectedTopicId]]
-                        .themes[selectedThemeId].questions.length}
+          <div className={styles.container_content_right}>
+            <div className={styles.container_content_right_content}>
+              {/* Wyswietlenie wyniku testu */}
+              {testIsFinish ? (
+                <Card additionalStyles={styles.card}>
+                  <>
+                    {data[Object.keys(data)[selectedTopicId]].themes[
+                      selectedThemeId
+                    ].name == "Całość (A1-C1)" ? (
+                      <p className={styles.card_title}>
+                        Jesteś na poziomie {grade}
                       </p>
-                    </>
-                  </Card>
-                ) : (
-                    // data (undefined | [{}]) && jsx, true && jsx -> jsx, false && jsx -> false
-                    data && (
-                      <div className={styles.content}>
-                        <p className={styles.name_tests}>
+                    ) : (
+                      ""
+                    )}
+                    <p>
+                      Ilość prawidłowych odpowiedzi: {userScore} /{" "}
+                      {
+                        data[Object.keys(data)[selectedTopicId]].themes[
+                          selectedThemeId
+                        ].questions.length
+                      }
+                    </p>
+                  </>
+                </Card>
+              ) : (
+                // data (undefined | [{}]) && jsx, true && jsx -> jsx, false && jsx -> false
+                data && (
+                  <div className={styles.content}>
+                    <p className={styles.name_tests}>
+                      {
+                        // nazwa podtematu
+                        data[Object.keys(data)[selectedTopicId]].themes[
+                          selectedThemeId
+                        ].name
+                      }
+                    </p>
+                    <div className={styles.question_container}>
+                      <div className={styles.question_container_text}>
+                        <p className={styles.question}>
                           {
-                            // nazwa podtematu
+                            // tekst pytania
                             data[Object.keys(data)[selectedTopicId]].themes[
                               selectedThemeId
-                            ].name
+                            ].questions[currentQuestionIndex].question
                           }
                         </p>
-                        <div className={styles.question_container}>
-                          <div className={styles.question_container_text}>
-                            <p className={styles.question}>
-                              {
-                                // tekst pytania
-                                data[Object.keys(data)[selectedTopicId]].themes[
-                                  selectedThemeId
-                                ].questions[currentQuestionIndex].question
-                              }
-                            </p>
-                          </div>
+                      </div>
 
-                          {/* 
+                      {/* 
                         aktualny test nie jest levelCheckTest-em 
                         oraz jej id != id poprawnej odpowiedzi 
                         jezeli odpowiedz wybrana
                       */}
-                          {Object.keys(data)[selectedTopicId] !==
-                            "3_levelCheckTest" &&
-                            selectedAnswerId !== currentCorrectAnswerId &&
-                            selectedAnswerId !== undefined && (
-                              <p className={styles.hint}>
-                                {
-                                  // wybranie podpowiedzi
-                                  data[Object.keys(data)[selectedTopicId]].themes[
-                                    selectedThemeId
-                                  ].questions[currentQuestionIndex].hint
-                                }
-                              </p>
-                            )}
-                          <div className={styles.questions_block}>
-                            <div className={styles.grid_container}>
-                              {data[Object.keys(data)[selectedTopicId]].themes[
+                      {Object.keys(data)[selectedTopicId] !==
+                        "3_levelCheckTest" &&
+                        selectedAnswerId !== currentCorrectAnswerId &&
+                        selectedAnswerId !== undefined && (
+                          <p className={styles.hint}>
+                            {
+                              // wybranie podpowiedzi
+                              data[Object.keys(data)[selectedTopicId]].themes[
                                 selectedThemeId
-                              ].questions[currentQuestionIndex].answers.map(
-                                (answer, index) => {
-                                  let additionalStyle1;
-                                  // ustawienie stylow dla wybranej odpowiedzi
-                                  if (index === selectedAnswerId) {
-                                    if (index === currentCorrectAnswerId) {
-                                      additionalStyle1 = styles.answer_button_correct;
-                                    } else if (currentCorrectAnswerId !== -1) {
-                                      additionalStyle1 = styles.answer_button_wrong;
-                                    }
-                                  }
-                                  let additionalStyle2;
-                                  // ustawienie stylow dla poprawnej odpowiedzi
-                                  if (index === currentCorrectAnswerId) {
-                                    additionalStyle2 = styles.answer_button_correct;
-                                  }
-                                  return (
-                                    <CustomButton
-                                      disabled={isEnable}
-                                      key={answer}
-                                      title={answer}
-                                      onPress={() => onAnswerConfirm(answer)}
-                                      additionalStyles={`${styles.answer_button} ${additionalStyle1} ${additionalStyle2}`}
-                                    />
-                                  );
+                              ].questions[currentQuestionIndex].hint
+                            }
+                          </p>
+                        )}
+                      <div className={styles.questions_block}>
+                        <div className={styles.grid_container}>
+                          {data[Object.keys(data)[selectedTopicId]].themes[
+                            selectedThemeId
+                          ].questions[currentQuestionIndex].answers.map(
+                            (answer, index) => {
+                              let additionalStyle1;
+                              // ustawienie stylow dla wybranej odpowiedzi
+                              if (index === selectedAnswerId) {
+                                if (index === currentCorrectAnswerId) {
+                                  additionalStyle1 =
+                                    styles.answer_button_correct;
+                                } else if (currentCorrectAnswerId !== -1) {
+                                  additionalStyle1 = styles.answer_button_wrong;
                                 }
-                              )}
-                            </div>
-                            <div className={styles.block_custom_button}>
-                              <CustomButton
-                                title={"Następne pytanie"}
-                                onPress={nextQuestion}
-                                additionalStyles={styles.next_question_button}
-                              />
-                            </div>
-                          </div>
-
+                              }
+                              let additionalStyle2;
+                              // ustawienie stylow dla poprawnej odpowiedzi
+                              if (index === currentCorrectAnswerId) {
+                                additionalStyle2 = styles.answer_button_correct;
+                              }
+                              return (
+                                <CustomButton
+                                  disabled={isEnable}
+                                  key={answer}
+                                  title={answer}
+                                  onPress={() => onAnswerConfirm(answer)}
+                                  additionalStyles={`${styles.answer_button} ${additionalStyle1} ${additionalStyle2}`}
+                                />
+                              );
+                            }
+                          )}
+                        </div>
+                        <div className={styles.block_custom_button}>
+                          <CustomButton
+                            title={"Następne pytanie"}
+                            onPress={nextQuestion}
+                            additionalStyles={styles.next_question_button}
+                          />
                         </div>
                       </div>
-                    )
-                  )}
-              </div>
+                    </div>
+                  </div>
+                )
+              )}
             </div>
           </div>
-        )}
+        </div>
+      )}
     </div>
   );
 }

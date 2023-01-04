@@ -28,7 +28,7 @@ function LevelCheck({ isDarkTheme }) {
     >
       <div className={styles.form_container}>
         <p className={styles.form_container_h1}>
-          Czy wiesz swój poziom języka?
+          Czy znasz swój poziom języka?
         </p>
         <div className={styles.check_level}>
           <NavLink to="/ChoiceLevel" className={styles.link_container}>

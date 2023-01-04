@@ -64,7 +64,6 @@ function Test({ isDarkTheme }) {
     get(child(dbRef, "tests/levelCheck"))
       .then((snapshot) => {
         if (snapshot.exists()) {
-          console.log(snapshot.val());
           setTEST(snapshot.val());
         } else {
           console.log("No data available");
