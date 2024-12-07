@@ -1,14 +1,68 @@
-@import "../../../lightmode_colors.module.scss";
+@import '../../../lightmode_colors.module.scss';
+@import '../../../darkmode_colors.module.scss';
 
 @mixin center {
   align-items: center;
   justify-content: center;
 }
 
+.lightTheme {
+  .level_test_container {
+    background-color: $background;
+  }
+
+  .card_title {
+    color: $black;
+  }
+
+  .form_container {
+    p {
+      color: $black;
+    }
+  }
+}
+
+.darkTheme {
+
+  .level_test_container {
+    background-color: $dark_back;
+  }
+
+  .form_container {
+    p {
+      color: $dark_white;
+    }
+  }
+
+  .answer_button,
+  .card_result_button {
+    background-color: $dark_button_color;
+    color: $dark_white;
+    border: none;
+
+    &:hover {
+      background-color: $dark_button_hover_color;
+    }
+  }
+
+  .card_title {
+    color: $dark_white;
+  }
+
+  .card {
+    background-color: $header_color;
+    color: $dark_white;
+  }
+
+  .themeCard {
+    background-color: $header_color;
+  }
+}
+
+
 .level_test_container {
   width: 100%;
   min-height: 100vh;
-  background-color: $background;
   display: flex;
   @include center();
 }
@@ -21,7 +75,7 @@
   p {
     font-weight: 700;
     color: $black;
-    font-size: 3em;
+    font-size: 2em;
     line-height: 35px;
     margin-bottom: 70px;
     line-height: 1em;
@@ -40,7 +94,9 @@
 }
 
 .card {
-  padding: 73px 196px 73px 196px;
+  padding: 73px 196px;
+  width: 250px;
+  height: 200px;
 
   a {
     text-decoration: none;
@@ -64,4 +120,83 @@
     line-height: 15px;
     margin: 0px 0px 0px 0px;
   }
+}
+
+.card_result_button {
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: 56px 128px;
+    width: 250px;
+    height: 200px;
+  }
+}
+
+@media (max-width: 680px) {
+  .form_container {
+    p {
+      font-size: 1.6em;
+      margin-bottom: 56px;
+    }
+  }
+
+  .answer_button {
+    padding: 20px 5px;
+  }
+
+  .card {
+    padding: 48px 96px;
+    width: 250px;
+    height: 200px;
+  }
+}
+
+@media (max-width: 468px) {
+  .form_container {
+    p {
+      font-size: 1.4em;
+      margin-bottom: 48px;
+    }
+  }
+
+  .answer_button {
+    padding: 18px 5px;
+  }
+
+  .card {
+    padding: 32px 64px;
+    width: 250px;
+    height: 200px;
+  }
+}
+
+@media (max-width: 400px) {
+  .card {
+    padding: 24px 32px;
+    width: 250px;
+    height: 200px;
+  }
+}
+
+@media (max-width: 375px) {
+  .form_container {
+    p {
+      font-size: 1.2em;
+      margin-bottom: 40px;
+    }
+  }
+
+  .answer_button {
+    padding: 16px 5px;
+  }
+}
+
+.loader {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 250px;
 }

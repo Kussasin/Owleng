@@ -1,18 +1,52 @@
-@import '../../lightmode_colors.module.scss';
+@import "../../lightmode_colors.module.scss";
+@import '../../darkmode_colors.module.scss';
+
 $arrow_margin: 10px;
+
 @mixin flexible() {
   display: flex;
   align-items: center;
+}
+
+.lightTheme {
+  background-color: $white;
+  box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.05);
+
+  .container_content_left_title {
+    color: $main_color;
+  }
+
+  .isActive {
+    background-color: $elementIsSelected;
+  }
+}
+
+.darkTheme {
+  background-color: $header_color;
+  box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.05);
+
+  .dropdown_text {
+    color: $dark_white;
+  }
+
+  .container_content_left_title {
+    color: $black;
+  }
+
+  .isActive {
+    background-color: $hover_menu;
+  }
 }
 
 .container_content_left {
   @include flexible();
   flex-direction: column;
   justify-content: space-between;
-  width: 35%;
-  height: 600px;
+  min-width: 35%;
+  min-height: 400px;
   box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.05);
   border-radius: 20px;
+  align-self: flex-start;
 
   &_title {
     color: $main_color;
@@ -28,9 +62,10 @@ $arrow_margin: 10px;
   overflow: auto;
 }
 
-.dropdown{
+.dropdown {
   margin-bottom: 5px;
   cursor: pointer;
+
   &_text {
     margin: 0;
     display: inline-block;
@@ -47,16 +82,17 @@ $arrow_margin: 10px;
   margin-left: $arrow_margin;
 }
 
-.dropdown_item_element{
+.dropdown_item_element {
   padding: 4px 6px;
   margin: 8px 0;
   cursor: pointer;
-  &_text{
+
+  &_text {
     display: block;
   }
 }
 
-.isActive{
+.isActive {
   background-color: $elementIsSelected;
 }
 
@@ -66,4 +102,62 @@ $arrow_margin: 10px;
 
 .hide {
   display: none;
+}
+
+@media (max-width: 1055px) {
+  .container_content_left {
+    font-size: 14px;
+  }
+
+  .dropdown {
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 995px) {
+  .container_content_left {
+    font-size: 13px;
+    min-width: 40%;
+  }
+
+}
+
+@media (max-width: 790px) {
+  .container_content_left {
+    min-width: 42%;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .container_content_left {
+    align-self: center;
+    min-height: 310px;
+    width: 75%;
+    font-size: 16px;
+  }
+
+  .dropdown {
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 678px) {
+  .container_content_left {
+    width: 85%;
+  }
+}
+
+@media (max-width: 549px) {
+  .container_content_left {
+    width: 90%;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 375px) {
+  .container_content_left {
+    width: 100%;
+    font-size: 13px;
+  }
 }

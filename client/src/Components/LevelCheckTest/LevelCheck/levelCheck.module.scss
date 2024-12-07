@@ -1,4 +1,5 @@
-@import "../../../lightmode_colors.module.scss";
+@import '../../../lightmode_colors.module.scss';
+@import '../../../darkmode_colors.module.scss';
 
 @mixin flexible() {
   display: flex;
@@ -13,10 +14,41 @@
   flex-direction: column;
 }
 
+.lightTheme {
+  .level_check_container {
+    background-color: $background;
+  }
+
+  .form_container_h1 {
+    color: $black;
+  }
+}
+
+.darkTheme {
+  .level_check_container {
+    background-color: $dark_back;
+  }
+
+  .form_container_h1 {
+    color: $dark_white;
+  }
+
+  .button_style {
+    background-color: $dark_button_color;
+    color: $dark_white;
+    border: none;
+
+    &:hover {
+      background-color: $dark_button_hover_color;
+    }
+  }
+
+}
+
+
 .level_check_container {
   width: 100%;
   min-height: 100vh;
-  background-color: $background;
   @include flexible();
 }
 
@@ -24,14 +56,13 @@
   width: 80%;
   text-align: center;
   @include flexColumn();
+}
 
-  p {
-    font-weight: 700;
-    color: $black;
-    font-size: 32px;
-    line-height: 35px;
-    margin-bottom: 70px;
-  }
+.form_container_h1 {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 35px;
+  margin-bottom: 70px;
 }
 
 .check_level {
@@ -49,5 +80,72 @@
 }
 
 .link_container {
-  width: 60%;
+  width: 512px;
+
+  span {
+    font-size: 20px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .form_container_h1 {
+    font-size: 28px;
+  }
+
+  .link_container {
+    width: 456px;
+
+    button {
+      padding: 22px 5px;
+    }
+
+    span {
+      font-size: 18px;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .form_container_h1 {
+    font-size: 24px;
+  }
+
+  .link_container {
+    width: 376px;
+
+    span {
+      font-size: 16px;
+    }
+  }
+}
+
+@media (max-width: 475px) {
+  .form_container_h1 {
+    font-size: 18px;
+    margin-bottom: 40px;
+  }
+
+  .link_container {
+    width: 320px;
+
+    button {
+      padding: 18px 5px;
+    }
+
+    span {
+      font-size: 14px;
+    }
+  }
+}
+
+@media (max-width: 375px) {
+  .form_container_h1 {
+    font-size: 16px;
+  }
+
+  .link_container {
+    width: 280px;
+
+  }
 }

@@ -1,9 +1,71 @@
-@import '../../../lightmode_colors.module';
+@import '../../../lightmode_colors.module.scss';
+@import '../../../darkmode_colors.module.scss';
 
 @mixin flexible() {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
+}
+
+.lightTheme {
+	.registration_page_container {
+		background-color: $white;
+	}
+
+	.forms_container_content {
+
+		.form_container {
+
+			.input {
+				background-color: $inactive_field;
+			}
+
+			.input:focus {
+				background-color: $white;
+				border-color: $main_color;
+			}
+
+			.submit_button {
+				background-color: $main_color;
+				color: $white;
+
+				&:hover {
+					background-color: $button_hover;
+				}
+			}
+		}
+
+		.link_styles {
+			color: $main_color;
+		}
+	}
+}
+
+.darkTheme {
+	.registration_page_container {
+		background-color: $dark_back;
+	}
+
+	.submit_button {
+		background-color: $dark_button_color;
+		color: $dark_white;
+
+		&:hover {
+			background-color: $dark_button_hover_color;
+		}
+	}
+
+	.link_styles {
+		color: $dark_main_color;
+	}
+
+	.header {
+		color: $dark_main_color;
+	}
+}
+
+.header {
+	width: 100%;
 }
 
 .registration_page {
@@ -15,7 +77,6 @@
 	&_container {
 		max-width: 992px;
 		@include flexible();
-		background-color: $white;
 	}
 }
 
@@ -28,14 +89,11 @@
 }
 
 .error_msg {
-	width: 370px;
-	padding: 15px;
-	margin: 5px 0;
-	font-size: 14px;
-	background-color: $error_color;
-	color: $white;
-	border-radius: 5px;
-	text-align: center;
+	width: 98%;
+	margin: 3px 0;
+	font-size: 16px;
+	color: $error_color;
+	text-align: left;
 }
 
 .registration_container_left {
@@ -48,13 +106,13 @@
 			0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
 
 		.forms_container_content {
-			margin: 40px 20px 0;
+			margin: 30px 10px 20px;
 
 			.form_container {
 				@include flexible();
 
 				h1 {
-					font-size: 26px;
+					font-size: 25px;
 					line-height: 24px;
 
 				}
@@ -65,42 +123,35 @@
 					width: 90%;
 					padding: 17px;
 					border-radius: 10px;
-					background-color: $inactive_field;
 					margin: 8px 0;
 					font-size: 14px;
 				}
 
 				.input:focus {
-					background-color: $white;
 					border: 1px solid;
-					border-color: $main_color;
-
 				}
 
 				.submit_button {
 					border: none;
 					outline: none;
 					padding: 15px 0;
-					background-color: $main_color;
 					border-radius: 10px;
 					width: 100%;
 					min-width: 180px;
 					margin: 8px 0;
 					font-weight: bold;
 					font-size: 14px;
-					color: $white;
 					cursor: pointer;
 				}
+			}
+
+			.link_styles {
+				text-decoration: none;
 			}
 
 			&_subscribe {
 				text-align: center;
 				margin: 40px 0 25px;
-
-				a {
-					text-decoration: none;
-					color: $main_color;
-				}
 			}
 		}
 	}
@@ -229,11 +280,11 @@
 }
 
 @media (max-width: 450px) {
-	$font_size: 20px;
+	$font_size: 19px;
 
 	.form_container {
 		h1 {
-			font-size: $font_size  !important;
+			font-size: $font_size !important;
 		}
 	}
 
@@ -244,20 +295,20 @@
 	}
 
 	.content_container_title {
-		font-size: $font_size  !important;
+		font-size: $font_size !important;
 	}
 }
 
 @media (max-width: 350px) {
-	$font_size: 16px;
+	$font_size: 15px;
 
 	.form_container {
 		h1 {
-			font-size: $font_size  !important;
+			font-size: $font_size !important;
 		}
 	}
 
 	.content_container_title {
-		font-size: $font_size  !important;
+		font-size: $font_size !important;
 	}
 }

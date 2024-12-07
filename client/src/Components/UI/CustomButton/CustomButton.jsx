@@ -5,6 +5,7 @@ import styles from "./customButton.module.scss";
 const CustomButton = (props) => {
   return (
     <button
+      disabled={props.disabled}
       type={props.type}
       className={`${styles.custom_button} ${props.additionalStyles}`}
       onClick={props.onPress}
@@ -19,6 +20,7 @@ CustomButton.propTypes = {
   type: PropTypes.string,
   additionalStyles: PropTypes.string,
   onPress: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 export default CustomButton;

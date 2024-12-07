@@ -1,0 +1,53 @@
+@import './lightmode_colors.module.scss';
+@import './darkmode_colors.module.scss';
+
+.lightTheme {
+  background: $white;
+
+  a {
+    color: $main_color;
+    text-decoration: none;
+  }
+
+  .input {
+    background-color: $inactive_field;
+  }
+
+  input:focus {
+    background-color: $white;
+    border-color: $main_color;
+  }
+}
+
+.darkTheme {
+  background: $dark_back;
+  color: $dark_white;
+
+  a {
+    color: $dark_main_color;
+    text-decoration: none;
+  }
+
+  input {
+    background-color: $hover_menu;
+    color: $dark_white;
+  }
+
+  input:focus {
+    background-color: $input_focus;
+    border-color: $dark_white;
+  }
+
+  ::placeholder {
+    color: $dark_white;
+    opacity: 1;
+  }
+
+  :-ms-input-placeholder {
+    color: $dark_white;
+  }
+
+  ::-ms-input-placeholder {
+    color: $dark_white;
+  }
+}

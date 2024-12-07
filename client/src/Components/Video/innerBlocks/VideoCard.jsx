@@ -11,8 +11,8 @@ const VideoCard = ({ name, videoId, onClick }) => {
         src={`https://img.youtube.com/vi/${videoId}/0.jpg`}
         alt={name}
       />
-      <p style={{ paddingLeft: "10px" }}>
-        <b>{name}</b>
+      <p className={styles.button_container_title}>
+        <b className={styles.button_container_title}>{name}</b>
       </p>
     </div>
   );

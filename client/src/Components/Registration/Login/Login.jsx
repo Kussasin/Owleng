@@ -1,25 +1,57 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../AuthContext/AuthContext";
 import styles from "./loginStyle.module.scss";
+import PropTypes from "prop-types";
+
 import welcomeImg from "../../../img/LogRegImg/authentication-illustration.svg";
+import DarkwelcomeImg from "../../../img/LogRegImg/dark_login.svg";
 import Header from "../RegHeader/RegHeader";
 
-function Login() {
+function Login({ isDarkTheme }) {
+
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const { login, curentUser } = useAuth();
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    try {
+      setError("");
+      setLoading(true);
+      await login(emailRef.current.value, passwordRef.current.value);
+      console.log(curentUser);
+      navigate('/');
+    } catch (error) {
+      setError("Niewłaściwy email lub hasło, spróbuj ponownie");
+      console.log(error.message);
+    }
+
+    setLoading(false);
+  }
+
   return (
-    <div className={styles.login_page}>
+    <div className={`${styles.login_page} ${isDarkTheme ? styles.darkTheme : styles.lightTheme}`}>
       <div className={styles.login_page_container}>
-        <Header />
+        <div className={styles.header}>
+          <Header />
+        </div>
         <div className={styles.login_container}>
           <div className={styles.login_container_left}>
             <div className={styles.login_forms_container}>
               <div className={styles.forms_container_content}>
-                <form className={styles.form_container}>
+                <form className={styles.form_container} onSubmit={handleSubmit}>
                   <h1>Zaloguj się na swoje konto</h1>
                   <input
                     type="email"
                     placeholder="Email"
                     name="email"
                     required
+                    ref={emailRef}
                     className={styles.input}
                   />
                   <input
@@ -27,16 +59,23 @@ function Login() {
                     placeholder="Password"
                     name="password"
                     required
+                    ref={passwordRef}
                     className={styles.input}
                   />
-                  <button type="submit" className={styles.submit_button}>
+                  <p className={styles.error_msg}>{error}</p>
+                  <button type="submit" disabled={loading} className={styles.submit_button}>
                     Zaloguj się
                   </button>
                 </form>
                 <div className={styles.container_content_subscribe}>
                   <p>
+                    <Link to="/reset-password" className={styles.link_styles}>
+                      <span>Zapomniałeś hasło?</span>
+                    </Link>
+                  </p>
+                  <p>
                     <span>Nie masz jeszcze profilu? </span>
-                    <Link to="/signup">
+                    <Link to="/signup" className={styles.link_styles}>
                       <span>Zarejestruj się</span>
                     </Link>
                   </p>
@@ -56,7 +95,7 @@ function Login() {
               </div>
               <img
                 className={styles.content_container_picture}
-                src={welcomeImg}
+                src={isDarkTheme ? DarkwelcomeImg : welcomeImg}
                 alt="welcome_picture"
               />
             </div>
@@ -66,4 +105,9 @@ function Login() {
     </div>
   );
 }
+
+Login.propTypes = {
+  isDarkTheme: PropTypes.bool
+}
+
 export default Login;

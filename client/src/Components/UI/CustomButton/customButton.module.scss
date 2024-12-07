@@ -1,16 +1,17 @@
 @import "../../../lightmode_colors.module.scss";
 
-$button_pudding: 29px;
+$button_pudding: 24px;
 
 .custom_button {
+  font-family: 'Poppins', sans-serif;  
   color: $white;
-  font-weight: 700;
-  font-size: 20px;
+  font-weight: 400;
+  font-size: 16px;
   line-height: 22px;
   box-sizing: border-box;
   background: $main_color;
   border: 1px solid $inactive_field;
-  border-radius: 40px;
+  border-radius: 16px;
   padding-top: $button_pudding;
   padding-bottom: $button_pudding;
   margin: 8px 0;
@@ -18,6 +19,7 @@ $button_pudding: 29px;
 
   &:hover {
     background-color: $button_hover;
+    cursor: pointer;
   }
 }
 

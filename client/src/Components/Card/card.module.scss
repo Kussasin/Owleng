@@ -8,3 +8,11 @@
   justify-content: center;
   text-align: center;
 }
+
+@media (max-width: 678px) {
+
+  .card {
+    padding: 68px 0 !important;
+    width: 100%;
+  }
+}

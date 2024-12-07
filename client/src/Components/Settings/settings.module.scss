@@ -1,9 +1,52 @@
-@import "../../lightmode_colors.module.scss";
+@import '../../lightmode_colors.module.scss';
+@import '../../darkmode_colors.module.scss';
 
 @mixin flexible() {
   display: flex;
   align-items: center;
 }
+
+.lightTheme {
+
+  .container_settings {
+
+    h1 {
+      color: $main_color;
+    }
+  }
+
+  .input {
+    border: 1px solid #B2B2B2;
+  }
+
+}
+
+.darkTheme {
+
+  .container_settings {
+
+    h1 {
+      color: $dark_white;
+    }
+  }
+
+  .input {
+    background-color: $hover_menu;
+    color: $dark_white;
+    border: 1px solid $dark_back;
+  }
+
+  .edit_password {
+    background-color: $dark_button_color;
+    color: $dark_white;
+    border: none;
+
+    &:hover {
+      background-color: $dark_button_hover_color;
+    }
+  }
+}
+
 
 .container {
   @include flexible();
@@ -12,11 +55,10 @@
   width: 100%;
 
   &_header {
-    background-color: $white;
     width: 100%;
   }
 
-  &_content {
+  x &_content {
     max-width: 1150px;
     margin-top: 50px;
     margin-bottom: 50px;
@@ -27,15 +69,34 @@
     border-radius: 20px;
   }
 
-  &_settings {
-    padding-left: 30px;
-    h1 {
-      color: $main_color;
-    }
-  }
 
   .edit_password {
     width: auto;
-    padding: 20px;
+    //padding: 20px;
+    padding: 16px 24px;
+    font-size: 16px;
   }
+}
+
+.settings_form {
+  @include flexible();
+  justify-content: center;
+  flex-direction: column;
+  width: 300px;
+}
+
+.input {
+  border-radius: 10px;
+  width: 280px;
+  height: 40px;
+  padding: 0 8px;
+
+  &_span {
+    width: 100%;
+    margin: 16px 0 5px;
+  }
+}
+
+.error_msg {
+  color: $error_color;
 }

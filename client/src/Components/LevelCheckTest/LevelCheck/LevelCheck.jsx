@@ -1,26 +1,46 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { database, auth } from "../../../utils/firebaseConfig";
+import { ref, set } from "firebase/database";
+import { useAuthState } from "react-firebase-hooks/auth";
 import styles from "./levelCheck.module.scss";
+import PropTypes from "prop-types";
+
 import CustomButton from "../../UI/CustomButton/CustomButton";
 
-function LevelCheck() {
+function LevelCheck({ isDarkTheme }) {
+  const [user] = useAuthState(auth);
+
+  try {
+    set(ref(database, "users/" + user.uid), {
+      email: user.email,
+      level: "A0",
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
+
   return (
-    <div className={styles.level_check_container}>
+    <div
+      className={`${styles.level_check_container} ${
+        isDarkTheme ? styles.darkTheme : styles.lightTheme
+      }`}
+    >
       <div className={styles.form_container}>
-        <p>Czy wiesz swój poziom języka?</p>
+        <p className={styles.form_container_h1}>
+          Czy znasz swój poziom języka?
+        </p>
         <div className={styles.check_level}>
           <NavLink to="/ChoiceLevel" className={styles.link_container}>
             <CustomButton
-              title="Wiem, jaki mam poziom"
+              title="Znam, jaki mam poziom"
               additionalStyles={styles.button_style}
-              onPress={() => {
-                console.log("text");
-              }}
+              onPress={() => {}}
             />
           </NavLink>
-          <NavLink to="" className={styles.link_container}>
+          <NavLink to="/" className={styles.link_container}>
             <CustomButton
-              title="Tylko zaczynam naukę"
+              title="Dopiero zaczynam naukę"
               additionalStyles={styles.button_style}
             />
           </NavLink>
@@ -35,4 +55,9 @@ function LevelCheck() {
     </div>
   );
 }
+
+LevelCheck.propTypes = {
+  isDarkTheme: PropTypes.bool,
+};
+
 export default LevelCheck;

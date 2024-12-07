@@ -1,4 +1,5 @@
 @import '../../../lightmode_colors.module.scss';
+@import '../../../darkmode_colors.module.scss';
 
 $right_img_weight: 25px;
 $font_size: 20px;
@@ -6,6 +7,62 @@ $font_size: 20px;
 @mixin flexible() {
   display: flex;
   align-items: center;
+}
+
+.lightTheme {
+  background-color: $white;
+
+  .header_left {
+    a {
+      color: $main_color;
+    }
+  }
+
+  .current_user_level {
+    color: $main_color;
+  }
+
+  .dropdown_container {
+    background-color: $white;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+
+    .container_item {
+      color: $black;
+
+      &:hover {
+        background-color: $main_color;
+        color: $white;
+      }
+    }
+  }
+}
+
+.darkTheme {
+  background-color: $header_color;
+
+  .header_left {
+    a {
+      color: $dark_main_color;
+    }
+  }
+
+  .current_user_level {
+    color: $dark_main_color;
+  }
+
+  .dropdown_container {
+    background-color: $header_color;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+
+    .container_item {
+      color: $dark_white;
+
+      &:hover {
+        background-color: $hover_menu;
+        color: $dark_white;
+      }
+    }
+  }
 }
 
 .header {
@@ -36,12 +93,15 @@ $font_size: 20px;
 
   a {
     text-decoration: none;
-    color: $main_color;
   }
 }
 
-
-
+.darkmodetoggle {
+  svg {
+    position: relative;
+    top: 1px;
+  }
+}
 
 .user_level {
   @include flexible();
@@ -60,7 +120,6 @@ $font_size: 20px;
     font-weight: 700;
     font-size: 35px;
     text-transform: uppercase;
-    color: $main_color;
   }
 }
 
@@ -94,15 +153,12 @@ $font_size: 20px;
   display: none;
   position: absolute;
   right: 0;
-  background-color: $white;
   min-width: 186px;
   overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   border-radius: 0px 0px 10px 10px;
 
   .container_item {
-    color: $black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
@@ -111,11 +167,6 @@ $font_size: 20px;
 
     p {
       margin: 0;
-    }
-
-    &:hover {
-      background-color: $main_color;
-      color: $white;
     }
   }
 }

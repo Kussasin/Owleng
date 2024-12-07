@@ -73,6 +73,7 @@ ____
 - `npm i node-modules`
 - `npm i react-router-dom`
 - `npm i -S prop-types`
+- `npm install firebase`
 ____
 # Полезные ссылки:
 [:arrow_up:Оглавление](#Оглавление)
